@@ -1,0 +1,75 @@
+CHeck the error conversion for current using thi shift division
+for current lsb from -15943 to 15943 the error is: -0.054931640624994685[%]
+
+
+Variables FOR THE WATT CALCULATION
+
+igbt_factor_v [V] : 	0.000245	 - 	0x0
+diode_factor_v [V] : 	0.000242	 - 	0x0
+igtb_offset_w : 	139.15	 - 	0x8b
+diode_offset_w: 	85.0	 - 	0x55
+
+CONST FOR THE CU CALCULATION (shift = 16
+
+vce_igbt_cv: 	160563.2	 - 	0x27333
+power_data.igbt_factor_cv: 	32	 - 	0x20
+igbt factor [cv]: 	16.0	 - 	0x10
+igbt factor [cv->v]: 	0.000244140625	 - 	0x0
+
+V_DIODE_CV: 	158597.12	 - 	0x26b85
+power_data.DIODE_FACTOR_CV: 	31	 - 	0x1f
+diode factor [cv]: 	15.5	 - 	0xf
+diode factor [cv->v]: 	0.00023651123046875	 - 	0x0
+
+igbt_e_cw: 	1823.86688	 - 	0x71f
+power_data.IGBT_OFFSET_CW: 	18238668	 - 	0x1164ccc
+igbt_offset_cw: 	9119334.0	 - 	0x8b2666
+igbt_offset_cw [cw->w]: 	139.14999389648438	 - 	0x8b
+
+diode_erec_cw: 	1114.112	 - 	0x45a
+power_data.DIODE_OFFSET_CW: 	11141120	 - 	0xaa0000
+idiode_offset_cw: 	5570560.0	 - 	0x550000
+diode_offset_cw [cw->w]: 	85.0	 - 	0x55
+
+LSB2A_CURR_FACTOR: 0.0125439453125
+
+A2LSB_CURR_FACTOR: 79.71973530556637
+
+
+
+VALUES for 0 to range(0, 10000)
+
+
+
+
+MAX - MIN
+
+
+PIT
+pit min[W]: 	9119334.4	 - 	0x8b2666
+pit max[W]: 	41228763.136	 - 	0x27519db
+pit min   : 	9119334	 - 	0x8b2666
+pit max   : 	41116134	 - 	0x27361e6
+err% min  : 	4.386285230615844e-06	 - 	0x0
+err% max  : 	0.2739292950061889	 - 	0x0
+PIB
+pib min[W]: 	0	 - 	0x0
+pib max[W]: 	0	 - 	0x0
+pib min   : 	0	 - 	0x0
+pib max   : 	0	 - 	0x0
+err% min  : 	0	 - 	0x0
+err% max  : 	0	 - 	0x0
+PDT
+pdt min[W]: 	0	 - 	0x0
+pdt max[W]: 	0	 - 	0x0
+pdt min   : 	0	 - 	0x0
+pdt max   : 	0	 - 	0x0
+err% min  : 	0	 - 	0x0
+err% max  : 	0	 - 	0x0
+PDB
+pdb min[W]: 	0	 - 	0x0
+pdb max[W]: 	0	 - 	0x0
+pdb min   : 	0	 - 	0x0
+pdb max   : 	0	 - 	0x0
+err% min  : 	0	 - 	0x0
+err% max  : 	0	 - 	0x0
