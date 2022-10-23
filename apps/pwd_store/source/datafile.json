@@ -1,0 +1,75 @@
+{
+   "time_stats": {
+      "last_modification": "10/22/2022, 12:45:32",
+      "creation": "10/05/2022, 19:14:05"
+   },
+   "pwd_items": [
+      {
+         "pwd_item": {
+            "name": "pippo 1",
+            "user": "",
+            "password": "",
+            "mail": "",
+            "notes": "",
+            "grp_name": "",
+            "time_stats": {
+               "last_modification": "10/14/2022, 23:49:21",
+               "creation": "10/14/2022, 23:49:21"
+            }
+         }
+      },
+      {
+         "pwd_item": {
+            "name": "pippo2",
+            "user": "",
+            "password": "",
+            "mail": "",
+            "notes": "",
+            "grp_name": "",
+            "time_stats": {
+               "last_modification": "10/14/2022, 23:49:21",
+               "creation": "10/14/2022, 23:49:21"
+            }
+         }
+      },
+      {
+         "pwd_item": {
+            "name": "item",
+            "user": "",
+            "password": "",
+            "mail": "",
+            "notes": "",
+            "grp_name": "",
+            "time_stats": {
+               "last_modification": "10/14/2022, 23:49:22",
+               "creation": "10/14/2022, 23:49:22"
+            }
+         }
+      },
+      {
+         "pwd_item": {
+            "name": "item",
+            "user": "",
+            "password": "",
+            "mail": "",
+            "notes": "",
+            "grp_name": "",
+            "time_stats": {
+               "last_modification": "10/14/2022, 23:49:23",
+               "creation": "10/14/2022, 23:49:23"
+            }
+         }
+      }
+   ],
+   "groups": [
+      {
+         "grp": {
+            "name": "group",
+            "time_stats": {
+               "last_modification": "10/22/2022, 12:45:22",
+               "creation": "10/22/2022, 12:45:22"
+            }
+         }
+      }
+   ]
+}

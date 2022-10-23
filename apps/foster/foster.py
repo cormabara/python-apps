@@ -1,295 +1,384 @@
 # Stima della temperatura con Foster
 
-
-from report import rpt_print_d, rpt_print
-from conversions import LSB2A_CURR_FACTOR, A2LSB_CURR_FACTOR
-from conversions import current_lsb_2_A
-
-# Dati di partenza dell'algoritmo descritto da Nick
-
-SYSTMR_BASE_FREQ_HZ = 10000  # base frequency of the pwm
-CMP_RATE_BASE = 5000  # reference value for the compare
-
-# Costanti prese dal datasheet
-IGBT_EON_W = 1.430E-3  # Energia on [W]
-IGBT_EOFF_W = 26.40E-3  # energia off [W]
-
-DIODE_EREC_W = 17E-3  # Energia diodo [W]
-
-VCE_IGBT_V = 2.45  # Tensione riferimento IGBT
-V_DIODE_V = 2.42;  # [V] @250A dc
-
-# Shift usato come moltiplicatore per evitare la perdita di risoluzione
-CU_SHIFT = 16
-
-# Frequency shift, variabile
-FreqShift = 1  # shift of the base frequency da 100uS a 200uS shift = 1
-
-pwm_frequency_hz = SYSTMR_BASE_FREQ_HZ >> FreqShift
-pwm_max_duty = CMP_RATE_BASE << FreqShift
+from report import rpt_print_d, rpt_print, rpt_sep
+from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, current_lsb2A_theo
+from constants import igbt_factor_real, igbt_offset_real,diode_factor_real,diode_offset_real
+from constants import igbt_factor_theo, igbt_offset_theo,diode_factor_theo,diode_offset_theo
+from constants import pwm_max_duty, curr_factor,perc_err
+from constants import power_theo_2_real,power_real_2_theo
+from common import CheckIntOverflow
 
 
-class ConstIgbt:
+class DataFormat(int):
+    data_theo_W = 0x0100
+    data_theo_WCU = 0x0200
+    data_real_WCU = 0x0400
+    theo_real_error_perc = 0x0800
+    data_format_mask = 0xff00
+
+
+class DataType(int):
+    PIT = 0x0001
+    PDT = 0x0002
+    PIB = 0x0004
+    PDB = 0x0008
+    data_type_mask = 0x00ff
+
+
+class PowerDato:
 
     def __init__(self):
-        self.igbt_factor_t: float = 0
-        self.igbt_factor_r: int = 0
+        self.real = 0
+        self.theo = 0
 
-        self.igbt_offset_t: float = 0
-        self.igbt_offset_r: int = 0
+    def get_value(self, format_):
+        if format_ == DataFormat.data_theo_W:
+            return self.theo
+        elif format_ == DataFormat.data_theo_WCU:
+            return power_theo_2_real(self.theo)
+        elif format_ == DataFormat.data_real_WCU:
+            return self.real
+        elif format_ == DataFormat.theo_real_error_perc:
+            return abs((self.real - (power_theo_2_real(self.theo))) * 100 / (1 if self.real == 0 else self.real))
+        elif format_ == DataFormat.theo_deg:
+            return self.theo
+        return -1
 
-        self.igbt_vce_cv = VCE_IGBT_V * (1 << CU_SHIFT)      # igbt voltage factor [cu]
-        self.igbt_e_cw = (IGBT_EON_W + IGBT_EOFF_W) * (1 << CU_SHIFT)
-        self.calc_igbt_factor()
-        self.calc_igbt_offset()
-
-    def calc_igbt_factor(self):
-        # Theorical value for the factor
-        self.igbt_factor_t = VCE_IGBT_V / pwm_max_duty
-        self.igbt_factor_r = int(self.igbt_vce_cv / CMP_RATE_BASE)
-
-    def calc_igbt_offset(self):
-        self.igbt_offset_t = (IGBT_EON_W + IGBT_EOFF_W) * pwm_frequency_hz  # [W] (Eon+Eoff)*f  @225A, 600V
-        self.igbt_offset_r = int(self.igbt_e_cw * SYSTMR_BASE_FREQ_HZ)
-
-
-class ConstDiode:
-
-    def __init__(self):
-        self.diode_factor_t: float = 0
-        self.diode_factor_r: int = 0
-
-        self.diode_offset_t: float = 0
-        self.diode_offset_r: int = 0
-
-        self.v_diode_cv = V_DIODE_V * (1 << CU_SHIFT)
-        self.diode_erec_cw = DIODE_EREC_W * (1 << CU_SHIFT)
-
-        self.calc_diode_factor()
-        self.calc_diode_offset()
-
-    def calc_diode_factor(self):
-        self.diode_factor_t = V_DIODE_V / pwm_max_duty
-        self.diode_factor_r = int(self.v_diode_cv / CMP_RATE_BASE)
-
-    def calc_diode_offset(self):
-        self.diode_offset_t = DIODE_EREC_W * pwm_frequency_hz
-        self.diode_offset_r = int(self.diode_erec_cw * SYSTMR_BASE_FREQ_HZ)
+    def set_value(self, format_, val_):
+        if format_ == DataFormat.data_theo_W:
+            self.theo = val_
+        elif format_ == DataFormat.data_real_WCU:
+            self.real = val_
 
 
 class PowerSample:
 
     def __init__(self):
-        self.pit_r = 0
-        self.pib_r = 0
-        self.pdt_r = 0
-        self.pdb_r = 0
-        self.pit_t = 0
-        self.pib_t = 0
-        self.pdt_t = 0
-        self.pdb_t = 0
+        self.pit = PowerDato()
+        self.pib = PowerDato()
+        self.pdt = PowerDato()
+        self.pdb = PowerDato()
 
-    def get_error_pit(self):
-        return self.pit_t - self.pit_r
+    def get_value(self, data_mode_):
+        d_type = data_mode_ & DataType.data_type_mask
+        d_format = data_mode_ & DataFormat.data_format_mask
 
-    def get_error_perc_pit(self):
-        return self.get_error_pit() * 100 / self.pit_r
+        if d_type == DataType.PIT:
+            return self.pit.get_value(d_format)
+        elif d_type == DataType.PIB:
+            return self.pib.get_value(d_format)
+        elif d_type == DataType.PDT:
+            return self.pdt.get_value(d_format)
+        elif d_type == DataType.PDB:
+            return self.pdb.get_value(d_format)
+        return -1
 
-    def check_limit_pit(self):
-        if self.pit_r > 0x7fffffff:
-            return False;
+    def set_value(self, data_mode_, val_):
+        d_type = data_mode_ & DataType.data_type_mask
+        d_format = data_mode_ & DataFormat.data_format_mask
+
+        if d_type == DataType.PIT:
+            self.pit.set_value(d_format, val_)
+        elif d_type == DataType.PIB:
+            self.pib.set_value(d_format, val_)
+        elif d_type == DataType.PDT:
+            self.pdt.set_value(d_format, val_)
+        elif d_type == DataType.PDB:
+            self.pdb.set_value(d_format, val_)
+
+    def check_overflow(self):
+        if (self.pit.real > 0x70000000 or self.pdt.real > 0x70000000 or
+                self.pib.real > 0x70000000 or self.pdb.real > 0x70000000):
+            rpt_print("Overflow")
+            return True
 
 
 class PowerData:
+    current_iter: range
+    power_sample: []  # Samples con iterazione su compare
+    power_sample_curr: []  # Samples con iterazione su corrente
 
-    igbt_const: ConstIgbt
-    diode_const: ConstDiode
-
-    power_sample: []
-
-    def __init__(self):
-
-        max_compare = pwm_max_duty
-
-        self.compare_iter = range(max_compare)
+    def __init__(self,single_):
+        self.single = single_
 
         # Const for the custom unity calculation
-        self.igbt_vce_cv: int = 0
-        self.v_diode_cv: int = 0
+        self.errors_pit = None
+        self.errors_pib = None
+        self.errors_pdt = None
+        self.errors_pdb = None
+        self.compare_range = None
+        self.compare_iter = range(pwm_max_duty)
 
-        self.igbt_factor_cv: int = 0        # Fattore di tensione igbt in custom voltage (shifted)
-        self.igbt_offset_cw: int = 0        # Fattore di potenza igbt in custom watt (shifted)
-        self.diode_factor_cv: int = 0       # Fattore di tensione diodo in custom voltage (shifted)
-        self.diode_offset_cw: int = 0       # Fattore di potenza diodo in custom watt (shifted)
+        self.current_delta = 100;
+        self.current_iter = range(int(((MAX_CURRENT_LSB - MIN_CURRENT_LSB)/self.current_delta)-1))
+        self.current_range = [0 for i in self.current_iter]
+        for cc in self.current_iter:
+            val = MIN_CURRENT_LSB + cc*self.current_delta
+            self.current_range[cc] = val
+            if 0 >= val > -100:
+                val = -100
+            elif 0 <= val < 100:
+                val = 100
 
-        self.power_sample = [PowerSample() for i in self.compare_iter]
+        self.power_sample_curr = [PowerSample() for i in self.current_iter]
 
-        # Variables for the Watt calculation
-        self.igtb_offset_w = 0
-        self.diode_offset_w = 0
-        self.igbt_factor_v = 0
-        self.diode_factor_v = 0
+    def GetCurrentValues(self) :
+        return self.current_range
 
-        myiter = self.compare_iter
-        self.compare_range = [0 for i in myiter]
-        self.pit_error_v = [0 for i in myiter]
-        self.pit_errorperc_v = [0 for i in myiter]
+    def calc_theoretical(self, sample: PowerSample, current_lsb_ : float, compare_: float):
+        """
 
-        self.pib_W = [0 for i in myiter]
-        self.pib_cu = [0 for i in myiter]
-        self.pib_error_v = [0 for i in myiter]
-        self.pib_errorperc_v = [0 for i in myiter]
+        :param sample: container of data
+        :param current_lsb_: current value in LSB
+        :param compare_: compare value
+        :return: none
 
-        self.pdt_W = [0 for i in myiter]
-        self.pdt_cu = [0 for i in myiter]
-        self.pdt_error_v = [0 for i in myiter]
-        self.pdt_errorperc_v = [0 for i in myiter]
+        This function calculate the power as:
+        power_t[W] = (current[A] * (compare/pwm_max_duty) * factor_t) + offset_t
+              = (current_lsb_2_A_T(current_lsb_) * (compare/max_pwm_duty) * factor_t) + offset_t
 
-        self.pdb_W = [0 for i in myiter]
-        self.pdb_cu = [0 for i in myiter]
-        self.pdb_error_v = [0 for i in myiter]
-        self.pdb_errorperc_v = [0 for i in myiter]
+        where factor_t and offset_t are constant calculated
+        """
 
-        self.Const_W()
-        self.Const_Cu()
+        # Conversion of current from lsb to Ampere
+        current_A = current_lsb2A_theo(current_lsb_)
+        mul_var = float(float(abs(current_A)) * float(compare_ / pwm_max_duty))
+        mul_var_compl = float(abs(current_A) * (1 - (compare_ / pwm_max_duty)))
 
-        self.igbt_const = ConstIgbt()
-        self.diode_const = ConstDiode()
-
-
-    # Calculate variables using theorical calculation (floating)
-    def Const_W(self):
-
-        rpt_print("\nVariables FOR THE WATT CALCULATION\n")
-
-        self.igbt_factor_v = VCE_IGBT_V / pwm_max_duty
-        rpt_print_d("igbt_factor_v [V] ", self.igbt_factor_v)
-
-        self.diode_factor_v = V_DIODE_V / pwm_max_duty
-        rpt_print_d("diode_factor_v [V] ", self.diode_factor_v)
-
-        self.igtb_offset_w = (IGBT_EON_W + IGBT_EOFF_W) * pwm_frequency_hz  # [W] (Eon+Eoff)*f  @225A, 600V
-        rpt_print_d("igtb_offset_w ", self.igtb_offset_w)
-
-        self.diode_offset_w = DIODE_EREC_W * pwm_frequency_hz
-        rpt_print_d("diode_offset_w", self.diode_offset_w)
-
-    # Calculate all constants in custom unity
-    def Const_Cu(self):
-
-        rpt_print("\nCONST FOR THE CU CALCULATION (shift = " + str(CU_SHIFT) + "\n")
-
-        self.igbt_vce_cv = VCE_IGBT_V * (1 << CU_SHIFT)      # igbt voltage factor [cu]
-        # igbt_const_cv = vce_igbt_cv/cmp_rate
-        # igbt_const_cv = vce_igbt_cv/ (cmp_rate_base << FreqShift)
-        self.igbt_factor_cv = int(self.igbt_vce_cv / CMP_RATE_BASE)
-        aux_igbt_factor_cv = self.igbt_factor_cv / (1 << FreqShift)
-        rpt_print_d("vce_igbt_cv", self.igbt_vce_cv)
-        rpt_print_d("power_data.igbt_factor_cv", self.igbt_factor_cv)
-        rpt_print_d("igbt factor [cv]", aux_igbt_factor_cv)
-        rpt_print_d("igbt factor [cv->v]", aux_igbt_factor_cv / (1 << CU_SHIFT))
-
-        rpt_print("")
-
-        self.v_diode_cv = V_DIODE_V * (1 << CU_SHIFT)
-        self.diode_factor_cv = int(self.v_diode_cv / CMP_RATE_BASE)
-        aux_diode_factor_cv = self.diode_factor_cv / (1 << FreqShift)
-        rpt_print_d("V_DIODE_CV", self.v_diode_cv)
-        rpt_print_d("power_data.DIODE_FACTOR_CV", self.diode_factor_cv)
-        rpt_print_d("diode factor [cv]", aux_diode_factor_cv)
-        rpt_print_d("diode factor [cv->v]", aux_diode_factor_cv / (1 << CU_SHIFT))
-
-        rpt_print("")
-
-        self.igbt_e_cw = (IGBT_EON_W + IGBT_EOFF_W) * (1 << CU_SHIFT)
-        # igbt_offset_cw = IGBT_E_W * pwm_frequency_hz
-        #                = IGBT_E_W * (SYSTMR_BASE_FREQ_HZ >> FreqShift)
-        self.igbt_offset_cw = int(self.igbt_e_cw * SYSTMR_BASE_FREQ_HZ)
-        aux_igbt_offset_cw = self.igbt_offset_cw / (1 << FreqShift)
-        rpt_print_d("igbt_e_cw", self.igbt_e_cw)
-        rpt_print_d("power_data.IGBT_OFFSET_CW", self.igbt_offset_cw)
-        rpt_print_d("igbt_offset_cw", aux_igbt_offset_cw)
-        rpt_print_d("igbt_offset_cw [cw->w]", aux_igbt_offset_cw / (1 << CU_SHIFT))
-
-        rpt_print("")
-
-        self.diode_erec_cw = DIODE_EREC_W * (1 << CU_SHIFT)
-        self.diode_offset_cw = int(self.diode_erec_cw * SYSTMR_BASE_FREQ_HZ)
-        aux_diode_offset_cw = self.diode_offset_cw / (1 << FreqShift)
-        rpt_print_d("diode_erec_cw", self.diode_erec_cw)
-        rpt_print_d("power_data.DIODE_OFFSET_CW", self.diode_offset_cw)
-        rpt_print_d("idiode_offset_cw", aux_diode_offset_cw)
-        rpt_print_d("diode_offset_cw [cw->w]", aux_diode_offset_cw / (1 << CU_SHIFT))
-        rpt_print("")
-        rpt_print("LSB2A_CURR_FACTOR: " + str(LSB2A_CURR_FACTOR) + "\n")
-        rpt_print("A2LSB_CURR_FACTOR: " + str(A2LSB_CURR_FACTOR) + "\n")
-
-    def calc_theoretical(self, sample: PowerSample, current_A_, compare_):
-        """ Funzione che calcola le componenti in WATT parendo da corrente in [A]
-            eseguo il calcolo in Watt, nel fare il calcolo aggiungo anche lo shift di CU_SHIFT per avere
-            dati commparabili """
-        mul_var = current_A_ * compare_
-        mul_var_1 = current_A_ * (pwm_max_duty - compare_)
-
-        if current_A_ > 0:
-            sample.pit_t = (mul_var * self.igbt_factor_v + self.igtb_offset_w) * (1 << CU_SHIFT)
-            sample.pdb_t = (mul_var_1 * self.diode_factor_v + self.diode_offset_w) * (1 << CU_SHIFT)
+        if current_A > 0:
+            sample.set_value(DataType.PIT | DataFormat.data_theo_W,
+                             (mul_var * igbt_factor_theo()) + igbt_offset_theo())
+            sample.set_value(DataType.PDB | DataFormat.data_theo_W,
+                             (mul_var_compl * diode_factor_theo()) + diode_offset_theo())
         else:
-            sample.pib_t = (mul_var_1 * self.igbt_factor_v + self.igtb_offset_w) * (1 << CU_SHIFT)
-            sample.pdt_t = (mul_var * self.diode_factor_v + self.diode_offset_w) * (1 << CU_SHIFT)
+            sample.set_value(DataType.PIB | DataFormat.data_theo_W,
+                             (mul_var_compl * igbt_factor_theo()) + igbt_offset_theo())
+            sample.set_value(DataType.PDT | DataFormat.data_theo_W,
+                             (mul_var * diode_factor_theo()) + igbt_offset_theo())
+
+    # This function take a fload, evaluate the rounding error to int, check the overflow and return
+    # the integer
+    def check_value(self, valfloat_: float, print_):
+        if print_:
+            err = perc_err(valfloat_, int(valfloat_))
+            overflow = CheckIntOverflow(valfloat_, 32)
+            rpt_print("Op: err%(" + str(err) + ") overflow(" + str(overflow) + ")")
+
+        return int(valfloat_)
+
+
+    # Funzione principale di conversione a rischio overflow, QUi ad ogi operazione faccio il test dell'overflow
+    def value_convert(self, dev_factor_: int, curr_: int, cmp_: int):
+        '''
+
+        :param dev_factor_:
+        :param curr_:
+        :param cmp_:
+        :return:
+
+        retval = curr_ * cmp_ * ( (dev_factor_ * CURR_FACTOR) / ( 1024 * 1000  ) )
+
+        Dove:
+            CURR_FACTOR variabile
+            dev_factor_ variabile
+            1/1000 = 131 >> 17
+            1/1024 = >> 10
+
+        Qui eseguiamo le operazioni una alla volta controllando overflow e l'errore in percentuale
+
+        '''
+
+        # Calcolo ( (curr_factor * dev_factor)  / 1000 ), questo calcolo è affidabile perchè curr_factor e dev_factor sono noti
+        # ache se non costanti
+        aux: float = (131 * float(curr_factor * dev_factor_)) / (1 << 17)
+        aux = self.check_value(aux, self.single)
+
+        # moltiplico per la corrente
+        aux *= curr_;
+        aux = self.check_value(aux, self.single)
+
+        # parzializzo la divisione per non perdere risoluzione
+        aux /= (1 << 4)
+        aux = self.check_value(aux, self.single)
+
+        aux *= cmp_
+        aux = self.check_value(aux, self.single)
+
+        # parzializzo la divisione per non perdere risoluzione
+        aux /= (1 << 6)
+        aux = self.check_value(aux, self.single)
+
+
+        # ora confronto il valore clacolato a float globale con il risultato per
+        # valutare l'errore di approssimazione complessivo
+        if self.single:
+            aux_theo = (curr_factor * dev_factor_ * curr_ * cmp_) / (1000 * 1024)
+            rpt_print("End: err(" + str(perc_err( aux,aux_theo)) + ")")
+            rpt_print("aux: (" + str(aux) + ") - aux_theo(" + str(aux_theo) + ")")
+
+        return int(aux)
+
+    def value_convert_c(self, dev_factor_, curr_factor_, curr_lsb_,cmp_):
+        aux = (131 * curr_factor_ * dev_factor_) >> 17
+        aux = (aux * curr_lsb_) >> 4
+        aux = (aux * cmp_) >> 6
+        return aux;
 
     def calc_real(self, sample: PowerSample, current_lsb_, compare_):
-        """ eseguo il calcolo in Custom Unit
-            usiamo la corrente in lsb quindi restiamo in credito di una moltiplica per JUNCT_CURR_FACTOR """
-        curr_A = current_lsb_ * LSB2A_CURR_FACTOR
-        # se mul_var = curr_A * compare_
-        mul_var_p1 = current_lsb_ * LSB2A_CURR_FACTOR * compare_
-        mul_var = (current_lsb_ * compare_) * LSB2A_CURR_FACTOR
-        mul_var_compl = current_lsb_ * LSB2A_CURR_FACTOR * (pwm_max_duty - compare_)
+        """
+
+        :param sample:
+        :param current_lsb_:
+        :param compare_:
+        :return:
+
+    	Power[WCu] = ((VCE_IGBT_V * Curr[A] * CompRate) * CUSTOM_FACTOR) + (DevOffset[W] * CUSTOM_FACTOR)
+
+	    where:
+	    CompRate = compare_/pwm_max_duty
+	    DevOffset[W] = IGBT_E_W * pwm_frequency_hz
+
+        So:
+
+	    Power = (VCE_IGBT_V * Curr[A] * compare_ * CUSTOM_FACTOR)/pwm_max_duty + DevOffset[W]*CUSTOM_FACTOR
+	    Power = (VCE_IGBT_V * Curr[A] * compare_ * CUSTOM_FACTOR)/pwm_max_duty
+	            + (IGBT_E_W * pwm_frequency_hz)*CUSTOM_FACTOR
+
+    	where:
+	    PwmMaxDuty = CMP_RATE_BASE * shift_freq_factor
+	    pwm_frequency_hz = SYSTMR_BASE_FREQ_HZ / shift_freq_factor
+	    Curr[A] = (current_lsb * CURR_FACTOR) / (1024 * 1000)
+
+        if Power = Power1 + Power2
+
+        Power1 = (VCE_IGBT_V * ((current_lsb * CURR_FACTOR) / (1024 * 1000)) * compare_ * CUSTOM_FACTOR)/ (CMP_RATE_BASE * shift_freq_factor)
+        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
+
+        Power1 = (VCE_IGBT_V * current_lsb * CURR_FACTOR * compare_ * CUSTOM_FACTOR) / ( 1024 * 1000 * CMP_RATE_BASE * shift_freq_factor )
+        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ) / shift_freq_factor
+
+	    Vars = compare_ * current_lsb
+
+        Power1 = Vars * (VCE_IGBT_V * CURR_FACTOR * CUSTOM_FACTOR ) / ( 1024 * 1000 * CMP_RATE_BASE * shift_freq_factor )
+        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
+
+        Power1 = Vars * ( (VCE_IGBT_V * CURR_FACTOR * CUSTOM_FACTOR) / ( 1024 * 1000 * CMP_RATE_BASE ) ) / shift_freq_factor
+        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ  * CUSTOM_FACTOR) / shift_freq_factor
+
+        but igbt_factor_real = (VCE_IGBT_V * CUSTOM_FACTOR) / CMP_RATE_BASE
+            igbt_offset_real = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ  * CUSTOM_FACTOR)
+
+        Power1 = Vars * ( (igbt_factor_real * CURR_FACTOR) / ( 1024 * 1000) ) / shift_freq_factor )
+        Power2 = igbt_offset_real / shift_freq_factor
+
+        Power1 = value_convert(igbt_factor_real, current_lsb, compare_)  / shift_freq_factor )
+        Power2 = igbt_offset_real / shift_freq_factor
+
+        real = value_convert(igbt_factor_real, current_lsb, compare_) + igbt_offset_real
+
+        dove real_2_theo(real): theo = (real/shift_freq_factor)/CUSTOM_FACTOR  """
 
         if current_lsb_ > 0:
-            sample.pit_r = (int(self.igbt_factor_cv * mul_var) >> FreqShift) + (
-                    int(self.igbt_offset_cw) >> FreqShift)
-            sample.pdb_r = (int(self.diode_factor_cv * mul_var_compl) >> FreqShift) + (
-                    int(self.diode_offset_cw) >> FreqShift)
+            if self.single:
+                rpt_sep()
+                rpt_print("PIT Calculation")
+            val = self.value_convert(igbt_factor_real(), abs(current_lsb_), compare_)
+            sample.set_value(DataType.PIT | DataFormat.data_real_WCU, val + igbt_offset_real())
+
+            if self.single:
+                rpt_sep()
+                rpt_print("PDB Calculation")
+            val = self.value_convert(diode_factor_real(), abs(current_lsb_), pwm_max_duty - compare_)
+            sample.set_value(DataType.PDB | DataFormat.data_real_WCU, val + diode_offset_real())
+
         else:
-            sample.pib_r = (int(self.igbt_factor_cv * mul_var_compl) >> FreqShift) + (
-                    int(self.igbt_offset_cw) >> FreqShift)
-            sample.pdt_r = (int(self.diode_factor_cv * mul_var) >> FreqShift) + (
-                    int(self.diode_offset_cw) >> FreqShift)
+            if self.single:
+                rpt_print("PIB Calculation")
+            val = self.value_convert(igbt_factor_real(), abs(current_lsb_), pwm_max_duty - compare_)
+            sample.set_value(DataType.PIB | DataFormat.data_real_WCU, val + igbt_offset_real())
 
-    def iter_compare_calc(self, current_):
+            if self.single:
+                rpt_print("PDT Calculation")
+            val = self.value_convert(diode_factor_real(), abs(current_lsb_), compare_)
+            sample.set_value(DataType.PDT | DataFormat.data_real_WCU, val + diode_offset_real())
 
-        rpt_print("\n\nVALUES for 0 to " + str(self.compare_iter) + "\n\n")
+    def calc_iter_current(self, compare_):
+        for cc in self.current_iter:
+            val = MIN_CURRENT_LSB + (cc*self.current_delta)
+            if 0 >= val > -100:
+                val = -100
+            elif 0 <= val < 100:
+                val = 100
 
-        for cc in self.compare_iter:
-            self.compare_range[cc] = cc
-            self.calc_theoretical(self.power_sample[cc], current_lsb_2_A(current_), cc)
-            self.calc_real(self.power_sample[cc], current_, cc)
-            self.pit_error_v[cc] = (self.power_sample[cc].pit_t - self.power_sample[cc].pit_r)
-            self.pit_errorperc_v[cc] = self.pit_error_v[cc] * 100 / self.power_sample[cc].pit_r
+            self.calc_theoretical(self.power_sample_curr[cc], self.current_range[cc], compare_)
+            self.calc_real(self.power_sample_curr[cc], self.current_range[cc], compare_)
 
-            if self.power_sample[cc].pit_r > 0x7fffffff:
-                rpt_print("ERROR: the value exceed maximum value from index: " + str(cc) + "\n")
-                break
+    def calc_single(self, fixed_current_, fixed_compare_):
+        rpt_sep()
+        rpt_print("Single calculation")
+        mul_var = abs(current_lsb2A_theo(fixed_current_)) * fixed_compare_ / pwm_max_duty
+        mul_var_compl = abs(current_lsb2A_theo(fixed_current_)) * (1 - (fixed_compare_ / pwm_max_duty))
 
-    def theo_samples_pit(self):
-        tmp = []
-        for ii in self.power_sample:
-            tmp.append(ii.pit_t)
+        rpt_print("current_A:\t " + str(current_lsb2A_theo(fixed_current_)))
+        rpt_print("mulvar:\t\t " + str(mul_var))
+        rpt_print("mulvar_c:\t " + str(mul_var_compl))
+
+        if fixed_current_ != 0 and fixed_compare_ != 0:
+            sample = PowerSample()
+            self.calc_real(sample, fixed_current_, fixed_compare_)
+            self.calc_theoretical(sample, fixed_current_, fixed_compare_)
+            return sample
+
+        return None
+
+    def get_samples(self, data_mode_):
+        tmp = [0 for cc in self.current_iter]
+        for ii in self.current_iter:
+            tmp[ii] = self.power_sample_curr[ii].get_value(data_mode_)
         return tmp
 
-    def real_samples_pit(self):
-        tmp = []
-        for ii in self.power_sample:
-            tmp.append(ii.pit_r)
-        return tmp
+    def check_overflow(self):
+        tmp = [0 for cc in self.current_iter]
+        for ii in self.current_iter:
+            if self.power_sample_curr[ii].check_overflow():
+                rpt_print("overflow on index" + str(ii))
+                return
 
-    def error_perc_pit(self):
-        tmp = []
-        for ii in self.power_sample:
-            tmp.append(ii.get_error_perc_pit())
-        return tmp
-
-
-power_data: PowerData
+    def print_data_curr(self):
+        rpt_print("\n\nestimation of power consumption for the complete current range")
+        rpt_print("PIT")
+        rpt_print_d("min T [W]", min(self.get_samples(DataType.PIT | DataFormat.data_theo_W)))
+        rpt_print_d("max T [W]", max(self.get_samples(DataType.PIT | DataFormat.data_theo_W)))
+        rpt_print_d("min T [WCU]", min(self.get_samples(DataType.PIT | DataFormat.data_theo_WCU)))
+        rpt_print_d("max T [WCU]", max(self.get_samples(DataType.PIT | DataFormat.data_theo_WCU)))
+        rpt_print_d("min R  ", min(self.get_samples(DataType.PIT | DataFormat.data_real_WCU)))
+        rpt_print_d("max R  ", max(self.get_samples(DataType.PIT | DataFormat.data_real_WCU)))
+        rpt_print_d("err% min  ", min(self.get_samples(DataType.PIT | DataFormat.theo_real_error_perc)))
+        rpt_print_d("err% max  ", max(self.get_samples(DataType.PIT | DataFormat.theo_real_error_perc)))
+        rpt_print("PIB")
+        rpt_print_d("min T [W]", min(self.get_samples(DataType.PIB | DataFormat.data_theo_W)))
+        rpt_print_d("max T [W]", max(self.get_samples(DataType.PIB | DataFormat.data_theo_W)))
+        rpt_print_d("min T [WCU]", min(self.get_samples(DataType.PIB | DataFormat.data_theo_WCU)))
+        rpt_print_d("max T [WCU]", max(self.get_samples(DataType.PIB | DataFormat.data_theo_WCU)))
+        rpt_print_d("min R  ", min(self.get_samples(DataType.PIB | DataFormat.data_real_WCU)))
+        rpt_print_d("max R  ", max(self.get_samples(DataType.PIB | DataFormat.data_real_WCU)))
+        rpt_print_d("err% min  ", min(self.get_samples(DataType.PIB | DataFormat.theo_real_error_perc)))
+        rpt_print_d("err% max  ", max(self.get_samples(DataType.PIB | DataFormat.theo_real_error_perc)))
+        rpt_print("PDT")
+        rpt_print_d("min T [W]", min(self.get_samples(DataType.PDT | DataFormat.data_theo_W)))
+        rpt_print_d("max T [W]", max(self.get_samples(DataType.PDT | DataFormat.data_theo_W)))
+        rpt_print_d("min T [WCU]", min(self.get_samples(DataType.PDT | DataFormat.data_theo_WCU)))
+        rpt_print_d("max T [WCU]", max(self.get_samples(DataType.PDT | DataFormat.data_theo_WCU)))
+        rpt_print_d("min R  ", min(self.get_samples(DataType.PDT | DataFormat.data_real_WCU)))
+        rpt_print_d("max R  ", max(self.get_samples(DataType.PDT | DataFormat.data_real_WCU)))
+        rpt_print_d("err% min  ", min(self.get_samples(DataType.PDT | DataFormat.theo_real_error_perc)))
+        rpt_print_d("err% max  ", max(self.get_samples(DataType.PDT | DataFormat.theo_real_error_perc)))
+        rpt_print("PDB")
+        rpt_print_d("min T [W]", min(self.get_samples(DataType.PDB | DataFormat.data_theo_W)))
+        rpt_print_d("max T [W]", max(self.get_samples(DataType.PDB | DataFormat.data_theo_W)))
+        rpt_print_d("min T [WCU]", min(self.get_samples(DataType.PDB | DataFormat.data_theo_WCU)))
+        rpt_print_d("max T [WCU]", max(self.get_samples(DataType.PDB | DataFormat.data_theo_WCU)))
+        rpt_print_d("min R  ", min(self.get_samples(DataType.PDB | DataFormat.data_real_WCU)))
+        rpt_print_d("max R  ", max(self.get_samples(DataType.PDB | DataFormat.data_real_WCU)))
+        rpt_print_d("err% min  ", min(self.get_samples(DataType.PDB | DataFormat.theo_real_error_perc)))
+        rpt_print_d("err% max  ", max(self.get_samples(DataType.PDB | DataFormat.theo_real_error_perc)))

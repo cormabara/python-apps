@@ -1,75 +1,104 @@
-CHeck the error conversion for current using thi shift division
-for current lsb from -15943 to 15943 the error is: -0.054931640624994685[%]
+---------------------------------------------
 
+PLATFORM: ALICONV
+CMP_RATE_BASE: 	5000	 - 	0x1388
+MAX_CURRENT_A: 	27	 - 	0x1b
+MAX_CURRENT_LSB: 	18000	 - 	0x4650
+MIN_CURRENT_LSB: 	-18000	 - 	-0x4650
+FreqShift: 	1	 - 	0x1
+curr_factor: 	1536	 - 	0x600
+pwm_max_duty: 	10000	 - 	0x2710
+pwm_frequency_hz: 	5000	 - 	0x1388
+pwm_period_uS: 	200.0	 - 	0xc8
+pwm_period_uS: 	200.0	 - 	0xc8
+---------------------------------------------
 
-Variables FOR THE WATT CALCULATION
+IGBT CONSTANT
+VCE_IGBT_V [V]: 2.45
+IGBT_E_W   [W]: 0.0405
 
-igbt_factor_v [V] : 	0.000245	 - 	0x0
-diode_factor_v [V] : 	0.000242	 - 	0x0
-igtb_offset_w : 	139.15	 - 	0x8b
-diode_offset_w: 	85.0	 - 	0x55
+Theorical calculation
 
-CONST FOR THE CU CALCULATION (shift = 16
+igbt_factor_t [V] : 	2.45	 - 	0x2
+igtb_offset_t [W]: 	202.5	 - 	0xca
 
-vce_igbt_cv: 	160563.2	 - 	0x27333
-power_data.igbt_factor_cv: 	32	 - 	0x20
-igbt factor [cv]: 	16.0	 - 	0x10
-igbt factor [cv->v]: 	0.000244140625	 - 	0x0
+Custom calculation
 
-V_DIODE_CV: 	158597.12	 - 	0x26b85
-power_data.DIODE_FACTOR_CV: 	31	 - 	0x1f
-diode factor [cv]: 	15.5	 - 	0xf
-diode factor [cv->v]: 	0.00023651123046875	 - 	0x0
+igbt_factor_r [V<<CU_SHIFT] : 	32	 - 	0x20
+igtb_offset_r [W<<CU_SHIFT]: 	1605632000	 - 	0x5fb40000
+igbt_factor_error (32) - (32.11264): 0.3507653061224458[%]
+---------------------------------------------
 
-igbt_e_cw: 	1823.86688	 - 	0x71f
-power_data.IGBT_OFFSET_CW: 	18238668	 - 	0x1164ccc
-igbt_offset_cw: 	9119334.0	 - 	0x8b2666
-igbt_offset_cw [cw->w]: 	139.14999389648438	 - 	0x8b
+DIODE CONSTANT
+V_DIODE_V [V]: 2.42
+DIODE_EREC_W   [W]: 0.017
 
-diode_erec_cw: 	1114.112	 - 	0x45a
-power_data.DIODE_OFFSET_CW: 	11141120	 - 	0xaa0000
-idiode_offset_cw: 	5570560.0	 - 	0x550000
-diode_offset_cw [cw->w]: 	85.0	 - 	0x55
+Theorical calculation with factor in volt and offset in Watt
 
-LSB2A_CURR_FACTOR: 0.0125439453125
+diode_factor_t [V] : 	2.42	 - 	0x2
+diode_offset_t [W]: 	85.0	 - 	0x55
 
-A2LSB_CURR_FACTOR: 79.71973530556637
+Custom calculation
 
+diode_factor_r [V<<CU_SHIFT] : 	31	 - 	0x1f
+diode_offset_r [W<<CU_SHIFT]: 	11141120	 - 	0xaa0000
+diode_factor_error (31) - (31.719424): 2.2680865831611574[%]
+---------------------------------------------
 
+SINGLE CALCULATION
+current: 5[A]
+current: 3333.333333333333[lsb]
+---------------------------------------------
 
-VALUES for 0 to range(0, 10000)
+Single calculation
+current_A:	 5.0
+mulvar:		 2.5
+mulvar_c:	 2.5
+---------------------------------------------
 
+PIT Calculation
+Op: err%(0.2544529262086514) overflow(False)
+Op: err%(0.00020408163264118212) overflow(False)
+Op: err%(0.003061230737205586) overflow(False)
+Op: err%(0.0) overflow(False)
+Op: err%(0.0) overflow(False)
+End: err(0.3134796238244514)
+aux: (797500) - aux_theo(800000.0)
+---------------------------------------------
 
+PDB Calculation
+Op: err%(1.239431995403431) overflow(False)
+Op: err%(0.00042553191488742476) overflow(False)
+Op: err%(0.006383005885131426) overflow(False)
+Op: err%(0.0) overflow(False)
+Op: err%(0.0001143907670309468) overflow(False)
+End: err(1.3176524111640286)
+aux: (764921) - aux_theo(775000.0)
+---------------------------------------------
 
-
-MAX - MIN
-
-
+for current(3333.333333333333)[lsb] and compare(5000/10000) the calc values are: 
 PIT
-pit min[W]: 	9119334.4	 - 	0x8b2666
-pit max[W]: 	41228763.136	 - 	0x27519db
-pit min   : 	9119334	 - 	0x8b2666
-pit max   : 	41116134	 - 	0x27361e6
-err% min  : 	4.386285230615844e-06	 - 	0x0
-err% max  : 	0.2739292950061889	 - 	0x0
-PIB
-pib min[W]: 	0	 - 	0x0
-pib max[W]: 	0	 - 	0x0
-pib min   : 	0	 - 	0x0
-pib max   : 	0	 - 	0x0
-err% min  : 	0	 - 	0x0
-err% max  : 	0	 - 	0x0
-PDT
-pdt min[W]: 	0	 - 	0x0
-pdt max[W]: 	0	 - 	0x0
-pdt min   : 	0	 - 	0x0
-pdt max   : 	0	 - 	0x0
-err% min  : 	0	 - 	0x0
-err% max  : 	0	 - 	0x0
+	Real(1606429500)
+	theorical[W](208.625)
+	theorical[WCU](27344896.0)
+	Error[%](98.29778424761248)
+
+
 PDB
-pdb min[W]: 	0	 - 	0x0
-pdb max[W]: 	0	 - 	0x0
-pdb min   : 	0	 - 	0x0
-pdb max   : 	0	 - 	0x0
-err% min  : 	0	 - 	0x0
-err% max  : 	0	 - 	0x0
+	Real(11906041)
+	Theorical[W](91.05)
+	Theorical[WCU](11934105.6)
+	Error[%](0.23571731358895562)
+
+PIB
+	Real(0)
+	Theorical[W](0)
+	Theorical[WCU](0)
+	Error[%](0.0)
+
+PDT
+	(0)
+	Theorical[W](0)
+	Theorical[WCU](0)
+	Error[%](0.0)
+

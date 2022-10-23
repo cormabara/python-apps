@@ -1,0 +1,23 @@
+CALCULATION OF OUTPUT LOW HYSTERESIS ALGORITHM 
+
+output calculation for:
+min edge[rpm]: (100.0) - min edge[iu]: (426.6666666666667)
+
+max edge[rpm]: (300.0) - max edge[iu]: (1280.0)
+
+hysteresis[rpm] is (0.0) - hiysteresis[rpm] is (0.0
+
+
+min_edge_lo[iu](426.6666666666667)
+min_edge_lo[rpm](100.0)
+
+max_edge_lo[iu](1280.0)
+max_edge_lo[rpm](300.0)
+ON
+OFF
+ON
+OFF
+ON
+OFF
+ON
+OFF

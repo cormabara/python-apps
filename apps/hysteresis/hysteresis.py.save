@@ -1,8 +1,0 @@
-# This is hysteresis simulation
-
-import numpy as np
-
-import matplotlib.pyplot as plot
-
-from report import rpt_open, rpt_print_d, rpt_print
-

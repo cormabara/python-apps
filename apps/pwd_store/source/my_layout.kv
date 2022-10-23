@@ -1,0 +1,62 @@
+<WinEditItemContent>
+    txt_name: txt_name
+    txt_user: txt_user
+    txt_password: txt_password
+    txt_notes: txt_notes
+    txt_email:txt_email
+
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "320dp"
+    MDBoxLayout:
+        id: content_layout
+        orientation:"vertical"
+        MDTextField:
+            id: txt_name
+            hint_text: "Name"
+        MDTextField:
+            id: txt_user
+            hint_text: "User name"
+        MDTextField:
+            id: txt_password
+            hint_text: "Password"
+        MDTextField:
+            id: txt_email
+            hint_text: "E mail"
+        MDTextField:
+            id: txt_notes
+            hint_text: "Notes"
+
+<DlgSetPwdContent>
+    txt_password: txt_password
+    txt_password_confirm: txt_password_confirm
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "320dp"
+    MDBoxLayout:
+        height: "300dp"
+        orientation: "vertical"
+        size_hint_y: None
+        MDTextField:
+            id: txt_password
+            hint_text: "Set password"
+            password: True
+        MDTextField:
+            id: txt_password_confirm
+            hint_text: "Confirm password"
+            password: True
+
+<DlgChkPwdContent>
+    txt_password: txt_password
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "320dp"
+    MDBoxLayout:
+        MDTextField:
+            id: txt_password
+            hint_text: "Set password"
+            password: True
+
