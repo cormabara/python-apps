@@ -21,14 +21,6 @@ else:
     MAX_CURRENT_A = 27
 
 
-# Fattore di conversione da lsm_ ad ampere
-lsb2a_factor = curr_factor / (1024 * 1000)
-a2lsb_factor = (1024 * 1000) / curr_factor
-
-
-MAX_CURRENT_LSB = int(MAX_CURRENT_A * a2lsb_factor)
-MIN_CURRENT_LSB = -int(MAX_CURRENT_A * a2lsb_factor)
-
 
 # Dati di partenza dell'algoritmo descritto da Nick
 ALT_CPU_FREQ  = 100000000
@@ -52,7 +44,6 @@ CU_SHIFT = 16
 FreqShift = 1  # shift of the base frequency da 100uS a 200uS shift = 1
 shift_freq_factor = (1 << FreqShift)
 CUSTOM_FACTOR = 1 << CU_SHIFT
-W_2_WCU_FACTOR = CUSTOM_FACTOR
 
 CMP_RATE_BASE = int( (ALT_CPU_FREQ/SYSTMR_BASE_FREQ_HZ)/2)  # reference value for the compare
 pwm_frequency_hz = int(ALT_CPU_FREQ/SYSTMR_BASE_FREQ_HZ) >> FreqShift      # [hz]
@@ -88,12 +79,12 @@ def igbt_factor_real():
 # Offset calculation [W] (Eon+Eoff)*f  @225A, 600V
 def igbt_offset_theo():
     return (IGBT_EON_W + IGBT_EOFF_W) * pwm_frequency_hz
-    # return 0
+    #return 0
 
 
 # Offset calculation [W << CUST_SHIFT]
 def igbt_offset_real():
-    return int(VCE_IGBT_V * CUSTOM_FACTOR * SYSTMR_BASE_FREQ_HZ)
+    return int((IGBT_EON_W + IGBT_EOFF_W) * CUSTOM_FACTOR * SYSTMR_BASE_FREQ_HZ)
     # return 0
 
 
@@ -122,12 +113,25 @@ def power_real_2_theo(real_):
 def power_theo_2_real(theo_):
     return (theo_*shift_freq_factor)*CUSTOM_FACTOR
 
+
+
+# Fattore di conversione da lsm_ ad ampere
+lsb2a_factor = curr_factor / (1024 * 1000)
+a2lsb_factor = (1024 * 1000) / curr_factor
+
+
+MAX_CURRENT_LSB = int(MAX_CURRENT_A * a2lsb_factor)
+MIN_CURRENT_LSB = -int(MAX_CURRENT_A * a2lsb_factor)
+
 # Conversion current from lsb to A for the theorical calculation
 def current_lsb2A_theo(lsb_: float):
     return lsb_ * lsb2a_factor
 
-def current_A2lsb_theo(lsb_: float):
-    return lsb_ * a2lsb_factor
+def current_A2lsb_theo(A_: float):
+    return A_ * a2lsb_factor
+
+
+
 
 # foster model
 RTH_IGBT_T = 0.14  # [K/W]
@@ -245,9 +249,14 @@ def print_start_data():
     rpt_sep()
     rpt_print("PLATFORM: " + PLATFORM)
     rpt_print_d("CMP_RATE_BASE", CMP_RATE_BASE)
+
+    rpt_print("\nCURRENT DATA")
+    rpt_print_d("lsb2a_factor",lsb2a_factor)
+    rpt_print_d("a2lsb_factor",a2lsb_factor)    
     rpt_print_d("MAX_CURRENT_A",MAX_CURRENT_A)
     rpt_print_d("MAX_CURRENT_LSB",MAX_CURRENT_LSB)
     rpt_print_d("MIN_CURRENT_LSB",MIN_CURRENT_LSB)
+    
     rpt_print_d("FreqShift", FreqShift)
     rpt_print_d("curr_factor",curr_factor)
     rpt_print_d("pwm_max_duty", pwm_max_duty)

@@ -2,6 +2,10 @@
 
 PLATFORM: ALICONV
 CMP_RATE_BASE: 	5000	 - 	0x1388
+
+CURRENT DATA
+lsb2a_factor: 	0.0015	 - 	0x0
+a2lsb_factor: 	666.6666666666666	 - 	0x29a
 MAX_CURRENT_A: 	27	 - 	0x1b
 MAX_CURRENT_LSB: 	18000	 - 	0x4650
 MIN_CURRENT_LSB: 	-18000	 - 	-0x4650
@@ -25,7 +29,7 @@ igtb_offset_t [W]: 	202.5	 - 	0xca
 Custom calculation
 
 igbt_factor_r [V<<CU_SHIFT] : 	32	 - 	0x20
-igtb_offset_r [W<<CU_SHIFT]: 	1605632000	 - 	0x5fb40000
+igtb_offset_r [W<<CU_SHIFT]: 	26542080	 - 	0x1950000
 igbt_factor_error (32) - (32.11264): 0.3507653061224458[%]
 ---------------------------------------------
 
@@ -43,62 +47,6006 @@ Custom calculation
 diode_factor_r [V<<CU_SHIFT] : 	31	 - 	0x1f
 diode_offset_r [W<<CU_SHIFT]: 	11141120	 - 	0xaa0000
 diode_factor_error (31) - (31.719424): 2.2680865831611574[%]
----------------------------------------------
 
-SINGLE CALCULATION
-current: 5[A]
-current: 3333.333333333333[lsb]
+CALCULATE FROM ARRAY
 ---------------------------------------------
 
 Single calculation
-current_A:	 5.0
-mulvar:		 2.5
-mulvar_c:	 2.5
+current_A:	 -27.0
+mulvar:		 0.0
+mulvar_c:	 27.0
 ---------------------------------------------
 
-PIT Calculation
-Op: err%(0.2544529262086514) overflow(False)
-Op: err%(0.00020408163264118212) overflow(False)
-Op: err%(0.003061230737205586) overflow(False)
-Op: err%(0.0) overflow(False)
-Op: err%(0.0) overflow(False)
-End: err(0.3134796238244514)
-aux: (797500) - aux_theo(800000.0)
+Single calculation
+current_A:	 -26.946
+mulvar:		 0.026946000000000005
+mulvar_c:	 26.919054000000003
 ---------------------------------------------
 
-PDB Calculation
-Op: err%(1.239431995403431) overflow(False)
-Op: err%(0.00042553191488742476) overflow(False)
-Op: err%(0.006383005885131426) overflow(False)
-Op: err%(0.0) overflow(False)
-Op: err%(0.0001143907670309468) overflow(False)
-End: err(1.3176524111640286)
-aux: (764921) - aux_theo(775000.0)
+Single calculation
+current_A:	 -26.892
+mulvar:		 0.053784000000000005
+mulvar_c:	 26.838216
 ---------------------------------------------
 
-for current(3333.333333333333)[lsb] and compare(5000/10000) the calc values are: 
-PIT
-	Real(1606429500)
-	theorical[W](208.625)
-	theorical[WCU](27344896.0)
-	Error[%](98.29778424761248)
+Single calculation
+current_A:	 -26.838
+mulvar:		 0.080514
+mulvar_c:	 26.757486
+---------------------------------------------
 
+Single calculation
+current_A:	 -26.784
+mulvar:		 0.107136
+mulvar_c:	 26.676864
+---------------------------------------------
 
-PDB
-	Real(11906041)
-	Theorical[W](91.05)
-	Theorical[WCU](11934105.6)
-	Error[%](0.23571731358895562)
+Single calculation
+current_A:	 -26.73
+mulvar:		 0.13365
+mulvar_c:	 26.59635
+---------------------------------------------
 
-PIB
-	Real(0)
-	Theorical[W](0)
-	Theorical[WCU](0)
-	Error[%](0.0)
+Single calculation
+current_A:	 -26.676000000000002
+mulvar:		 0.160056
+mulvar_c:	 26.515944
+---------------------------------------------
 
-PDT
-	(0)
-	Theorical[W](0)
-	Theorical[WCU](0)
-	Error[%](0.0)
+Single calculation
+current_A:	 -26.622
+mulvar:		 0.186354
+mulvar_c:	 26.435646
+---------------------------------------------
 
+Single calculation
+current_A:	 -26.568
+mulvar:		 0.212544
+mulvar_c:	 26.355456
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.514
+mulvar:		 0.23862599999999998
+mulvar_c:	 26.275374
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.46
+mulvar:		 0.2646
+mulvar_c:	 26.1954
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.406
+mulvar:		 0.290466
+mulvar_c:	 26.115534
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.352
+mulvar:		 0.316224
+mulvar_c:	 26.035776
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.298000000000002
+mulvar:		 0.341874
+mulvar_c:	 25.956126
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.244
+mulvar:		 0.36741599999999996
+mulvar_c:	 25.876584
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.19
+mulvar:		 0.39285
+mulvar_c:	 25.797150000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.136
+mulvar:		 0.41817600000000005
+mulvar_c:	 25.717824
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.082
+mulvar:		 0.44339400000000007
+mulvar_c:	 25.638606
+---------------------------------------------
+
+Single calculation
+current_A:	 -26.028000000000002
+mulvar:		 0.468504
+mulvar_c:	 25.559496000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.974
+mulvar:		 0.49350600000000006
+mulvar_c:	 25.480494
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.92
+mulvar:		 0.5184
+mulvar_c:	 25.401600000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.866
+mulvar:		 0.543186
+mulvar_c:	 25.322813999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.812
+mulvar:		 0.567864
+mulvar_c:	 25.244136
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.758
+mulvar:		 0.592434
+mulvar_c:	 25.165566
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.704
+mulvar:		 0.616896
+mulvar_c:	 25.087104
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.650000000000002
+mulvar:		 0.6412500000000001
+mulvar_c:	 25.008750000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.596
+mulvar:		 0.665496
+mulvar_c:	 24.930504
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.542
+mulvar:		 0.689634
+mulvar_c:	 24.852366
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.488
+mulvar:		 0.713664
+mulvar_c:	 24.774335999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.434
+mulvar:		 0.7375860000000001
+mulvar_c:	 24.696414
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.38
+mulvar:		 0.7614
+mulvar_c:	 24.618599999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.326
+mulvar:		 0.7851060000000001
+mulvar_c:	 24.540894
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.272000000000002
+mulvar:		 0.8087040000000001
+mulvar_c:	 24.463296
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.218
+mulvar:		 0.8321940000000001
+mulvar_c:	 24.385806
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.164
+mulvar:		 0.855576
+mulvar_c:	 24.308424000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.11
+mulvar:		 0.87885
+mulvar_c:	 24.23115
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.056
+mulvar:		 0.902016
+mulvar_c:	 24.153984
+---------------------------------------------
+
+Single calculation
+current_A:	 -25.002
+mulvar:		 0.925074
+mulvar_c:	 24.076925999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.948
+mulvar:		 0.948024
+mulvar_c:	 23.999976
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.894000000000002
+mulvar:		 0.970866
+mulvar_c:	 23.923134
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.84
+mulvar:		 0.9936
+mulvar_c:	 23.8464
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.786
+mulvar:		 1.016226
+mulvar_c:	 23.769774
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.732
+mulvar:		 1.0387440000000001
+mulvar_c:	 23.693255999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.678
+mulvar:		 1.0611540000000002
+mulvar_c:	 23.616846
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.624
+mulvar:		 1.083456
+mulvar_c:	 23.540543999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.57
+mulvar:		 1.10565
+mulvar_c:	 23.46435
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.516000000000002
+mulvar:		 1.127736
+mulvar_c:	 23.388264
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.462
+mulvar:		 1.149714
+mulvar_c:	 23.312286
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.408
+mulvar:		 1.171584
+mulvar_c:	 23.236416
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.354
+mulvar:		 1.193346
+mulvar_c:	 23.160653999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.3
+mulvar:		 1.215
+mulvar_c:	 23.085
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.246000000000002
+mulvar:		 1.2365460000000001
+mulvar_c:	 23.009454
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.192
+mulvar:		 1.257984
+mulvar_c:	 22.934016
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.138
+mulvar:		 1.279314
+mulvar_c:	 22.858686
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.084
+mulvar:		 1.3005360000000001
+mulvar_c:	 22.783464
+---------------------------------------------
+
+Single calculation
+current_A:	 -24.03
+mulvar:		 1.32165
+mulvar_c:	 22.70835
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.976
+mulvar:		 1.3426559999999998
+mulvar_c:	 22.633343999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.922
+mulvar:		 1.3635540000000002
+mulvar_c:	 22.558446
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.868000000000002
+mulvar:		 1.384344
+mulvar_c:	 22.483656
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.814
+mulvar:		 1.405026
+mulvar_c:	 22.408974
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.76
+mulvar:		 1.4256000000000002
+mulvar_c:	 22.3344
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.706
+mulvar:		 1.446066
+mulvar_c:	 22.259934
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.652
+mulvar:		 1.466424
+mulvar_c:	 22.185576
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.598
+mulvar:		 1.486674
+mulvar_c:	 22.111326000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.544
+mulvar:		 1.506816
+mulvar_c:	 22.037184
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.490000000000002
+mulvar:		 1.5268500000000003
+mulvar_c:	 21.963150000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.436
+mulvar:		 1.546776
+mulvar_c:	 21.889224
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.382
+mulvar:		 1.566594
+mulvar_c:	 21.815406000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.328
+mulvar:		 1.586304
+mulvar_c:	 21.741695999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.274
+mulvar:		 1.605906
+mulvar_c:	 21.668094000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.22
+mulvar:		 1.6254
+mulvar_c:	 21.594599999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.166
+mulvar:		 1.644786
+mulvar_c:	 21.521214
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.112000000000002
+mulvar:		 1.6640640000000002
+mulvar_c:	 21.447936000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.058
+mulvar:		 1.6832340000000001
+mulvar_c:	 21.374766
+---------------------------------------------
+
+Single calculation
+current_A:	 -23.004
+mulvar:		 1.7022960000000003
+mulvar_c:	 21.301704
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.95
+mulvar:		 1.72125
+mulvar_c:	 21.22875
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.896
+mulvar:		 1.7400959999999999
+mulvar_c:	 21.155904000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.842
+mulvar:		 1.758834
+mulvar_c:	 21.083166
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.788
+mulvar:		 1.777464
+mulvar_c:	 21.010536000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.734
+mulvar:		 1.795986
+mulvar_c:	 20.938014000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.68
+mulvar:		 1.8144
+mulvar_c:	 20.8656
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.626
+mulvar:		 1.8327060000000002
+mulvar_c:	 20.793294000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.572
+mulvar:		 1.850904
+mulvar_c:	 20.721096
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.518
+mulvar:		 1.8689940000000003
+mulvar_c:	 20.649006
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.464000000000002
+mulvar:		 1.8869760000000002
+mulvar_c:	 20.577024
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.41
+mulvar:		 1.90485
+mulvar_c:	 20.50515
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.356
+mulvar:		 1.9226159999999999
+mulvar_c:	 20.433384000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.302
+mulvar:		 1.9402739999999998
+mulvar_c:	 20.361726
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.248
+mulvar:		 1.9578240000000002
+mulvar_c:	 20.290176000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.194
+mulvar:		 1.975266
+mulvar_c:	 20.218734
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.14
+mulvar:		 1.9926
+mulvar_c:	 20.1474
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.086000000000002
+mulvar:		 2.0098260000000003
+mulvar_c:	 20.076174
+---------------------------------------------
+
+Single calculation
+current_A:	 -22.032
+mulvar:		 2.026944
+mulvar_c:	 20.005056
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.978
+mulvar:		 2.0439540000000003
+mulvar_c:	 19.934046000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.924
+mulvar:		 2.0608560000000002
+mulvar_c:	 19.863144000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.87
+mulvar:		 2.07765
+mulvar_c:	 19.792350000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.816
+mulvar:		 2.094336
+mulvar_c:	 19.721664
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.762
+mulvar:		 2.1109139999999997
+mulvar_c:	 19.651086
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.708000000000002
+mulvar:		 2.127384
+mulvar_c:	 19.580616000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.654
+mulvar:		 2.1437459999999997
+mulvar_c:	 19.510254
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.6
+mulvar:		 2.16
+mulvar_c:	 19.44
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.546
+mulvar:		 2.1761459999999997
+mulvar_c:	 19.369854
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.492
+mulvar:		 2.192184
+mulvar_c:	 19.299816
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.438
+mulvar:		 2.208114
+mulvar_c:	 19.229886
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.384
+mulvar:		 2.223936
+mulvar_c:	 19.160064000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.330000000000002
+mulvar:		 2.2396500000000006
+mulvar_c:	 19.09035
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.276
+mulvar:		 2.255256
+mulvar_c:	 19.020744
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.222
+mulvar:		 2.270754
+mulvar_c:	 18.951246
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.168
+mulvar:		 2.2861439999999997
+mulvar_c:	 18.881856
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.114
+mulvar:		 2.301426
+mulvar_c:	 18.812574
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.06
+mulvar:		 2.3166
+mulvar_c:	 18.743399999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -21.006
+mulvar:		 2.331666
+mulvar_c:	 18.674334
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.952
+mulvar:		 2.3466240000000003
+mulvar_c:	 18.605376000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.898
+mulvar:		 2.361474
+mulvar_c:	 18.536526
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.844
+mulvar:		 2.376216
+mulvar_c:	 18.467784
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.79
+mulvar:		 2.39085
+mulvar_c:	 18.39915
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.736
+mulvar:		 2.4053760000000004
+mulvar_c:	 18.330624
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.682000000000002
+mulvar:		 2.4197940000000004
+mulvar_c:	 18.262206000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.628
+mulvar:		 2.434104
+mulvar_c:	 18.193896
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.574
+mulvar:		 2.448306
+mulvar_c:	 18.125694000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.52
+mulvar:		 2.4624
+mulvar_c:	 18.0576
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.466
+mulvar:		 2.476386
+mulvar_c:	 17.989614
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.412
+mulvar:		 2.490264
+mulvar_c:	 17.921736
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.358
+mulvar:		 2.504034
+mulvar_c:	 17.853966
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.304000000000002
+mulvar:		 2.5176960000000004
+mulvar_c:	 17.786304
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.25
+mulvar:		 2.53125
+mulvar_c:	 17.71875
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.196
+mulvar:		 2.544696
+mulvar_c:	 17.651304
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.142
+mulvar:		 2.558034
+mulvar_c:	 17.583966
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.088
+mulvar:		 2.5712639999999998
+mulvar_c:	 17.516736
+---------------------------------------------
+
+Single calculation
+current_A:	 -20.034
+mulvar:		 2.584386
+mulvar_c:	 17.449614
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.98
+mulvar:		 2.5974
+mulvar_c:	 17.3826
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.926000000000002
+mulvar:		 2.610306
+mulvar_c:	 17.315694
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.872
+mulvar:		 2.623104
+mulvar_c:	 17.248896
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.818
+mulvar:		 2.635794
+mulvar_c:	 17.182206
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.764
+mulvar:		 2.648376
+mulvar_c:	 17.115624
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.71
+mulvar:		 2.66085
+mulvar_c:	 17.04915
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.656
+mulvar:		 2.673216
+mulvar_c:	 16.982784
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.602
+mulvar:		 2.685474
+mulvar_c:	 16.916526
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.548000000000002
+mulvar:		 2.6976240000000002
+mulvar_c:	 16.850376
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.494
+mulvar:		 2.709666
+mulvar_c:	 16.784334
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.44
+mulvar:		 2.7216
+mulvar_c:	 16.718400000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.386
+mulvar:		 2.7334259999999997
+mulvar_c:	 16.652573999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.332
+mulvar:		 2.7451440000000003
+mulvar_c:	 16.586856
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.278
+mulvar:		 2.756754
+mulvar_c:	 16.521245999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.224
+mulvar:		 2.768256
+mulvar_c:	 16.455744
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.17
+mulvar:		 2.77965
+mulvar_c:	 16.39035
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.116
+mulvar:		 2.790936
+mulvar_c:	 16.325063999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.062
+mulvar:		 2.8021140000000004
+mulvar_c:	 16.259886
+---------------------------------------------
+
+Single calculation
+current_A:	 -19.008
+mulvar:		 2.813184
+mulvar_c:	 16.194816
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.954
+mulvar:		 2.824146
+mulvar_c:	 16.129854
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.900000000000002
+mulvar:		 2.8350000000000004
+mulvar_c:	 16.065
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.846
+mulvar:		 2.845746
+mulvar_c:	 16.000253999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.792
+mulvar:		 2.8563840000000003
+mulvar_c:	 15.935616000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.738
+mulvar:		 2.866914
+mulvar_c:	 15.871086
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.684
+mulvar:		 2.877336
+mulvar_c:	 15.806664
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.63
+mulvar:		 2.88765
+mulvar_c:	 15.742349999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.576
+mulvar:		 2.897856
+mulvar_c:	 15.678144
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.522000000000002
+mulvar:		 2.9079540000000006
+mulvar_c:	 15.614046000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.468
+mulvar:		 2.917944
+mulvar_c:	 15.550056
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.414
+mulvar:		 2.927826
+mulvar_c:	 15.486174
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.36
+mulvar:		 2.9376
+mulvar_c:	 15.4224
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.306
+mulvar:		 2.947266
+mulvar_c:	 15.358734
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.252
+mulvar:		 2.9568239999999997
+mulvar_c:	 15.295175999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.198
+mulvar:		 2.9662740000000003
+mulvar_c:	 15.231726
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.144000000000002
+mulvar:		 2.9756160000000005
+mulvar_c:	 15.168384000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.09
+mulvar:		 2.98485
+mulvar_c:	 15.10515
+---------------------------------------------
+
+Single calculation
+current_A:	 -18.036
+mulvar:		 2.9939760000000004
+mulvar_c:	 15.042024
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.982
+mulvar:		 3.0029939999999997
+mulvar_c:	 14.979005999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.928
+mulvar:		 3.011904
+mulvar_c:	 14.916096
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.874
+mulvar:		 3.0207059999999997
+mulvar_c:	 14.853293999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.82
+mulvar:		 3.0294
+mulvar_c:	 14.7906
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.766000000000002
+mulvar:		 3.0379860000000005
+mulvar_c:	 14.728014
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.712
+mulvar:		 3.046464
+mulvar_c:	 14.665536000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.658
+mulvar:		 3.0548340000000005
+mulvar_c:	 14.603166
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.604
+mulvar:		 3.063096
+mulvar_c:	 14.540904000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.55
+mulvar:		 3.07125
+mulvar_c:	 14.47875
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.496
+mulvar:		 3.079296
+mulvar_c:	 14.416704
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.442
+mulvar:		 3.087234
+mulvar_c:	 14.354766
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.388
+mulvar:		 3.0950640000000003
+mulvar_c:	 14.292936000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.334
+mulvar:		 3.102786
+mulvar_c:	 14.231214
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.28
+mulvar:		 3.1104000000000003
+mulvar_c:	 14.169600000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.226
+mulvar:		 3.1179059999999996
+mulvar_c:	 14.108093999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.172
+mulvar:		 3.1253040000000003
+mulvar_c:	 14.046696
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.118000000000002
+mulvar:		 3.132594
+mulvar_c:	 13.985406000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.064
+mulvar:		 3.139776
+mulvar_c:	 13.924224
+---------------------------------------------
+
+Single calculation
+current_A:	 -17.01
+mulvar:		 3.14685
+mulvar_c:	 13.863150000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.956
+mulvar:		 3.153816
+mulvar_c:	 13.802184
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.902
+mulvar:		 3.160674
+mulvar_c:	 13.741325999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.848
+mulvar:		 3.167424
+mulvar_c:	 13.680576
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.794
+mulvar:		 3.174066
+mulvar_c:	 13.619933999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.740000000000002
+mulvar:		 3.1806000000000005
+mulvar_c:	 13.559400000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.686
+mulvar:		 3.187026
+mulvar_c:	 13.498973999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.632
+mulvar:		 3.193344
+mulvar_c:	 13.438656000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.578
+mulvar:		 3.1995539999999996
+mulvar_c:	 13.378445999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.524
+mulvar:		 3.2056560000000003
+mulvar_c:	 13.318344000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.47
+mulvar:		 3.2116499999999997
+mulvar_c:	 13.258349999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.416
+mulvar:		 3.217536
+mulvar_c:	 13.198464000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.362000000000002
+mulvar:		 3.2233140000000002
+mulvar_c:	 13.138686
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.308
+mulvar:		 3.228984
+mulvar_c:	 13.079016000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.254
+mulvar:		 3.2345460000000004
+mulvar_c:	 13.019454
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.2
+mulvar:		 3.24
+mulvar_c:	 12.96
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.146
+mulvar:		 3.245346
+mulvar_c:	 12.900654
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.092
+mulvar:		 3.2505839999999995
+mulvar_c:	 12.841415999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -16.038
+mulvar:		 3.2557139999999998
+mulvar_c:	 12.782286
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.984
+mulvar:		 3.260736
+mulvar_c:	 12.723264
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.93
+mulvar:		 3.26565
+mulvar_c:	 12.66435
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.876
+mulvar:		 3.270456
+mulvar_c:	 12.605544
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.822000000000001
+mulvar:		 3.275154
+mulvar_c:	 12.546846000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.768
+mulvar:		 3.2797440000000004
+mulvar_c:	 12.488256000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.714
+mulvar:		 3.2842260000000003
+mulvar_c:	 12.429774
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.66
+mulvar:		 3.2886
+mulvar_c:	 12.371400000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.606
+mulvar:		 3.2928659999999996
+mulvar_c:	 12.313134
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.552
+mulvar:		 3.297024
+mulvar_c:	 12.254976000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.498000000000001
+mulvar:		 3.3010740000000007
+mulvar_c:	 12.196926000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.444
+mulvar:		 3.305016
+mulvar_c:	 12.138984
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.39
+mulvar:		 3.30885
+mulvar_c:	 12.081150000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.336
+mulvar:		 3.3125760000000004
+mulvar_c:	 12.023424
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.282
+mulvar:		 3.3161940000000003
+mulvar_c:	 11.965806
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.228
+mulvar:		 3.319704
+mulvar_c:	 11.908296
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.174
+mulvar:		 3.3231059999999997
+mulvar_c:	 11.850894
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.120000000000001
+mulvar:		 3.3264
+mulvar_c:	 11.793600000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.066
+mulvar:		 3.329586
+mulvar_c:	 11.736414000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -15.012
+mulvar:		 3.332664
+mulvar_c:	 11.679336000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.958
+mulvar:		 3.335634
+mulvar_c:	 11.622366000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.904
+mulvar:		 3.338496
+mulvar_c:	 11.565504
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.85
+mulvar:		 3.34125
+mulvar_c:	 11.508750000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.796000000000001
+mulvar:		 3.343896
+mulvar_c:	 11.452104000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.742
+mulvar:		 3.3464340000000004
+mulvar_c:	 11.395566
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.688
+mulvar:		 3.348864
+mulvar_c:	 11.339136
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.634
+mulvar:		 3.351186
+mulvar_c:	 11.282814
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.58
+mulvar:		 3.3534
+mulvar_c:	 11.2266
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.526
+mulvar:		 3.3555059999999997
+mulvar_c:	 11.170494
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.472
+mulvar:		 3.357504
+mulvar_c:	 11.114495999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.418000000000001
+mulvar:		 3.3593940000000004
+mulvar_c:	 11.058606000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.364
+mulvar:		 3.3611760000000004
+mulvar_c:	 11.002824
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.31
+mulvar:		 3.36285
+mulvar_c:	 10.94715
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.256
+mulvar:		 3.3644160000000003
+mulvar_c:	 10.891584
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.202
+mulvar:		 3.365874
+mulvar_c:	 10.836126
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.148
+mulvar:		 3.3672239999999998
+mulvar_c:	 10.780776
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.094
+mulvar:		 3.3684659999999997
+mulvar_c:	 10.725534
+---------------------------------------------
+
+Single calculation
+current_A:	 -14.040000000000001
+mulvar:		 3.3696
+mulvar_c:	 10.6704
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.986
+mulvar:		 3.370626
+mulvar_c:	 10.615374000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.932
+mulvar:		 3.371544
+mulvar_c:	 10.560456
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.878
+mulvar:		 3.372354
+mulvar_c:	 10.505646
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.824
+mulvar:		 3.3730559999999996
+mulvar_c:	 10.450944
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.77
+mulvar:		 3.37365
+mulvar_c:	 10.39635
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.716000000000001
+mulvar:		 3.374136
+mulvar_c:	 10.341864000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.662
+mulvar:		 3.374514
+mulvar_c:	 10.287486000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.608
+mulvar:		 3.3747840000000005
+mulvar_c:	 10.233216
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.554
+mulvar:		 3.374946
+mulvar_c:	 10.179054
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.5
+mulvar:		 3.375
+mulvar_c:	 10.125
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.446
+mulvar:		 3.374946
+mulvar_c:	 10.071054
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.392
+mulvar:		 3.3747839999999996
+mulvar_c:	 10.017216
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.338000000000001
+mulvar:		 3.374514
+mulvar_c:	 9.963486000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.284
+mulvar:		 3.374136
+mulvar_c:	 9.909864
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.23
+mulvar:		 3.37365
+mulvar_c:	 9.85635
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.176
+mulvar:		 3.3730559999999996
+mulvar_c:	 9.802944
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.122
+mulvar:		 3.372354
+mulvar_c:	 9.749646
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.068
+mulvar:		 3.371544
+mulvar_c:	 9.696456
+---------------------------------------------
+
+Single calculation
+current_A:	 -13.014000000000001
+mulvar:		 3.370626
+mulvar_c:	 9.643374000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.96
+mulvar:		 3.3696
+mulvar_c:	 9.5904
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.906
+mulvar:		 3.368466
+mulvar_c:	 9.537534
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.852
+mulvar:		 3.3672239999999998
+mulvar_c:	 9.484776
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.798
+mulvar:		 3.365874
+mulvar_c:	 9.432126
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.744
+mulvar:		 3.3644159999999994
+mulvar_c:	 9.379584
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.69
+mulvar:		 3.36285
+mulvar_c:	 9.32715
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.636000000000001
+mulvar:		 3.3611760000000004
+mulvar_c:	 9.274824
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.582
+mulvar:		 3.3593940000000004
+mulvar_c:	 9.222606
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.528
+mulvar:		 3.357504
+mulvar_c:	 9.170496
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.474
+mulvar:		 3.3555059999999997
+mulvar_c:	 9.118494
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.42
+mulvar:		 3.3534
+mulvar_c:	 9.0666
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.366
+mulvar:		 3.351186
+mulvar_c:	 9.014814
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.312
+mulvar:		 3.348864
+mulvar_c:	 8.963135999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.258000000000001
+mulvar:		 3.3464340000000004
+mulvar_c:	 8.911566
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.204
+mulvar:		 3.343896
+mulvar_c:	 8.860104
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.15
+mulvar:		 3.34125
+mulvar_c:	 8.80875
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.096
+mulvar:		 3.338496
+mulvar_c:	 8.757503999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -12.042
+mulvar:		 3.3356339999999998
+mulvar_c:	 8.706366
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.988
+mulvar:		 3.332664
+mulvar_c:	 8.655336
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.934000000000001
+mulvar:		 3.329586
+mulvar_c:	 8.604414
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.88
+mulvar:		 3.3264
+mulvar_c:	 8.5536
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.826
+mulvar:		 3.3231060000000006
+mulvar_c:	 8.502894
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.772
+mulvar:		 3.319704
+mulvar_c:	 8.452296
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.718
+mulvar:		 3.3161940000000003
+mulvar_c:	 8.401806
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.664
+mulvar:		 3.3125760000000004
+mulvar_c:	 8.351424
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.61
+mulvar:		 3.30885
+mulvar_c:	 8.30115
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.556000000000001
+mulvar:		 3.305016
+mulvar_c:	 8.250984
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.502
+mulvar:		 3.3010740000000007
+mulvar_c:	 8.200926
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.448
+mulvar:		 3.297024
+mulvar_c:	 8.150976
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.394
+mulvar:		 3.2928660000000005
+mulvar_c:	 8.101134000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.34
+mulvar:		 3.2886
+mulvar_c:	 8.0514
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.286
+mulvar:		 3.2842260000000003
+mulvar_c:	 8.001774000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.232000000000001
+mulvar:		 3.2797440000000004
+mulvar_c:	 7.952256
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.178
+mulvar:		 3.275154
+mulvar_c:	 7.902846000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.124
+mulvar:		 3.2704560000000003
+mulvar_c:	 7.853544
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.07
+mulvar:		 3.26565
+mulvar_c:	 7.804350000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -11.016
+mulvar:		 3.260736
+mulvar_c:	 7.7552639999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.962
+mulvar:		 3.2557139999999998
+mulvar_c:	 7.706286
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.908
+mulvar:		 3.250584
+mulvar_c:	 7.657416
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.854000000000001
+mulvar:		 3.245346
+mulvar_c:	 7.608654000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.8
+mulvar:		 3.24
+mulvar_c:	 7.56
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.746
+mulvar:		 3.2345460000000004
+mulvar_c:	 7.511454000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.692
+mulvar:		 3.228984
+mulvar_c:	 7.463016
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.638
+mulvar:		 3.223314
+mulvar_c:	 7.4146860000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.584
+mulvar:		 3.217536
+mulvar_c:	 7.366464
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.53
+mulvar:		 3.2116499999999997
+mulvar_c:	 7.318350000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.476
+mulvar:		 3.2056560000000003
+mulvar_c:	 7.270344
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.422
+mulvar:		 3.199554
+mulvar_c:	 7.2224460000000015
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.368
+mulvar:		 3.193344
+mulvar_c:	 7.174656
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.314
+mulvar:		 3.187026
+mulvar_c:	 7.126974000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.26
+mulvar:		 3.1806
+mulvar_c:	 7.0794
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.206
+mulvar:		 3.174066
+mulvar_c:	 7.031934000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.152000000000001
+mulvar:		 3.167424
+mulvar_c:	 6.984576000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.098
+mulvar:		 3.160674
+mulvar_c:	 6.937326000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -10.044
+mulvar:		 3.153816
+mulvar_c:	 6.890184
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.99
+mulvar:		 3.14685
+mulvar_c:	 6.8431500000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.936
+mulvar:		 3.139776
+mulvar_c:	 6.796224
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.882
+mulvar:		 3.1325939999999997
+mulvar_c:	 6.7494060000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.828
+mulvar:		 3.125304
+mulvar_c:	 6.702695999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.774000000000001
+mulvar:		 3.117906
+mulvar_c:	 6.656094000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.72
+mulvar:		 3.1104000000000003
+mulvar_c:	 6.6095999999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.666
+mulvar:		 3.102786
+mulvar_c:	 6.563214
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.612
+mulvar:		 3.095064
+mulvar_c:	 6.516935999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.558
+mulvar:		 3.087234
+mulvar_c:	 6.470766
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.504
+mulvar:		 3.079296
+mulvar_c:	 6.424703999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.450000000000001
+mulvar:		 3.0712500000000005
+mulvar_c:	 6.378750000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.396
+mulvar:		 3.0630960000000003
+mulvar_c:	 6.332904
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.342
+mulvar:		 3.054834
+mulvar_c:	 6.287166000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.288
+mulvar:		 3.046464
+mulvar_c:	 6.241535999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.234
+mulvar:		 3.037986
+mulvar_c:	 6.196014000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.18
+mulvar:		 3.0294
+mulvar_c:	 6.150599999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.126
+mulvar:		 3.0207059999999997
+mulvar_c:	 6.105294
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.072000000000001
+mulvar:		 3.0119040000000004
+mulvar_c:	 6.060096
+---------------------------------------------
+
+Single calculation
+current_A:	 -9.018
+mulvar:		 3.002994
+mulvar_c:	 6.0150060000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.964
+mulvar:		 2.9939760000000004
+mulvar_c:	 5.9700239999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.91
+mulvar:		 2.98485
+mulvar_c:	 5.92515
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.856
+mulvar:		 2.975616
+mulvar_c:	 5.880383999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.802
+mulvar:		 2.966274
+mulvar_c:	 5.835726
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.748
+mulvar:		 2.9568239999999997
+mulvar_c:	 5.791175999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.694
+mulvar:		 2.9472660000000004
+mulvar_c:	 5.746734000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.64
+mulvar:		 2.9376
+mulvar_c:	 5.7024
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.586
+mulvar:		 2.927826
+mulvar_c:	 5.658174000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.532
+mulvar:		 2.917944
+mulvar_c:	 5.614056
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.478
+mulvar:		 2.907954
+mulvar_c:	 5.5700460000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.424
+mulvar:		 2.897856
+mulvar_c:	 5.5261439999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.370000000000001
+mulvar:		 2.8876500000000003
+mulvar_c:	 5.482350000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.316
+mulvar:		 2.8773360000000006
+mulvar_c:	 5.438664000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.262
+mulvar:		 2.8669140000000004
+mulvar_c:	 5.395086000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.208
+mulvar:		 2.856384
+mulvar_c:	 5.351616
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.154
+mulvar:		 2.845746
+mulvar_c:	 5.308254
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.1
+mulvar:		 2.835
+mulvar_c:	 5.265
+---------------------------------------------
+
+Single calculation
+current_A:	 -8.046
+mulvar:		 2.824146
+mulvar_c:	 5.2218539999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.992
+mulvar:		 2.813184
+mulvar_c:	 5.178816
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.938
+mulvar:		 2.802114
+mulvar_c:	 5.135886
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.884
+mulvar:		 2.790936
+mulvar_c:	 5.093064
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.83
+mulvar:		 2.77965
+mulvar_c:	 5.05035
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.776
+mulvar:		 2.7682559999999996
+mulvar_c:	 5.007744
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.722
+mulvar:		 2.756754
+mulvar_c:	 4.9652460000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.668
+mulvar:		 2.7451440000000003
+mulvar_c:	 4.922856
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.614
+mulvar:		 2.7334259999999997
+mulvar_c:	 4.880574
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.5600000000000005
+mulvar:		 2.7216
+mulvar_c:	 4.8384
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.506
+mulvar:		 2.709666
+mulvar_c:	 4.796334
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.452
+mulvar:		 2.6976240000000002
+mulvar_c:	 4.754376
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.398000000000001
+mulvar:		 2.685474
+mulvar_c:	 4.712526
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.344
+mulvar:		 2.673216
+mulvar_c:	 4.670784
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.29
+mulvar:		 2.66085
+mulvar_c:	 4.62915
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.236
+mulvar:		 2.648376
+mulvar_c:	 4.587624
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.182
+mulvar:		 2.635794
+mulvar_c:	 4.546206000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.128
+mulvar:		 2.623104
+mulvar_c:	 4.5048960000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.074
+mulvar:		 2.6103059999999996
+mulvar_c:	 4.463694
+---------------------------------------------
+
+Single calculation
+current_A:	 -7.0200000000000005
+mulvar:		 2.5974
+mulvar_c:	 4.4226
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.966
+mulvar:		 2.584386
+mulvar_c:	 4.381614
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.912
+mulvar:		 2.5712639999999998
+mulvar_c:	 4.340736
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.8580000000000005
+mulvar:		 2.5580340000000006
+mulvar_c:	 4.299966
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.804
+mulvar:		 2.544696
+mulvar_c:	 4.259304
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.75
+mulvar:		 2.53125
+mulvar_c:	 4.21875
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.696
+mulvar:		 2.517696
+mulvar_c:	 4.178304
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.642
+mulvar:		 2.504034
+mulvar_c:	 4.1379660000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.588
+mulvar:		 2.490264
+mulvar_c:	 4.097736
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.534
+mulvar:		 2.476386
+mulvar_c:	 4.057614
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.48
+mulvar:		 2.4624
+mulvar_c:	 4.0176
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.426
+mulvar:		 2.448306
+mulvar_c:	 3.977694
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.372
+mulvar:		 2.434104
+mulvar_c:	 3.937896
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.3180000000000005
+mulvar:		 2.4197940000000004
+mulvar_c:	 3.898206
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.264
+mulvar:		 2.4053760000000004
+mulvar_c:	 3.8586240000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.21
+mulvar:		 2.39085
+mulvar_c:	 3.81915
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.156
+mulvar:		 2.376216
+mulvar_c:	 3.779784
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.102
+mulvar:		 2.3614740000000003
+mulvar_c:	 3.740526
+---------------------------------------------
+
+Single calculation
+current_A:	 -6.048
+mulvar:		 2.3466240000000003
+mulvar_c:	 3.7013759999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.994
+mulvar:		 2.331666
+mulvar_c:	 3.662334
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.94
+mulvar:		 2.3166
+mulvar_c:	 3.6234
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.886
+mulvar:		 2.301426
+mulvar_c:	 3.584574
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.832
+mulvar:		 2.2861439999999997
+mulvar_c:	 3.5458559999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.7780000000000005
+mulvar:		 2.270754
+mulvar_c:	 3.5072460000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.724
+mulvar:		 2.255256
+mulvar_c:	 3.468744
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.67
+mulvar:		 2.23965
+mulvar_c:	 3.43035
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.6160000000000005
+mulvar:		 2.223936
+mulvar_c:	 3.3920640000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.562
+mulvar:		 2.208114
+mulvar_c:	 3.353886
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.508
+mulvar:		 2.192184
+mulvar_c:	 3.315816
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.454
+mulvar:		 2.1761459999999997
+mulvar_c:	 3.2778539999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.4
+mulvar:		 2.16
+mulvar_c:	 3.24
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.346
+mulvar:		 2.1437459999999997
+mulvar_c:	 3.202254
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.292
+mulvar:		 2.127384
+mulvar_c:	 3.1646159999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.238
+mulvar:		 2.110914
+mulvar_c:	 3.1270860000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.184
+mulvar:		 2.094336
+mulvar_c:	 3.089664
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.13
+mulvar:		 2.07765
+mulvar_c:	 3.0523499999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.0760000000000005
+mulvar:		 2.0608560000000002
+mulvar_c:	 3.0151440000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -5.022
+mulvar:		 2.0439540000000003
+mulvar_c:	 2.978046
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.968
+mulvar:		 2.026944
+mulvar_c:	 2.9410560000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.914
+mulvar:		 2.009826
+mulvar_c:	 2.904174
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.86
+mulvar:		 1.9926
+mulvar_c:	 2.8674000000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.806
+mulvar:		 1.975266
+mulvar_c:	 2.830734
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.752
+mulvar:		 1.9578239999999998
+mulvar_c:	 2.794176
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.698
+mulvar:		 1.940274
+mulvar_c:	 2.757726
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.644
+mulvar:		 1.9226159999999999
+mulvar_c:	 2.7213840000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.59
+mulvar:		 1.90485
+mulvar_c:	 2.6851499999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.5360000000000005
+mulvar:		 1.8869760000000002
+mulvar_c:	 2.6490240000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.482
+mulvar:		 1.8689940000000003
+mulvar_c:	 2.613006
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.428
+mulvar:		 1.850904
+mulvar_c:	 2.5770960000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.374
+mulvar:		 1.8327059999999997
+mulvar_c:	 2.5412939999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.32
+mulvar:		 1.8144
+mulvar_c:	 2.5056000000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.266
+mulvar:		 1.795986
+mulvar_c:	 2.470014
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.212
+mulvar:		 1.777464
+mulvar_c:	 2.434536
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.158
+mulvar:		 1.758834
+mulvar_c:	 2.399166
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.104
+mulvar:		 1.7400959999999999
+mulvar_c:	 2.3639040000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -4.05
+mulvar:		 1.72125
+mulvar_c:	 2.32875
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.996
+mulvar:		 1.7022959999999998
+mulvar_c:	 2.2937040000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.942
+mulvar:		 1.6832340000000001
+mulvar_c:	 2.258766
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.888
+mulvar:		 1.664064
+mulvar_c:	 2.223936
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.834
+mulvar:		 1.644786
+mulvar_c:	 2.1892139999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.7800000000000002
+mulvar:		 1.6254000000000002
+mulvar_c:	 2.1546000000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.726
+mulvar:		 1.605906
+mulvar_c:	 2.120094
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.672
+mulvar:		 1.5863040000000002
+mulvar_c:	 2.0856960000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.618
+mulvar:		 1.5665939999999998
+mulvar_c:	 2.0514059999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.564
+mulvar:		 1.546776
+mulvar_c:	 2.017224
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.5100000000000002
+mulvar:		 1.5268500000000003
+mulvar_c:	 1.98315
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.456
+mulvar:		 1.506816
+mulvar_c:	 1.9491840000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.402
+mulvar:		 1.486674
+mulvar_c:	 1.9153259999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.348
+mulvar:		 1.466424
+mulvar_c:	 1.8815760000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.294
+mulvar:		 1.446066
+mulvar_c:	 1.8479339999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.24
+mulvar:		 1.4256000000000002
+mulvar_c:	 1.8144000000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.186
+mulvar:		 1.405026
+mulvar_c:	 1.7809739999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.132
+mulvar:		 1.384344
+mulvar_c:	 1.7476560000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.078
+mulvar:		 1.363554
+mulvar_c:	 1.7144459999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -3.024
+mulvar:		 1.3426559999999998
+mulvar_c:	 1.6813440000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.97
+mulvar:		 1.32165
+mulvar_c:	 1.64835
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.916
+mulvar:		 1.300536
+mulvar_c:	 1.615464
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.862
+mulvar:		 1.279314
+mulvar_c:	 1.5826859999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.8080000000000003
+mulvar:		 1.2579840000000002
+mulvar_c:	 1.5500160000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.754
+mulvar:		 1.236546
+mulvar_c:	 1.5174539999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.7
+mulvar:		 1.215
+mulvar_c:	 1.4850000000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.646
+mulvar:		 1.193346
+mulvar_c:	 1.4526539999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.592
+mulvar:		 1.171584
+mulvar_c:	 1.4204160000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.5380000000000003
+mulvar:		 1.1497140000000001
+mulvar_c:	 1.388286
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.484
+mulvar:		 1.127736
+mulvar_c:	 1.3562640000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.43
+mulvar:		 1.10565
+mulvar_c:	 1.32435
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.376
+mulvar:		 1.083456
+mulvar_c:	 1.2925440000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.322
+mulvar:		 1.0611540000000002
+mulvar_c:	 1.260846
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.2680000000000002
+mulvar:		 1.0387440000000001
+mulvar_c:	 1.2292560000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.214
+mulvar:		 1.016226
+mulvar_c:	 1.197774
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.16
+mulvar:		 0.9936
+mulvar_c:	 1.1664
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.106
+mulvar:		 0.970866
+mulvar_c:	 1.1351339999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 -2.052
+mulvar:		 0.948024
+mulvar_c:	 1.103976
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.998
+mulvar:		 0.925074
+mulvar_c:	 1.0729259999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.944
+mulvar:		 0.902016
+mulvar_c:	 1.041984
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.8900000000000001
+mulvar:		 0.87885
+mulvar_c:	 1.01115
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.836
+mulvar:		 0.855576
+mulvar_c:	 0.9804240000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.782
+mulvar:		 0.8321940000000001
+mulvar_c:	 0.9498059999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.728
+mulvar:		 0.808704
+mulvar_c:	 0.919296
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.674
+mulvar:		 0.785106
+mulvar_c:	 0.888894
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.62
+mulvar:		 0.7614000000000001
+mulvar_c:	 0.8586000000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.566
+mulvar:		 0.7375860000000001
+mulvar_c:	 0.8284140000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.512
+mulvar:		 0.7136640000000001
+mulvar_c:	 0.798336
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.458
+mulvar:		 0.689634
+mulvar_c:	 0.768366
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.4040000000000001
+mulvar:		 0.6654960000000001
+mulvar_c:	 0.738504
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.35
+mulvar:		 0.64125
+mulvar_c:	 0.7087500000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.296
+mulvar:		 0.616896
+mulvar_c:	 0.679104
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.242
+mulvar:		 0.592434
+mulvar_c:	 0.649566
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.188
+mulvar:		 0.5678639999999999
+mulvar_c:	 0.620136
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.1340000000000001
+mulvar:		 0.5431860000000001
+mulvar_c:	 0.5908140000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.08
+mulvar:		 0.5184
+mulvar_c:	 0.5616000000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 -1.026
+mulvar:		 0.49350600000000006
+mulvar_c:	 0.532494
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.972
+mulvar:		 0.468504
+mulvar_c:	 0.503496
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.918
+mulvar:		 0.44339400000000007
+mulvar_c:	 0.47460600000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.864
+mulvar:		 0.41817600000000005
+mulvar_c:	 0.445824
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.81
+mulvar:		 0.39285000000000003
+mulvar_c:	 0.41715
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.756
+mulvar:		 0.36741599999999996
+mulvar_c:	 0.388584
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.7020000000000001
+mulvar:		 0.341874
+mulvar_c:	 0.36012600000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.648
+mulvar:		 0.316224
+mulvar_c:	 0.331776
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.594
+mulvar:		 0.290466
+mulvar_c:	 0.30353399999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.54
+mulvar:		 0.2646
+mulvar_c:	 0.27540000000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.486
+mulvar:		 0.23862599999999998
+mulvar_c:	 0.247374
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.432
+mulvar:		 0.212544
+mulvar_c:	 0.219456
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.378
+mulvar:		 0.186354
+mulvar_c:	 0.191646
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.324
+mulvar:		 0.160056
+mulvar_c:	 0.163944
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.27
+mulvar:		 0.13365
+mulvar_c:	 0.13635
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.216
+mulvar:		 0.107136
+mulvar_c:	 0.108864
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.162
+mulvar:		 0.080514
+mulvar_c:	 0.081486
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.108
+mulvar:		 0.053784000000000005
+mulvar_c:	 0.054216
+---------------------------------------------
+
+Single calculation
+current_A:	 -0.054
+mulvar:		 0.026945999999999998
+mulvar_c:	 0.027053999999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 0.0
+mulvar:		 0.0
+mulvar_c:	 0.0
+---------------------------------------------
+
+Single calculation
+current_A:	 0.054
+mulvar:		 0.027054
+mulvar_c:	 0.026946
+---------------------------------------------
+
+Single calculation
+current_A:	 0.108
+mulvar:		 0.05421599999999999
+mulvar_c:	 0.053784
+---------------------------------------------
+
+Single calculation
+current_A:	 0.162
+mulvar:		 0.081486
+mulvar_c:	 0.080514
+---------------------------------------------
+
+Single calculation
+current_A:	 0.216
+mulvar:		 0.10886400000000002
+mulvar_c:	 0.107136
+---------------------------------------------
+
+Single calculation
+current_A:	 0.27
+mulvar:		 0.13635
+mulvar_c:	 0.13365000000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 0.324
+mulvar:		 0.163944
+mulvar_c:	 0.160056
+---------------------------------------------
+
+Single calculation
+current_A:	 0.378
+mulvar:		 0.191646
+mulvar_c:	 0.186354
+---------------------------------------------
+
+Single calculation
+current_A:	 0.432
+mulvar:		 0.21945599999999998
+mulvar_c:	 0.21254399999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 0.486
+mulvar:		 0.24737399999999998
+mulvar_c:	 0.23862599999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 0.54
+mulvar:		 0.2754
+mulvar_c:	 0.2646
+---------------------------------------------
+
+Single calculation
+current_A:	 0.594
+mulvar:		 0.30353399999999997
+mulvar_c:	 0.290466
+---------------------------------------------
+
+Single calculation
+current_A:	 0.648
+mulvar:		 0.331776
+mulvar_c:	 0.316224
+---------------------------------------------
+
+Single calculation
+current_A:	 0.7020000000000001
+mulvar:		 0.360126
+mulvar_c:	 0.341874
+---------------------------------------------
+
+Single calculation
+current_A:	 0.756
+mulvar:		 0.38858400000000004
+mulvar_c:	 0.367416
+---------------------------------------------
+
+Single calculation
+current_A:	 0.81
+mulvar:		 0.41715
+mulvar_c:	 0.39285000000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 0.864
+mulvar:		 0.445824
+mulvar_c:	 0.418176
+---------------------------------------------
+
+Single calculation
+current_A:	 0.918
+mulvar:		 0.47460600000000003
+mulvar_c:	 0.443394
+---------------------------------------------
+
+Single calculation
+current_A:	 0.972
+mulvar:		 0.503496
+mulvar_c:	 0.468504
+---------------------------------------------
+
+Single calculation
+current_A:	 1.026
+mulvar:		 0.532494
+mulvar_c:	 0.493506
+---------------------------------------------
+
+Single calculation
+current_A:	 1.08
+mulvar:		 0.5616
+mulvar_c:	 0.5184
+---------------------------------------------
+
+Single calculation
+current_A:	 1.1340000000000001
+mulvar:		 0.5908140000000001
+mulvar_c:	 0.5431860000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 1.188
+mulvar:		 0.620136
+mulvar_c:	 0.5678639999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 1.242
+mulvar:		 0.649566
+mulvar_c:	 0.592434
+---------------------------------------------
+
+Single calculation
+current_A:	 1.296
+mulvar:		 0.679104
+mulvar_c:	 0.616896
+---------------------------------------------
+
+Single calculation
+current_A:	 1.35
+mulvar:		 0.7087500000000001
+mulvar_c:	 0.64125
+---------------------------------------------
+
+Single calculation
+current_A:	 1.4040000000000001
+mulvar:		 0.738504
+mulvar_c:	 0.6654960000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 1.458
+mulvar:		 0.768366
+mulvar_c:	 0.689634
+---------------------------------------------
+
+Single calculation
+current_A:	 1.512
+mulvar:		 0.7983359999999999
+mulvar_c:	 0.713664
+---------------------------------------------
+
+Single calculation
+current_A:	 1.566
+mulvar:		 0.828414
+mulvar_c:	 0.737586
+---------------------------------------------
+
+Single calculation
+current_A:	 1.62
+mulvar:		 0.8586
+mulvar_c:	 0.7614
+---------------------------------------------
+
+Single calculation
+current_A:	 1.674
+mulvar:		 0.8888940000000001
+mulvar_c:	 0.785106
+---------------------------------------------
+
+Single calculation
+current_A:	 1.728
+mulvar:		 0.9192959999999999
+mulvar_c:	 0.808704
+---------------------------------------------
+
+Single calculation
+current_A:	 1.782
+mulvar:		 0.9498059999999999
+mulvar_c:	 0.832194
+---------------------------------------------
+
+Single calculation
+current_A:	 1.836
+mulvar:		 0.980424
+mulvar_c:	 0.855576
+---------------------------------------------
+
+Single calculation
+current_A:	 1.8900000000000001
+mulvar:		 1.01115
+mulvar_c:	 0.87885
+---------------------------------------------
+
+Single calculation
+current_A:	 1.944
+mulvar:		 1.041984
+mulvar_c:	 0.9020159999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 1.998
+mulvar:		 1.072926
+mulvar_c:	 0.925074
+---------------------------------------------
+
+Single calculation
+current_A:	 2.052
+mulvar:		 1.103976
+mulvar_c:	 0.948024
+---------------------------------------------
+
+Single calculation
+current_A:	 2.106
+mulvar:		 1.135134
+mulvar_c:	 0.9708659999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 2.16
+mulvar:		 1.1664
+mulvar_c:	 0.9936
+---------------------------------------------
+
+Single calculation
+current_A:	 2.214
+mulvar:		 1.197774
+mulvar_c:	 1.0162259999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 2.2680000000000002
+mulvar:		 1.2292560000000001
+mulvar_c:	 1.0387440000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 2.322
+mulvar:		 1.2608460000000001
+mulvar_c:	 1.061154
+---------------------------------------------
+
+Single calculation
+current_A:	 2.376
+mulvar:		 1.292544
+mulvar_c:	 1.0834559999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 2.43
+mulvar:		 1.32435
+mulvar_c:	 1.10565
+---------------------------------------------
+
+Single calculation
+current_A:	 2.484
+mulvar:		 1.356264
+mulvar_c:	 1.1277359999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 2.5380000000000003
+mulvar:		 1.3882860000000001
+mulvar_c:	 1.149714
+---------------------------------------------
+
+Single calculation
+current_A:	 2.592
+mulvar:		 1.420416
+mulvar_c:	 1.171584
+---------------------------------------------
+
+Single calculation
+current_A:	 2.646
+mulvar:		 1.452654
+mulvar_c:	 1.1933459999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 2.7
+mulvar:		 1.485
+mulvar_c:	 1.2149999999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 2.754
+mulvar:		 1.517454
+mulvar_c:	 1.236546
+---------------------------------------------
+
+Single calculation
+current_A:	 2.8080000000000003
+mulvar:		 1.550016
+mulvar_c:	 1.257984
+---------------------------------------------
+
+Single calculation
+current_A:	 2.862
+mulvar:		 1.582686
+mulvar_c:	 1.2793139999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 2.916
+mulvar:		 1.615464
+mulvar_c:	 1.300536
+---------------------------------------------
+
+Single calculation
+current_A:	 2.97
+mulvar:		 1.64835
+mulvar_c:	 1.32165
+---------------------------------------------
+
+Single calculation
+current_A:	 3.024
+mulvar:		 1.681344
+mulvar_c:	 1.3426559999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 3.078
+mulvar:		 1.714446
+mulvar_c:	 1.3635539999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 3.132
+mulvar:		 1.747656
+mulvar_c:	 1.3843439999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 3.186
+mulvar:		 1.7809739999999998
+mulvar_c:	 1.4050259999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 3.24
+mulvar:		 1.8144
+mulvar_c:	 1.4256
+---------------------------------------------
+
+Single calculation
+current_A:	 3.294
+mulvar:		 1.847934
+mulvar_c:	 1.4460659999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 3.348
+mulvar:		 1.881576
+mulvar_c:	 1.4664239999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 3.402
+mulvar:		 1.9153260000000003
+mulvar_c:	 1.4866740000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 3.456
+mulvar:		 1.949184
+mulvar_c:	 1.5068160000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 3.5100000000000002
+mulvar:		 1.98315
+mulvar_c:	 1.5268500000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 3.564
+mulvar:		 2.017224
+mulvar_c:	 1.5467760000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 3.618
+mulvar:		 2.0514059999999996
+mulvar_c:	 1.566594
+---------------------------------------------
+
+Single calculation
+current_A:	 3.672
+mulvar:		 2.085696
+mulvar_c:	 1.5863040000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 3.726
+mulvar:		 2.120094
+mulvar_c:	 1.6059060000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 3.7800000000000002
+mulvar:		 2.1546
+mulvar_c:	 1.6254000000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 3.834
+mulvar:		 2.1892139999999998
+mulvar_c:	 1.6447860000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 3.888
+mulvar:		 2.223936
+mulvar_c:	 1.6640640000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 3.942
+mulvar:		 2.258766
+mulvar_c:	 1.6832340000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 3.996
+mulvar:		 2.293704
+mulvar_c:	 1.7022960000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 4.05
+mulvar:		 2.32875
+mulvar_c:	 1.7212500000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.104
+mulvar:		 2.3639040000000002
+mulvar_c:	 1.7400960000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 4.158
+mulvar:		 2.399166
+mulvar_c:	 1.7588340000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.212
+mulvar:		 2.4345359999999996
+mulvar_c:	 1.7774640000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.266
+mulvar:		 2.470014
+mulvar_c:	 1.795986
+---------------------------------------------
+
+Single calculation
+current_A:	 4.32
+mulvar:		 2.5056
+mulvar_c:	 1.8144000000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.374
+mulvar:		 2.5412939999999997
+mulvar_c:	 1.832706
+---------------------------------------------
+
+Single calculation
+current_A:	 4.428
+mulvar:		 2.577096
+mulvar_c:	 1.850904
+---------------------------------------------
+
+Single calculation
+current_A:	 4.482
+mulvar:		 2.613006
+mulvar_c:	 1.8689940000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 4.5360000000000005
+mulvar:		 2.6490240000000003
+mulvar_c:	 1.8869760000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 4.59
+mulvar:		 2.68515
+mulvar_c:	 1.9048500000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.644
+mulvar:		 2.721384
+mulvar_c:	 1.9226160000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 4.698
+mulvar:		 2.7577260000000003
+mulvar_c:	 1.9402740000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 4.752
+mulvar:		 2.7941759999999998
+mulvar_c:	 1.957824
+---------------------------------------------
+
+Single calculation
+current_A:	 4.806
+mulvar:		 2.830734
+mulvar_c:	 1.9752660000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 4.86
+mulvar:		 2.8674000000000004
+mulvar_c:	 1.9926000000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 4.914
+mulvar:		 2.904174
+mulvar_c:	 2.009826
+---------------------------------------------
+
+Single calculation
+current_A:	 4.968
+mulvar:		 2.941056
+mulvar_c:	 2.0269440000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 5.022
+mulvar:		 2.9780460000000004
+mulvar_c:	 2.0439540000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 5.0760000000000005
+mulvar:		 3.0151440000000003
+mulvar_c:	 2.0608560000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 5.13
+mulvar:		 3.05235
+mulvar_c:	 2.07765
+---------------------------------------------
+
+Single calculation
+current_A:	 5.184
+mulvar:		 3.089664
+mulvar_c:	 2.094336
+---------------------------------------------
+
+Single calculation
+current_A:	 5.238
+mulvar:		 3.1270860000000003
+mulvar_c:	 2.110914
+---------------------------------------------
+
+Single calculation
+current_A:	 5.292
+mulvar:		 3.164616
+mulvar_c:	 2.127384
+---------------------------------------------
+
+Single calculation
+current_A:	 5.346
+mulvar:		 3.202254
+mulvar_c:	 2.143746
+---------------------------------------------
+
+Single calculation
+current_A:	 5.4
+mulvar:		 3.24
+mulvar_c:	 2.16
+---------------------------------------------
+
+Single calculation
+current_A:	 5.454
+mulvar:		 3.277854
+mulvar_c:	 2.176146
+---------------------------------------------
+
+Single calculation
+current_A:	 5.508
+mulvar:		 3.3158160000000003
+mulvar_c:	 2.192184
+---------------------------------------------
+
+Single calculation
+current_A:	 5.562
+mulvar:		 3.353886
+mulvar_c:	 2.208114
+---------------------------------------------
+
+Single calculation
+current_A:	 5.6160000000000005
+mulvar:		 3.392064000000001
+mulvar_c:	 2.223936
+---------------------------------------------
+
+Single calculation
+current_A:	 5.67
+mulvar:		 3.43035
+mulvar_c:	 2.23965
+---------------------------------------------
+
+Single calculation
+current_A:	 5.724
+mulvar:		 3.468744
+mulvar_c:	 2.255256
+---------------------------------------------
+
+Single calculation
+current_A:	 5.7780000000000005
+mulvar:		 3.5072460000000008
+mulvar_c:	 2.270754
+---------------------------------------------
+
+Single calculation
+current_A:	 5.832
+mulvar:		 3.5458559999999997
+mulvar_c:	 2.286144
+---------------------------------------------
+
+Single calculation
+current_A:	 5.886
+mulvar:		 3.584574
+mulvar_c:	 2.301426
+---------------------------------------------
+
+Single calculation
+current_A:	 5.94
+mulvar:		 3.6234
+mulvar_c:	 2.3166
+---------------------------------------------
+
+Single calculation
+current_A:	 5.994
+mulvar:		 3.6623339999999995
+mulvar_c:	 2.331666
+---------------------------------------------
+
+Single calculation
+current_A:	 6.048
+mulvar:		 3.701376
+mulvar_c:	 2.3466240000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 6.102
+mulvar:		 3.740526
+mulvar_c:	 2.3614740000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 6.156
+mulvar:		 3.779784
+mulvar_c:	 2.376216
+---------------------------------------------
+
+Single calculation
+current_A:	 6.21
+mulvar:		 3.81915
+mulvar_c:	 2.39085
+---------------------------------------------
+
+Single calculation
+current_A:	 6.264
+mulvar:		 3.858624
+mulvar_c:	 2.405376
+---------------------------------------------
+
+Single calculation
+current_A:	 6.3180000000000005
+mulvar:		 3.8982060000000005
+mulvar_c:	 2.4197940000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 6.372
+mulvar:		 3.937896
+mulvar_c:	 2.434104
+---------------------------------------------
+
+Single calculation
+current_A:	 6.426
+mulvar:		 3.977694
+mulvar_c:	 2.448306
+---------------------------------------------
+
+Single calculation
+current_A:	 6.48
+mulvar:		 4.0176
+mulvar_c:	 2.4624
+---------------------------------------------
+
+Single calculation
+current_A:	 6.534
+mulvar:		 4.057614
+mulvar_c:	 2.4763859999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 6.588
+mulvar:		 4.097736
+mulvar_c:	 2.4902640000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 6.642
+mulvar:		 4.1379660000000005
+mulvar_c:	 2.5040340000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 6.696
+mulvar:		 4.178304
+mulvar_c:	 2.517696
+---------------------------------------------
+
+Single calculation
+current_A:	 6.75
+mulvar:		 4.21875
+mulvar_c:	 2.53125
+---------------------------------------------
+
+Single calculation
+current_A:	 6.804
+mulvar:		 4.259304
+mulvar_c:	 2.544696
+---------------------------------------------
+
+Single calculation
+current_A:	 6.8580000000000005
+mulvar:		 4.299966
+mulvar_c:	 2.558034
+---------------------------------------------
+
+Single calculation
+current_A:	 6.912
+mulvar:		 4.340736
+mulvar_c:	 2.5712639999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 6.966
+mulvar:		 4.381614
+mulvar_c:	 2.584386
+---------------------------------------------
+
+Single calculation
+current_A:	 7.0200000000000005
+mulvar:		 4.4226
+mulvar_c:	 2.5974
+---------------------------------------------
+
+Single calculation
+current_A:	 7.074
+mulvar:		 4.463694
+mulvar_c:	 2.610306
+---------------------------------------------
+
+Single calculation
+current_A:	 7.128
+mulvar:		 4.504896
+mulvar_c:	 2.623104
+---------------------------------------------
+
+Single calculation
+current_A:	 7.182
+mulvar:		 4.546206000000001
+mulvar_c:	 2.635794
+---------------------------------------------
+
+Single calculation
+current_A:	 7.236
+mulvar:		 4.587624
+mulvar_c:	 2.648376
+---------------------------------------------
+
+Single calculation
+current_A:	 7.29
+mulvar:		 4.62915
+mulvar_c:	 2.66085
+---------------------------------------------
+
+Single calculation
+current_A:	 7.344
+mulvar:		 4.670784
+mulvar_c:	 2.673216
+---------------------------------------------
+
+Single calculation
+current_A:	 7.398000000000001
+mulvar:		 4.712526
+mulvar_c:	 2.685474
+---------------------------------------------
+
+Single calculation
+current_A:	 7.452
+mulvar:		 4.754376000000001
+mulvar_c:	 2.697624
+---------------------------------------------
+
+Single calculation
+current_A:	 7.506
+mulvar:		 4.796334000000001
+mulvar_c:	 2.709666
+---------------------------------------------
+
+Single calculation
+current_A:	 7.5600000000000005
+mulvar:		 4.8384
+mulvar_c:	 2.7216
+---------------------------------------------
+
+Single calculation
+current_A:	 7.614
+mulvar:		 4.880574
+mulvar_c:	 2.7334259999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 7.668
+mulvar:		 4.9228559999999995
+mulvar_c:	 2.745144
+---------------------------------------------
+
+Single calculation
+current_A:	 7.722
+mulvar:		 4.965246
+mulvar_c:	 2.756754
+---------------------------------------------
+
+Single calculation
+current_A:	 7.776
+mulvar:		 5.007744000000001
+mulvar_c:	 2.7682559999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 7.83
+mulvar:		 5.05035
+mulvar_c:	 2.7796499999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 7.884
+mulvar:		 5.093064
+mulvar_c:	 2.790936
+---------------------------------------------
+
+Single calculation
+current_A:	 7.938
+mulvar:		 5.135886
+mulvar_c:	 2.8021139999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 7.992
+mulvar:		 5.178816
+mulvar_c:	 2.8131839999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 8.046
+mulvar:		 5.2218539999999996
+mulvar_c:	 2.824146
+---------------------------------------------
+
+Single calculation
+current_A:	 8.1
+mulvar:		 5.265
+mulvar_c:	 2.8349999999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 8.154
+mulvar:		 5.308254
+mulvar_c:	 2.8457459999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 8.208
+mulvar:		 5.351616
+mulvar_c:	 2.856384
+---------------------------------------------
+
+Single calculation
+current_A:	 8.262
+mulvar:		 5.395086
+mulvar_c:	 2.866914
+---------------------------------------------
+
+Single calculation
+current_A:	 8.316
+mulvar:		 5.438664000000001
+mulvar_c:	 2.877336
+---------------------------------------------
+
+Single calculation
+current_A:	 8.370000000000001
+mulvar:		 5.482350000000001
+mulvar_c:	 2.8876500000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 8.424
+mulvar:		 5.5261439999999995
+mulvar_c:	 2.8978559999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 8.478
+mulvar:		 5.570046
+mulvar_c:	 2.9079539999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 8.532
+mulvar:		 5.614056
+mulvar_c:	 2.917944
+---------------------------------------------
+
+Single calculation
+current_A:	 8.586
+mulvar:		 5.658174000000001
+mulvar_c:	 2.927826
+---------------------------------------------
+
+Single calculation
+current_A:	 8.64
+mulvar:		 5.702400000000001
+mulvar_c:	 2.9375999999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 8.694
+mulvar:		 5.746734
+mulvar_c:	 2.947266
+---------------------------------------------
+
+Single calculation
+current_A:	 8.748
+mulvar:		 5.791175999999999
+mulvar_c:	 2.9568239999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 8.802
+mulvar:		 5.835725999999999
+mulvar_c:	 2.9662739999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 8.856
+mulvar:		 5.880383999999999
+mulvar_c:	 2.9756159999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 8.91
+mulvar:		 5.92515
+mulvar_c:	 2.98485
+---------------------------------------------
+
+Single calculation
+current_A:	 8.964
+mulvar:		 5.970024
+mulvar_c:	 2.993976
+---------------------------------------------
+
+Single calculation
+current_A:	 9.018
+mulvar:		 6.0150060000000005
+mulvar_c:	 3.0029939999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 9.072000000000001
+mulvar:		 6.060096000000001
+mulvar_c:	 3.011904
+---------------------------------------------
+
+Single calculation
+current_A:	 9.126
+mulvar:		 6.105294
+mulvar_c:	 3.0207059999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 9.18
+mulvar:		 6.1506
+mulvar_c:	 3.0293999999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 9.234
+mulvar:		 6.196014
+mulvar_c:	 3.0379859999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 9.288
+mulvar:		 6.241536
+mulvar_c:	 3.046464
+---------------------------------------------
+
+Single calculation
+current_A:	 9.342
+mulvar:		 6.287166
+mulvar_c:	 3.0548339999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 9.396
+mulvar:		 6.332904000000001
+mulvar_c:	 3.063096
+---------------------------------------------
+
+Single calculation
+current_A:	 9.450000000000001
+mulvar:		 6.378750000000001
+mulvar_c:	 3.07125
+---------------------------------------------
+
+Single calculation
+current_A:	 9.504
+mulvar:		 6.424703999999999
+mulvar_c:	 3.0792959999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 9.558
+mulvar:		 6.470765999999999
+mulvar_c:	 3.0872339999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 9.612
+mulvar:		 6.516936
+mulvar_c:	 3.0950639999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 9.666
+mulvar:		 6.563214
+mulvar_c:	 3.1027859999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 9.72
+mulvar:		 6.6096
+mulvar_c:	 3.1104
+---------------------------------------------
+
+Single calculation
+current_A:	 9.774000000000001
+mulvar:		 6.656094
+mulvar_c:	 3.1179059999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 9.828
+mulvar:		 6.7026959999999995
+mulvar_c:	 3.1253039999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 9.882
+mulvar:		 6.749406
+mulvar_c:	 3.132593999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 9.936
+mulvar:		 6.7962240000000005
+mulvar_c:	 3.1397759999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 9.99
+mulvar:		 6.84315
+mulvar_c:	 3.1468499999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 10.044
+mulvar:		 6.890184
+mulvar_c:	 3.1538159999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 10.098
+mulvar:		 6.9373260000000005
+mulvar_c:	 3.1606739999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 10.152000000000001
+mulvar:		 6.984576000000001
+mulvar_c:	 3.167424000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 10.206
+mulvar:		 7.031934
+mulvar_c:	 3.1740660000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 10.26
+mulvar:		 7.0794
+mulvar_c:	 3.1806000000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 10.314
+mulvar:		 7.126974000000001
+mulvar_c:	 3.1870260000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 10.368
+mulvar:		 7.174656
+mulvar_c:	 3.1933440000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 10.422
+mulvar:		 7.222446000000001
+mulvar_c:	 3.199554000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 10.476
+mulvar:		 7.270344000000001
+mulvar_c:	 3.2056560000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 10.53
+mulvar:		 7.31835
+mulvar_c:	 3.21165
+---------------------------------------------
+
+Single calculation
+current_A:	 10.584
+mulvar:		 7.366464
+mulvar_c:	 3.2175360000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 10.638
+mulvar:		 7.414686
+mulvar_c:	 3.2233140000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 10.692
+mulvar:		 7.4630160000000005
+mulvar_c:	 3.2289840000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 10.746
+mulvar:		 7.5114540000000005
+mulvar_c:	 3.234546000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 10.8
+mulvar:		 7.56
+mulvar_c:	 3.2400000000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 10.854000000000001
+mulvar:		 7.6086540000000005
+mulvar_c:	 3.245346000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 10.908
+mulvar:		 7.6574160000000004
+mulvar_c:	 3.2505840000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 10.962
+mulvar:		 7.706286
+mulvar_c:	 3.255714
+---------------------------------------------
+
+Single calculation
+current_A:	 11.016
+mulvar:		 7.755264
+mulvar_c:	 3.2607360000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 11.07
+mulvar:		 7.80435
+mulvar_c:	 3.2656500000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 11.124
+mulvar:		 7.853544
+mulvar_c:	 3.2704560000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 11.178
+mulvar:		 7.902846
+mulvar_c:	 3.2751540000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 11.232000000000001
+mulvar:		 7.952256000000001
+mulvar_c:	 3.279744000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 11.286
+mulvar:		 8.001774
+mulvar_c:	 3.2842260000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 11.34
+mulvar:		 8.0514
+mulvar_c:	 3.2886
+---------------------------------------------
+
+Single calculation
+current_A:	 11.394
+mulvar:		 8.101134
+mulvar_c:	 3.2928660000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 11.448
+mulvar:		 8.150976000000002
+mulvar_c:	 3.2970240000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 11.502
+mulvar:		 8.200926
+mulvar_c:	 3.3010740000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 11.556000000000001
+mulvar:		 8.250984
+mulvar_c:	 3.3050160000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 11.61
+mulvar:		 8.30115
+mulvar_c:	 3.30885
+---------------------------------------------
+
+Single calculation
+current_A:	 11.664
+mulvar:		 8.351424
+mulvar_c:	 3.3125760000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 11.718
+mulvar:		 8.401806
+mulvar_c:	 3.3161940000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 11.772
+mulvar:		 8.452296
+mulvar_c:	 3.319704
+---------------------------------------------
+
+Single calculation
+current_A:	 11.826
+mulvar:		 8.502894
+mulvar_c:	 3.3231060000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 11.88
+mulvar:		 8.5536
+mulvar_c:	 3.3264000000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 11.934000000000001
+mulvar:		 8.604414000000002
+mulvar_c:	 3.329586000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 11.988
+mulvar:		 8.655336
+mulvar_c:	 3.3326640000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 12.042
+mulvar:		 8.706366000000001
+mulvar_c:	 3.335634
+---------------------------------------------
+
+Single calculation
+current_A:	 12.096
+mulvar:		 8.757503999999999
+mulvar_c:	 3.338496
+---------------------------------------------
+
+Single calculation
+current_A:	 12.15
+mulvar:		 8.80875
+mulvar_c:	 3.3412500000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 12.204
+mulvar:		 8.860104000000002
+mulvar_c:	 3.3438960000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 12.258000000000001
+mulvar:		 8.911566
+mulvar_c:	 3.3464340000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 12.312
+mulvar:		 8.963136
+mulvar_c:	 3.3488640000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 12.366
+mulvar:		 9.014814
+mulvar_c:	 3.351186
+---------------------------------------------
+
+Single calculation
+current_A:	 12.42
+mulvar:		 9.0666
+mulvar_c:	 3.3534
+---------------------------------------------
+
+Single calculation
+current_A:	 12.474
+mulvar:		 9.118494
+mulvar_c:	 3.355506
+---------------------------------------------
+
+Single calculation
+current_A:	 12.528
+mulvar:		 9.170496
+mulvar_c:	 3.3575040000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 12.582
+mulvar:		 9.222606
+mulvar_c:	 3.3593940000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 12.636000000000001
+mulvar:		 9.274824
+mulvar_c:	 3.3611760000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 12.69
+mulvar:		 9.32715
+mulvar_c:	 3.36285
+---------------------------------------------
+
+Single calculation
+current_A:	 12.744
+mulvar:		 9.379584
+mulvar_c:	 3.3644160000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 12.798
+mulvar:		 9.432126
+mulvar_c:	 3.3658740000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 12.852
+mulvar:		 9.484776
+mulvar_c:	 3.367224
+---------------------------------------------
+
+Single calculation
+current_A:	 12.906
+mulvar:		 9.537534
+mulvar_c:	 3.368466
+---------------------------------------------
+
+Single calculation
+current_A:	 12.96
+mulvar:		 9.5904
+mulvar_c:	 3.3696
+---------------------------------------------
+
+Single calculation
+current_A:	 13.014000000000001
+mulvar:		 9.643374
+mulvar_c:	 3.3706260000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 13.068
+mulvar:		 9.696456
+mulvar_c:	 3.371544
+---------------------------------------------
+
+Single calculation
+current_A:	 13.122
+mulvar:		 9.749646
+mulvar_c:	 3.372354
+---------------------------------------------
+
+Single calculation
+current_A:	 13.176
+mulvar:		 9.802944
+mulvar_c:	 3.373056
+---------------------------------------------
+
+Single calculation
+current_A:	 13.23
+mulvar:		 9.85635
+mulvar_c:	 3.37365
+---------------------------------------------
+
+Single calculation
+current_A:	 13.284
+mulvar:		 9.909864
+mulvar_c:	 3.374136
+---------------------------------------------
+
+Single calculation
+current_A:	 13.338000000000001
+mulvar:		 9.963486
+mulvar_c:	 3.3745140000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 13.392
+mulvar:		 10.017216
+mulvar_c:	 3.374784
+---------------------------------------------
+
+Single calculation
+current_A:	 13.446
+mulvar:		 10.071054
+mulvar_c:	 3.374946
+---------------------------------------------
+
+Single calculation
+current_A:	 13.5
+mulvar:		 10.125
+mulvar_c:	 3.375
+---------------------------------------------
+
+Single calculation
+current_A:	 13.554
+mulvar:		 10.179054
+mulvar_c:	 3.374946
+---------------------------------------------
+
+Single calculation
+current_A:	 13.608
+mulvar:		 10.233216
+mulvar_c:	 3.374784
+---------------------------------------------
+
+Single calculation
+current_A:	 13.662
+mulvar:		 10.287486
+mulvar_c:	 3.374514
+---------------------------------------------
+
+Single calculation
+current_A:	 13.716000000000001
+mulvar:		 10.341864000000001
+mulvar_c:	 3.374136
+---------------------------------------------
+
+Single calculation
+current_A:	 13.77
+mulvar:		 10.39635
+mulvar_c:	 3.37365
+---------------------------------------------
+
+Single calculation
+current_A:	 13.824
+mulvar:		 10.450944
+mulvar_c:	 3.373056
+---------------------------------------------
+
+Single calculation
+current_A:	 13.878
+mulvar:		 10.505646
+mulvar_c:	 3.372354
+---------------------------------------------
+
+Single calculation
+current_A:	 13.932
+mulvar:		 10.560456
+mulvar_c:	 3.371544
+---------------------------------------------
+
+Single calculation
+current_A:	 13.986
+mulvar:		 10.615374000000001
+mulvar_c:	 3.370626
+---------------------------------------------
+
+Single calculation
+current_A:	 14.040000000000001
+mulvar:		 10.6704
+mulvar_c:	 3.3696
+---------------------------------------------
+
+Single calculation
+current_A:	 14.094
+mulvar:		 10.725534
+mulvar_c:	 3.3684659999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 14.148
+mulvar:		 10.780776
+mulvar_c:	 3.3672239999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 14.202
+mulvar:		 10.836126
+mulvar_c:	 3.365874
+---------------------------------------------
+
+Single calculation
+current_A:	 14.256
+mulvar:		 10.891584
+mulvar_c:	 3.364416
+---------------------------------------------
+
+Single calculation
+current_A:	 14.31
+mulvar:		 10.94715
+mulvar_c:	 3.36285
+---------------------------------------------
+
+Single calculation
+current_A:	 14.364
+mulvar:		 11.002824
+mulvar_c:	 3.361176
+---------------------------------------------
+
+Single calculation
+current_A:	 14.418000000000001
+mulvar:		 11.058606000000001
+mulvar_c:	 3.359394
+---------------------------------------------
+
+Single calculation
+current_A:	 14.472
+mulvar:		 11.114495999999999
+mulvar_c:	 3.3575039999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 14.526
+mulvar:		 11.170494
+mulvar_c:	 3.3555059999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 14.58
+mulvar:		 11.2266
+mulvar_c:	 3.3533999999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 14.634
+mulvar:		 11.282814
+mulvar_c:	 3.3511859999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 14.688
+mulvar:		 11.339136
+mulvar_c:	 3.348864
+---------------------------------------------
+
+Single calculation
+current_A:	 14.742
+mulvar:		 11.395566
+mulvar_c:	 3.346434
+---------------------------------------------
+
+Single calculation
+current_A:	 14.796000000000001
+mulvar:		 11.452104
+mulvar_c:	 3.343896
+---------------------------------------------
+
+Single calculation
+current_A:	 14.85
+mulvar:		 11.50875
+mulvar_c:	 3.3412499999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 14.904
+mulvar:		 11.565503999999999
+mulvar_c:	 3.3384959999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 14.958
+mulvar:		 11.622366
+mulvar_c:	 3.3356339999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 15.012
+mulvar:		 11.679336
+mulvar_c:	 3.332664
+---------------------------------------------
+
+Single calculation
+current_A:	 15.066
+mulvar:		 11.736414
+mulvar_c:	 3.329586
+---------------------------------------------
+
+Single calculation
+current_A:	 15.120000000000001
+mulvar:		 11.793600000000001
+mulvar_c:	 3.3264
+---------------------------------------------
+
+Single calculation
+current_A:	 15.174
+mulvar:		 11.850894
+mulvar_c:	 3.3231059999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 15.228
+mulvar:		 11.908296
+mulvar_c:	 3.3197039999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 15.282
+mulvar:		 11.965806
+mulvar_c:	 3.3161939999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 15.336
+mulvar:		 12.023424
+mulvar_c:	 3.3125759999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 15.39
+mulvar:		 12.08115
+mulvar_c:	 3.3088499999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 15.444
+mulvar:		 12.138984
+mulvar_c:	 3.3050159999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 15.498000000000001
+mulvar:		 12.196926000000001
+mulvar_c:	 3.301074
+---------------------------------------------
+
+Single calculation
+current_A:	 15.552
+mulvar:		 12.254976
+mulvar_c:	 3.2970239999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 15.606
+mulvar:		 12.313134
+mulvar_c:	 3.2928659999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 15.66
+mulvar:		 12.3714
+mulvar_c:	 3.2885999999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 15.714
+mulvar:		 12.429774
+mulvar_c:	 3.2842259999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 15.768
+mulvar:		 12.488256000000002
+mulvar_c:	 3.2797439999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 15.822000000000001
+mulvar:		 12.546846
+mulvar_c:	 3.2751539999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 15.876
+mulvar:		 12.605544
+mulvar_c:	 3.2704559999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 15.93
+mulvar:		 12.66435
+mulvar_c:	 3.2656499999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 15.984
+mulvar:		 12.723264
+mulvar_c:	 3.260735999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.038
+mulvar:		 12.782286000000001
+mulvar_c:	 3.2557139999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 16.092
+mulvar:		 12.841415999999999
+mulvar_c:	 3.250583999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.146
+mulvar:		 12.900654000000001
+mulvar_c:	 3.2453459999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 16.2
+mulvar:		 12.96
+mulvar_c:	 3.2399999999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 16.254
+mulvar:		 13.019454000000001
+mulvar_c:	 3.2345459999999995
+---------------------------------------------
+
+Single calculation
+current_A:	 16.308
+mulvar:		 13.079016000000001
+mulvar_c:	 3.228983999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.362000000000002
+mulvar:		 13.138686000000002
+mulvar_c:	 3.223314
+---------------------------------------------
+
+Single calculation
+current_A:	 16.416
+mulvar:		 13.198464000000001
+mulvar_c:	 3.217535999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.47
+mulvar:		 13.25835
+mulvar_c:	 3.211649999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.524
+mulvar:		 13.318344
+mulvar_c:	 3.2056559999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 16.578
+mulvar:		 13.378445999999999
+mulvar_c:	 3.199553999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.632
+mulvar:		 13.438656
+mulvar_c:	 3.1933439999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 16.686
+mulvar:		 13.498973999999999
+mulvar_c:	 3.187025999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 16.740000000000002
+mulvar:		 13.559400000000004
+mulvar_c:	 3.1805999999999996
+---------------------------------------------
+
+Single calculation
+current_A:	 16.794
+mulvar:		 13.619933999999999
+mulvar_c:	 3.1740659999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 16.848
+mulvar:		 13.680575999999999
+mulvar_c:	 3.1674239999999987
+---------------------------------------------
+
+Single calculation
+current_A:	 16.902
+mulvar:		 13.741326
+mulvar_c:	 3.160674000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 16.956
+mulvar:		 13.802184
+mulvar_c:	 3.153816000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.01
+mulvar:		 13.86315
+mulvar_c:	 3.146850000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.064
+mulvar:		 13.924223999999999
+mulvar_c:	 3.139776000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.118000000000002
+mulvar:		 13.985406000000003
+mulvar_c:	 3.1325940000000014
+---------------------------------------------
+
+Single calculation
+current_A:	 17.172
+mulvar:		 14.046695999999999
+mulvar_c:	 3.125304000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.226
+mulvar:		 14.108094
+mulvar_c:	 3.1179060000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 17.28
+mulvar:		 14.1696
+mulvar_c:	 3.110400000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.334
+mulvar:		 14.231213999999998
+mulvar_c:	 3.102786000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.388
+mulvar:		 14.292936000000001
+mulvar_c:	 3.095064000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.442
+mulvar:		 14.354766
+mulvar_c:	 3.087234000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.496
+mulvar:		 14.416703999999998
+mulvar_c:	 3.0792960000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 17.55
+mulvar:		 14.47875
+mulvar_c:	 3.071250000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.604
+mulvar:		 14.540903999999998
+mulvar_c:	 3.0630960000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 17.658
+mulvar:		 14.603166
+mulvar_c:	 3.054834000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.712
+mulvar:		 14.665536
+mulvar_c:	 3.0464640000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 17.766000000000002
+mulvar:		 14.728014000000002
+mulvar_c:	 3.037986000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.82
+mulvar:		 14.7906
+mulvar_c:	 3.0294000000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 17.874
+mulvar:		 14.853294
+mulvar_c:	 3.0207060000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 17.928
+mulvar:		 14.916096000000001
+mulvar_c:	 3.011904000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 17.982
+mulvar:		 14.979006
+mulvar_c:	 3.0029940000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 18.036
+mulvar:		 15.042024000000001
+mulvar_c:	 2.993976000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.09
+mulvar:		 15.10515
+mulvar_c:	 2.9848500000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 18.144000000000002
+mulvar:		 15.168384000000003
+mulvar_c:	 2.975616000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.198
+mulvar:		 15.231726
+mulvar_c:	 2.9662740000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 18.252
+mulvar:		 15.295175999999998
+mulvar_c:	 2.9568240000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 18.306
+mulvar:		 15.358734
+mulvar_c:	 2.947266000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.36
+mulvar:		 15.4224
+mulvar_c:	 2.9376000000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 18.414
+mulvar:		 15.486174000000002
+mulvar_c:	 2.927826000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.468
+mulvar:		 15.550056
+mulvar_c:	 2.9179440000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 18.522000000000002
+mulvar:		 15.614046000000002
+mulvar_c:	 2.907954000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.576
+mulvar:		 15.678144
+mulvar_c:	 2.8978560000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 18.63
+mulvar:		 15.74235
+mulvar_c:	 2.8876500000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 18.684
+mulvar:		 15.806664000000001
+mulvar_c:	 2.8773360000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 18.738
+mulvar:		 15.871085999999998
+mulvar_c:	 2.8669140000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 18.792
+mulvar:		 15.935616
+mulvar_c:	 2.8563840000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 18.846
+mulvar:		 16.000254
+mulvar_c:	 2.8457460000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 18.900000000000002
+mulvar:		 16.065
+mulvar_c:	 2.835000000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 18.954
+mulvar:		 16.129854
+mulvar_c:	 2.8241460000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 19.008
+mulvar:		 16.194816
+mulvar_c:	 2.813184
+---------------------------------------------
+
+Single calculation
+current_A:	 19.062
+mulvar:		 16.259886
+mulvar_c:	 2.8021140000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 19.116
+mulvar:		 16.325063999999998
+mulvar_c:	 2.7909360000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 19.17
+mulvar:		 16.39035
+mulvar_c:	 2.7796500000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 19.224
+mulvar:		 16.455744
+mulvar_c:	 2.7682560000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 19.278
+mulvar:		 16.521245999999998
+mulvar_c:	 2.756754
+---------------------------------------------
+
+Single calculation
+current_A:	 19.332
+mulvar:		 16.586856
+mulvar_c:	 2.7451440000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 19.386
+mulvar:		 16.652573999999998
+mulvar_c:	 2.733426
+---------------------------------------------
+
+Single calculation
+current_A:	 19.44
+mulvar:		 16.7184
+mulvar_c:	 2.7216000000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 19.494
+mulvar:		 16.784334
+mulvar_c:	 2.7096660000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 19.548000000000002
+mulvar:		 16.850376
+mulvar_c:	 2.6976240000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 19.602
+mulvar:		 16.916526
+mulvar_c:	 2.685474
+---------------------------------------------
+
+Single calculation
+current_A:	 19.656
+mulvar:		 16.982784
+mulvar_c:	 2.673216
+---------------------------------------------
+
+Single calculation
+current_A:	 19.71
+mulvar:		 17.04915
+mulvar_c:	 2.6608500000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 19.764
+mulvar:		 17.115624
+mulvar_c:	 2.6483760000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 19.818
+mulvar:		 17.182206
+mulvar_c:	 2.635794
+---------------------------------------------
+
+Single calculation
+current_A:	 19.872
+mulvar:		 17.248896
+mulvar_c:	 2.623104
+---------------------------------------------
+
+Single calculation
+current_A:	 19.926000000000002
+mulvar:		 17.315694
+mulvar_c:	 2.6103060000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 19.98
+mulvar:		 17.3826
+mulvar_c:	 2.5974
+---------------------------------------------
+
+Single calculation
+current_A:	 20.034
+mulvar:		 17.449613999999997
+mulvar_c:	 2.584386
+---------------------------------------------
+
+Single calculation
+current_A:	 20.088
+mulvar:		 17.516736
+mulvar_c:	 2.571264
+---------------------------------------------
+
+Single calculation
+current_A:	 20.142
+mulvar:		 17.583966
+mulvar_c:	 2.558034
+---------------------------------------------
+
+Single calculation
+current_A:	 20.196
+mulvar:		 17.651304
+mulvar_c:	 2.544696
+---------------------------------------------
+
+Single calculation
+current_A:	 20.25
+mulvar:		 17.71875
+mulvar_c:	 2.53125
+---------------------------------------------
+
+Single calculation
+current_A:	 20.304000000000002
+mulvar:		 17.786304
+mulvar_c:	 2.5176960000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 20.358
+mulvar:		 17.853966
+mulvar_c:	 2.504034
+---------------------------------------------
+
+Single calculation
+current_A:	 20.412
+mulvar:		 17.921736
+mulvar_c:	 2.490264
+---------------------------------------------
+
+Single calculation
+current_A:	 20.466
+mulvar:		 17.989614000000003
+mulvar_c:	 2.476386
+---------------------------------------------
+
+Single calculation
+current_A:	 20.52
+mulvar:		 18.0576
+mulvar_c:	 2.4623999999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 20.574
+mulvar:		 18.125694
+mulvar_c:	 2.448306
+---------------------------------------------
+
+Single calculation
+current_A:	 20.628
+mulvar:		 18.193896
+mulvar_c:	 2.434104
+---------------------------------------------
+
+Single calculation
+current_A:	 20.682000000000002
+mulvar:		 18.262206000000003
+mulvar_c:	 2.419794
+---------------------------------------------
+
+Single calculation
+current_A:	 20.736
+mulvar:		 18.330624
+mulvar_c:	 2.405376
+---------------------------------------------
+
+Single calculation
+current_A:	 20.79
+mulvar:		 18.39915
+mulvar_c:	 2.39085
+---------------------------------------------
+
+Single calculation
+current_A:	 20.844
+mulvar:		 18.467783999999998
+mulvar_c:	 2.376216
+---------------------------------------------
+
+Single calculation
+current_A:	 20.898
+mulvar:		 18.536526000000002
+mulvar_c:	 2.361474
+---------------------------------------------
+
+Single calculation
+current_A:	 20.952
+mulvar:		 18.605376
+mulvar_c:	 2.346624
+---------------------------------------------
+
+Single calculation
+current_A:	 21.006
+mulvar:		 18.674333999999998
+mulvar_c:	 2.331666
+---------------------------------------------
+
+Single calculation
+current_A:	 21.06
+mulvar:		 18.7434
+mulvar_c:	 2.3165999999999998
+---------------------------------------------
+
+Single calculation
+current_A:	 21.114
+mulvar:		 18.812574
+mulvar_c:	 2.3014259999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.168
+mulvar:		 18.881856
+mulvar_c:	 2.2861439999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.222
+mulvar:		 18.951246
+mulvar_c:	 2.2707539999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.276
+mulvar:		 19.020744
+mulvar_c:	 2.2552559999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.330000000000002
+mulvar:		 19.090350000000004
+mulvar_c:	 2.2396499999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.384
+mulvar:		 19.160064000000002
+mulvar_c:	 2.2239359999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.438
+mulvar:		 19.229885999999997
+mulvar_c:	 2.2081139999999992
+---------------------------------------------
+
+Single calculation
+current_A:	 21.492
+mulvar:		 19.299816
+mulvar_c:	 2.1921839999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.546
+mulvar:		 19.369854
+mulvar_c:	 2.1761459999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.6
+mulvar:		 19.44
+mulvar_c:	 2.1599999999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.654
+mulvar:		 19.510254
+mulvar_c:	 2.1437459999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.708000000000002
+mulvar:		 19.580616
+mulvar_c:	 2.1273839999999997
+---------------------------------------------
+
+Single calculation
+current_A:	 21.762
+mulvar:		 19.651086000000003
+mulvar_c:	 2.1109139999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 21.816
+mulvar:		 19.721663999999997
+mulvar_c:	 2.0943359999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 21.87
+mulvar:		 19.79235
+mulvar_c:	 2.0776499999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 21.924
+mulvar:		 19.863144000000002
+mulvar_c:	 2.0608559999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 21.978
+mulvar:		 19.934046000000002
+mulvar_c:	 2.0439539999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 22.032
+mulvar:		 20.005056
+mulvar_c:	 2.0269439999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 22.086000000000002
+mulvar:		 20.076174
+mulvar_c:	 2.0098259999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 22.14
+mulvar:		 20.1474
+mulvar_c:	 1.9925999999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.194
+mulvar:		 20.218734
+mulvar_c:	 1.9752659999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.248
+mulvar:		 20.290176000000002
+mulvar_c:	 1.9578239999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.302
+mulvar:		 20.361726
+mulvar_c:	 1.9402739999999992
+---------------------------------------------
+
+Single calculation
+current_A:	 22.356
+mulvar:		 20.433384000000004
+mulvar_c:	 1.9226159999999994
+---------------------------------------------
+
+Single calculation
+current_A:	 22.41
+mulvar:		 20.50515
+mulvar_c:	 1.9048499999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.464000000000002
+mulvar:		 20.577024
+mulvar_c:	 1.8869759999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.518
+mulvar:		 20.649006
+mulvar_c:	 1.8689939999999992
+---------------------------------------------
+
+Single calculation
+current_A:	 22.572
+mulvar:		 20.721096
+mulvar_c:	 1.850903999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 22.626
+mulvar:		 20.793294
+mulvar_c:	 1.8327059999999993
+---------------------------------------------
+
+Single calculation
+current_A:	 22.68
+mulvar:		 20.8656
+mulvar_c:	 1.8143999999999991
+---------------------------------------------
+
+Single calculation
+current_A:	 22.734
+mulvar:		 20.938014000000003
+mulvar_c:	 1.7959859999999992
+---------------------------------------------
+
+Single calculation
+current_A:	 22.788
+mulvar:		 21.010536000000002
+mulvar_c:	 1.777463999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 22.842
+mulvar:		 21.083166
+mulvar_c:	 1.758833999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 22.896
+mulvar:		 21.155904
+mulvar_c:	 1.740095999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 22.95
+mulvar:		 21.22875
+mulvar_c:	 1.7212499999999988
+---------------------------------------------
+
+Single calculation
+current_A:	 23.004
+mulvar:		 21.301704
+mulvar_c:	 1.7022959999999991
+---------------------------------------------
+
+Single calculation
+current_A:	 23.058
+mulvar:		 21.374766
+mulvar_c:	 1.683233999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.112000000000002
+mulvar:		 21.447936000000002
+mulvar_c:	 1.664063999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.166
+mulvar:		 21.521214
+mulvar_c:	 1.644785999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.22
+mulvar:		 21.5946
+mulvar_c:	 1.6253999999999988
+---------------------------------------------
+
+Single calculation
+current_A:	 23.274
+mulvar:		 21.668094
+mulvar_c:	 1.605905999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.328
+mulvar:		 21.741695999999997
+mulvar_c:	 1.5863039999999988
+---------------------------------------------
+
+Single calculation
+current_A:	 23.382
+mulvar:		 21.815406000000003
+mulvar_c:	 1.566593999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.436
+mulvar:		 21.889224
+mulvar_c:	 1.5467759999999988
+---------------------------------------------
+
+Single calculation
+current_A:	 23.490000000000002
+mulvar:		 21.963150000000002
+mulvar_c:	 1.526849999999999
+---------------------------------------------
+
+Single calculation
+current_A:	 23.544
+mulvar:		 22.037184
+mulvar_c:	 1.5068159999999988
+---------------------------------------------
+
+Single calculation
+current_A:	 23.598
+mulvar:		 22.111326
+mulvar_c:	 1.4866739999999987
+---------------------------------------------
+
+Single calculation
+current_A:	 23.652
+mulvar:		 22.185576
+mulvar_c:	 1.4664240000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 23.706
+mulvar:		 22.259934
+mulvar_c:	 1.4460660000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 23.76
+mulvar:		 22.334400000000002
+mulvar_c:	 1.4256000000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 23.814
+mulvar:		 22.408974
+mulvar_c:	 1.4050260000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 23.868000000000002
+mulvar:		 22.483656000000003
+mulvar_c:	 1.3843440000000014
+---------------------------------------------
+
+Single calculation
+current_A:	 23.922
+mulvar:		 22.558446
+mulvar_c:	 1.3635540000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 23.976
+mulvar:		 22.633344
+mulvar_c:	 1.3426560000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 24.03
+mulvar:		 22.70835
+mulvar_c:	 1.3216500000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 24.084
+mulvar:		 22.783464
+mulvar_c:	 1.300536000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.138
+mulvar:		 22.858686000000002
+mulvar_c:	 1.2793140000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 24.192
+mulvar:		 22.934016
+mulvar_c:	 1.257984000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.246000000000002
+mulvar:		 23.009454
+mulvar_c:	 1.2365460000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 24.3
+mulvar:		 23.085
+mulvar_c:	 1.2150000000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 24.354
+mulvar:		 23.160653999999997
+mulvar_c:	 1.1933460000000011
+---------------------------------------------
+
+Single calculation
+current_A:	 24.408
+mulvar:		 23.236416000000002
+mulvar_c:	 1.171584000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.462
+mulvar:		 23.312286
+mulvar_c:	 1.149714000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.516000000000002
+mulvar:		 23.388264000000003
+mulvar_c:	 1.1277360000000012
+---------------------------------------------
+
+Single calculation
+current_A:	 24.57
+mulvar:		 23.46435
+mulvar_c:	 1.105650000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.624
+mulvar:		 23.540544
+mulvar_c:	 1.0834560000000009
+---------------------------------------------
+
+Single calculation
+current_A:	 24.678
+mulvar:		 23.616846000000002
+mulvar_c:	 1.061154000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.732
+mulvar:		 23.693255999999998
+mulvar_c:	 1.038744000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.786
+mulvar:		 23.769774
+mulvar_c:	 1.016226000000001
+---------------------------------------------
+
+Single calculation
+current_A:	 24.84
+mulvar:		 23.8464
+mulvar_c:	 0.9936000000000009
+---------------------------------------------
+
+Single calculation
+current_A:	 24.894000000000002
+mulvar:		 23.923134
+mulvar_c:	 0.9708660000000009
+---------------------------------------------
+
+Single calculation
+current_A:	 24.948
+mulvar:		 23.999976
+mulvar_c:	 0.9480240000000009
+---------------------------------------------
+
+Single calculation
+current_A:	 25.002
+mulvar:		 24.076925999999997
+mulvar_c:	 0.9250740000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 25.056
+mulvar:		 24.153984
+mulvar_c:	 0.9020160000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 25.11
+mulvar:		 24.23115
+mulvar_c:	 0.8788500000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 25.164
+mulvar:		 24.308424000000002
+mulvar_c:	 0.8555760000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 25.218
+mulvar:		 24.385806
+mulvar_c:	 0.8321940000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 25.272000000000002
+mulvar:		 24.463296000000003
+mulvar_c:	 0.8087040000000008
+---------------------------------------------
+
+Single calculation
+current_A:	 25.326
+mulvar:		 24.540894
+mulvar_c:	 0.7851060000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 25.38
+mulvar:		 24.6186
+mulvar_c:	 0.7614000000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 25.434
+mulvar:		 24.696414
+mulvar_c:	 0.7375860000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 25.488
+mulvar:		 24.774335999999998
+mulvar_c:	 0.7136640000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 25.542
+mulvar:		 24.852366
+mulvar_c:	 0.6896340000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 25.596
+mulvar:		 24.930504
+mulvar_c:	 0.6654960000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 25.650000000000002
+mulvar:		 25.008750000000003
+mulvar_c:	 0.6412500000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 25.704
+mulvar:		 25.087104
+mulvar_c:	 0.6168960000000006
+---------------------------------------------
+
+Single calculation
+current_A:	 25.758
+mulvar:		 25.165566000000002
+mulvar_c:	 0.5924340000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 25.812
+mulvar:		 25.244136
+mulvar_c:	 0.5678640000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 25.866
+mulvar:		 25.322813999999997
+mulvar_c:	 0.5431860000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 25.92
+mulvar:		 25.401600000000002
+mulvar_c:	 0.5184000000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 25.974
+mulvar:		 25.480494
+mulvar_c:	 0.49350600000000044
+---------------------------------------------
+
+Single calculation
+current_A:	 26.028000000000002
+mulvar:		 25.559496000000003
+mulvar_c:	 0.4685040000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 26.082
+mulvar:		 25.638606
+mulvar_c:	 0.4433940000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 26.136
+mulvar:		 25.717824
+mulvar_c:	 0.4181760000000004
+---------------------------------------------
+
+Single calculation
+current_A:	 26.19
+mulvar:		 25.79715
+mulvar_c:	 0.39285000000000037
+---------------------------------------------
+
+Single calculation
+current_A:	 26.244
+mulvar:		 25.876584
+mulvar_c:	 0.3674160000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 26.298000000000002
+mulvar:		 25.956126
+mulvar_c:	 0.34187400000000034
+---------------------------------------------
+
+Single calculation
+current_A:	 26.352
+mulvar:		 26.035776000000002
+mulvar_c:	 0.3162240000000003
+---------------------------------------------
+
+Single calculation
+current_A:	 26.406
+mulvar:		 26.115534
+mulvar_c:	 0.2904660000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 26.46
+mulvar:		 26.1954
+mulvar_c:	 0.2646000000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 26.514
+mulvar:		 26.275374
+mulvar_c:	 0.2386260000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 26.568
+mulvar:		 26.355456
+mulvar_c:	 0.2125440000000002
+---------------------------------------------
+
+Single calculation
+current_A:	 26.622
+mulvar:		 26.435646000000002
+mulvar_c:	 0.18635400000000016
+---------------------------------------------
+
+Single calculation
+current_A:	 26.676000000000002
+mulvar:		 26.515944
+mulvar_c:	 0.16005600000000014
+---------------------------------------------
+
+Single calculation
+current_A:	 26.73
+mulvar:		 26.59635
+mulvar_c:	 0.13365000000000013
+---------------------------------------------
+
+Single calculation
+current_A:	 26.784
+mulvar:		 26.676864000000002
+mulvar_c:	 0.10713600000000009
+---------------------------------------------
+
+Single calculation
+current_A:	 26.838
+mulvar:		 26.757486
+mulvar_c:	 0.08051400000000007
+---------------------------------------------
+
+Single calculation
+current_A:	 26.892
+mulvar:		 26.838216
+mulvar_c:	 0.05378400000000005
+---------------------------------------------
+
+Single calculation
+current_A:	 26.946
+mulvar:		 26.919054000000003
+mulvar_c:	 0.026946000000000025
+END
