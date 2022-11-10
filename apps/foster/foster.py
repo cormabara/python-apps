@@ -5,9 +5,10 @@ from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, current_lsb2A_theo
 from constants import igbt_factor_real, igbt_offset_real,diode_factor_real,diode_offset_real
 from constants import igbt_factor_theo, igbt_offset_theo,diode_factor_theo,diode_offset_theo
 from constants import pwm_max_duty, curr_factor,perc_err
-from constants import power_theo_2_real, lsb2a_factor
+from constants import power_w_2_wcu, lsb2a_factor
+from constants import igbt_wcu_to_deg_r,diode_wcu_to_deg_r,igbt_w_to_deg_t,diode_w_to_deg_t
 from common import CheckIntOverflow
-
+import sys
 
 class DataFormat(int):
     data_theo_W = 0x0100
@@ -15,6 +16,9 @@ class DataFormat(int):
     data_real_WCU = 0x0400
     data_compare = 0x0800
     data_error = 0x1000
+    data_real_deg = 0x2000
+    data_theo_deg = 0x4000
+
     data_format_mask = 0xff00
 
 
@@ -29,6 +33,7 @@ class DataType(int):
 # This function take a fload, evaluate the rounding error to int, check the overflow and return
 # the integer
 def check_value(value_float_: float, print_):
+    overflow = False
     if print_:
         if int(value_float_) != 0:
             err = perc_err(value_float_, int(value_float_))
@@ -36,6 +41,9 @@ def check_value(value_float_: float, print_):
             err = 0
         overflow = CheckIntOverflow(value_float_, 32)
         rpt_print("Op: err%(" + str(err) + ") overflow(" + str(overflow) + ")")
+
+    if overflow == True:
+        sys.exit(-2);
 
     return int(value_float_)
 
@@ -45,20 +53,25 @@ class PowerDato:
     def __init__(self):
         self.real = 0
         self.theo = 0
+        self.theo_deg = 0
+        self.real_deg = 0
 
     def get_value(self, format_):
         if format_ == DataFormat.data_theo_W:
             return self.theo
         elif format_ == DataFormat.data_theo_WCU:
-            return power_theo_2_real(self.theo)
+            return power_w_2_wcu(self.theo)
         elif format_ == DataFormat.data_real_WCU:
             return self.real
         elif format_ == DataFormat.data_compare:
-            return self.real - power_theo_2_real(self.theo)
+            return self.real - power_w_2_wcu(self.theo)
         elif format_ == DataFormat.data_error:
-            return abs((self.real - (power_theo_2_real(self.theo))) * 100 / (1 if self.real == 0 else self.real))
-        elif format_ == DataFormat.theo_deg:
-            return self.theo
+            return abs((self.real - (power_w_2_wcu(self.theo))) * 100 / (1 if self.real == 0 else self.real))
+ 
+        elif format_ == DataFormat.data_real_deg:
+            return self.real_deg
+        elif format_ == DataFormat.data_theo_deg:
+            return self.theo_deg
         return -1
 
     def set_value(self, format_, val_):
@@ -66,6 +79,10 @@ class PowerDato:
             self.theo = val_
         elif format_ == DataFormat.data_real_WCU:
             self.real = val_
+        elif format_ == DataFormat.data_real_deg:
+            self.real_deg = val_
+        elif format_ == DataFormat.data_theo_deg:
+            self.theo_deg = val_
 
 
 class PowerSample:
@@ -106,13 +123,13 @@ class PowerSample:
 
 class PowerData:
 
-    def __init__(self):
+    def __init__(self,do_print):
         self.current = None
         self.compare = None
         self.samples = 0
         self.power_samples = None
         self.sample_iter = None
-        self.debug_print = False
+        self.debug_print = do_print
         pass
 
     def CalcVectors(self, current_v_, compare_v_):
@@ -124,7 +141,7 @@ class PowerData:
         self.power_samples = [PowerSample() for i in self.sample_iter]
         self.samples = [i for i in self.sample_iter]
         for index in self.sample_iter:
-            self.power_samples[index] = self.calc_single(current_v_[index], compare_v_[index])
+            self.power_samples[index] = self.__calc_single(current_v_[index], compare_v_[index])
 
     def CalcSingle(self, current_, compare_):
         size = 1
@@ -132,9 +149,10 @@ class PowerData:
         self.power_samples = [PowerSample() for i in self.sample_iter]
         self.samples = [i for i in self.sample_iter]
         for index in self.sample_iter:
-            self.power_samples[index] = self.calc_single(current_, compare_)
+            self.power_samples[index] = self.__calc_single(current_, compare_)
+        return self.power_samples[0]
 
-    def calc_theoretical(self, sample: PowerSample, current_lsb_: float, compare_: float):
+    def __calc_theoretical(self, sample: PowerSample, current_lsb_: float, compare_: float):
         """
 
         :param sample: container of data
@@ -154,19 +172,37 @@ class PowerData:
         mul_var = float(float(abs(current_A)) * float(compare_ / pwm_max_duty))
         mul_var_compl = float(abs(current_A)) * (1 - (compare_ / pwm_max_duty))
 
+        if self.debug_print:
+            rpt_sep()
+            rpt_print("real factor and offset estimation")
+            bkp = self.debug_print
+            self.debug_print = False
+            dbg_val = (mul_var_compl * igbt_factor_theo())
+            dbg_val_compl = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var_compl)
+            dbg_offs = igbt_offset_theo()
+            self.debug_print = bkp
+            rpt_print("factor is: " + str(dbg_val) + "( compl: " + str(dbg_val_compl) + ") - offset is: " + str(dbg_offs))
+
         if current_A > 0:
-            sample.set_value(DataType.PIT | DataFormat.data_theo_W,
-                             (mul_var_compl * igbt_factor_theo()) + igbt_offset_theo())
-            sample.set_value(DataType.PDB | DataFormat.data_theo_W,
-                             (mul_var * diode_factor_theo()) + diode_offset_theo())
+            val = (mul_var_compl * igbt_factor_theo()) + igbt_offset_theo()
+            sample.set_value(DataType.PIT | DataFormat.data_theo_W, val)
+            sample.set_value(DataType.PIT | DataFormat.data_theo_deg, igbt_w_to_deg_t(val))
+
+            val = (mul_var * diode_factor_theo()) + diode_offset_theo()
+            sample.set_value(DataType.PDB | DataFormat.data_theo_W, val)
+            sample.set_value(DataType.PDB | DataFormat.data_theo_deg, diode_w_to_deg_t(val))
+
         else:
-            sample.set_value(DataType.PIB | DataFormat.data_theo_W,
-                             (mul_var * igbt_factor_theo()) + igbt_offset_theo())
-            sample.set_value(DataType.PDT | DataFormat.data_theo_W,
-                             (mul_var_compl * diode_factor_theo()) + igbt_offset_theo())
+            val = (mul_var * igbt_factor_theo()) + igbt_offset_theo()
+            sample.set_value(DataType.PIB | DataFormat.data_theo_W, val)
+            sample.set_value(DataType.PIB | DataFormat.data_theo_deg, igbt_w_to_deg_t(val))
+
+            val = (mul_var_compl * diode_factor_theo()) + diode_offset_theo()
+            sample.set_value(DataType.PDT | DataFormat.data_theo_W, val)
+            sample.set_value(DataType.PDT | DataFormat.data_theo_deg, diode_w_to_deg_t(val))
 
     # Funzione principale di conversione a rischio overflow, QUi ad ogi operazione faccio il test dell'overflow
-    def value_convert(self, dev_factor_: int, curr_: int, cmp_: int):
+    def __value_convert(self, dev_factor_: int, curr_: int, cmp_: int):
         '''
 
         :param dev_factor_:
@@ -214,7 +250,7 @@ class PowerData:
             rpt_print("Value convert: err(" + str(perc_err( aux, aux_theo)) + ")")
         return int(aux)
 
-    def calc_real(self, sample: PowerSample, current_lsb_, compare_):
+    def __calc_real(self, sample: PowerSample, current_lsb_, compare_):
         """
 
         :param sample:
@@ -267,37 +303,51 @@ class PowerData:
         real = value_convert(igbt_factor_real, current_lsb, compare_) + igbt_offset_real
 
         dove real_2_theo(real): theo = (real/shift_freq_factor)/CUSTOM_FACTOR  """
-
+        # rpt_print("REAL CALCULATION: current(" + str(current_lsb_) + ") - compare(" + str(compare_) + ")")
         mul_var = compare_
         mul_var_compl =  pwm_max_duty - compare_
 
+        if self.debug_print:
+            rpt_sep()
+            rpt_print("theoretical factor and offset estimation")
+            bkp = self.debug_print
+            self.debug_print = False
+            dbg_val = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var)
+            dbg_val_compl = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var_compl)
+            dbg_offs = igbt_offset_real()
+            self.debug_print = bkp
+            rpt_print("factor is: " + str(dbg_val) + "(compl: " + str(dbg_val_compl) + ") - offset is: " + str(dbg_offs))
+
         if current_lsb_ > 0:
-            val = self.value_convert(igbt_factor_real(), abs(current_lsb_), mul_var_compl)
-            sample.set_value(DataType.PIT | DataFormat.data_real_WCU, val + igbt_offset_real())
+            val = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var_compl) + igbt_offset_real()
+            sample.set_value(DataType.PIT | DataFormat.data_real_WCU, val)
+            sample.set_value(DataType.PIT | DataFormat.data_real_deg, igbt_wcu_to_deg_r(val))
 
-            val = self.value_convert(diode_factor_real(), abs(current_lsb_), mul_var)
-            sample.set_value(DataType.PDB | DataFormat.data_real_WCU, val + diode_offset_real())
-
+            val = self.__value_convert(diode_factor_real(), abs(current_lsb_), mul_var) + diode_offset_real()
+            sample.set_value(DataType.PDB | DataFormat.data_real_WCU, val)
+            sample.set_value(DataType.PDB | DataFormat.data_real_deg, diode_wcu_to_deg_r(val))
         else:
-            val = self.value_convert(igbt_factor_real(), abs(current_lsb_), mul_var)
-            sample.set_value(DataType.PIB | DataFormat.data_real_WCU, val + igbt_offset_real())
+            val = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var) + igbt_offset_real()
+            sample.set_value(DataType.PIB | DataFormat.data_real_WCU, val)
+            sample.set_value(DataType.PIB | DataFormat.data_real_deg, igbt_wcu_to_deg_r(val))
 
-            val = self.value_convert(diode_factor_real(), abs(current_lsb_), mul_var_compl)
-            sample.set_value(DataType.PDT | DataFormat.data_real_WCU, val + diode_offset_real())
+            val = self.__value_convert(diode_factor_real(), abs(current_lsb_), mul_var_compl) + diode_offset_real()
+            sample.set_value(DataType.PDT | DataFormat.data_real_WCU, val)
+            sample.set_value(DataType.PDT | DataFormat.data_real_deg, diode_wcu_to_deg_r(val))
 
-    def calc_single(self, fixed_current_, fixed_compare_):
+    def __calc_single(self, fixed_current_, fixed_compare_):
         rpt_sep()
-        rpt_print("Single calculation")
+        # rpt_print("Single calculation")
         mul_var = abs(current_lsb2A_theo(fixed_current_)) * fixed_compare_ / pwm_max_duty
         mul_var_compl = abs(current_lsb2A_theo(fixed_current_)) * (1 - (fixed_compare_ / pwm_max_duty))
 
-        rpt_print("current_A:\t " + str(current_lsb2A_theo(fixed_current_)))
-        rpt_print("mulvar:\t\t " + str(mul_var))
-        rpt_print("mulvar_c:\t " + str(mul_var_compl))
+        # rpt_print("current_A:\t " + str(current_lsb2A_theo(fixed_current_)))
+        # rpt_print("mulvar:\t\t " + str(mul_var))
+        # rpt_print("mulvar_c:\t " + str(mul_var_compl))
 
         sample = PowerSample()
-        self.calc_real(sample, fixed_current_, fixed_compare_)
-        self.calc_theoretical(sample, fixed_current_, fixed_compare_)
+        self.__calc_real(sample, fixed_current_, fixed_compare_)
+        self.__calc_theoretical(sample, fixed_current_, fixed_compare_)
         return sample
 
     def get_current(self):

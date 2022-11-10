@@ -7,18 +7,55 @@ from common import CheckIntOverflow
 ALICONV = "ALICONV"
 ISD2 = "ISDPRO"
 
-PLATFORM = ALICONV
+PLATFORM = ISD2
 
 # fattore di conversione da lsb a mA (CURR_FACTOR/1024)
 CURR_FACTOR_ISDPRO = 12845
 CURR_FACTOR_ALICONV = 1536
 
+Tau_IGBT_R = 0.04  # [s]
+Tau_DIODE_R = 0.04  # [s]
+
 if PLATFORM == ISD2:
     curr_factor = CURR_FACTOR_ISDPRO
     MAX_CURRENT_A = 250
+
+    VCE_IGBT_V = 2.45  # Costante di tensione igbt [V]
+    IGBT_EON_W = 14.10E-3  # Energia on [J]
+    IGBT_EOFF_W = 26.40E-3  # energia off [J]
+
+    V_DIODE_V = 2.42  # Costante di tensione del diodo [V]
+    DIODE_EREC_W = 17E-3  # Energia dissipata dal diodo [W]
+
+    RTH_IGBT_T = 0.14  # [K/W]
+    RTH_DIODE_T = 0.2  # [K/W]
+    # = 14/100 = mul (71)	 sh (9)	 err% (0.9486607142857237)
+    def RTH_IGBT_R(w_):		
+        return divshx((w_) * 71, 9)	 		
+    # = 20/100 = mul (51)	 sh (8)	 err% (0.39062500000000555)
+    def RTH_DIODE_R(w_):		
+        return divshx((w_) * 51, 8)			
+
 else:
     curr_factor = CURR_FACTOR_ALICONV
     MAX_CURRENT_A = 27
+    
+    VCE_IGBT_V = 1.6  # Costante di tensione igbt [V]
+    IGBT_EON_W = 0.65E-3  # Energia on [J]
+    IGBT_EOFF_W = 1.6E-3  # energia off [J]
+
+    V_DIODE_V = 1.5  # Costante di tensione del diodo [V]
+    DIODE_EREC_W = 0.83E-3  # Energia dissipata dal diodo [W]
+
+    RTH_IGBT_T = 0.66 + 0.8  # [K/W]
+    RTH_DIODE_T = 1 + 0.85  # [K/W]
+
+    # = 1,46 = 146/100 mul (93)	 sh (6)	 err% (0.47089041095890166)
+    def RTH_IGBT_R(w_):
+        return divshx((w_) * 93, 6)	 		
+    # = 1,85 = 185/100 mul (59)	 sh (5)	 err% (0.3378378378378426)
+    def RTH_DIODE_R(w_):		
+        return divshx((w_) * 59, 5)			
 
 
 
@@ -28,14 +65,9 @@ SYSTMR_BASE_FREQ_HZ = 10000  # base frequency of the pwm
 
 
 # Costanti energia prese dal datasheet
-IGBT_EON_W = 14.10E-3  # Energia on [W]
-IGBT_EOFF_W = 26.40E-3  # energia off [W]
 IGBT_E_W = (IGBT_EON_W + IGBT_EOFF_W)  # Energia dissipata da IGBT [W]
-DIODE_EREC_W = 17E-3  # Energia dissipata dal diodo [W]
 
 # Costanti di tensione
-VCE_IGBT_V = 2.45  # Costante di tensione igbt [V]
-V_DIODE_V = 2.42  # Costante di tensione del diodo [V]
 
 # Shift usato come moltiplicatore per evitare la perdita di risoluzione
 CU_SHIFT = 16
@@ -56,7 +88,10 @@ pwm_max_duty = CMP_RATE_BASE << FreqShift
 def perc_err(val1_ : float, val2_: float):
     val = val1_ - val2_
     val = abs(val)
-    val = val / val1_
+    if val1_ != 0:
+        val = val / val1_
+    elif val2_ != 0:
+        val = val / val2_
     val = val * 100
     return val
 
@@ -106,12 +141,17 @@ def diode_offset_real():
     return int(DIODE_EREC_W * CUSTOM_FACTOR * SYSTMR_BASE_FREQ_HZ)
     #return 0
 
-def power_real_2_theo(real_):
-    return (real_/shift_freq_factor)/CUSTOM_FACTOR
+
+# Fattori di conversione tra watt e custom_watt
+conv_w2wcu = CUSTOM_FACTOR * shift_freq_factor
+conv_wcu2w = 1 / (CUSTOM_FACTOR * shift_freq_factor) 
+
+def power_wcu_2_w(real_):
+    return real_ * conv_wcu2w
 
 
-def power_theo_2_real(theo_):
-    return (theo_*shift_freq_factor)*CUSTOM_FACTOR
+def power_w_2_wcu(theo_):
+    return theo_ * conv_w2wcu
 
 
 
@@ -134,8 +174,6 @@ def current_A2lsb_theo(A_: float):
 
 
 # foster model
-RTH_IGBT_T = 0.14  # [K/W]
-RTH_DIODE_T = 0.2  # [K/W]
 Tau_IGBT_T = 0.04  # [s]
 Tau_DIODE_T = 0.04  # [s]
 
@@ -144,10 +182,6 @@ F_SAMPLE_HZ = 1E3;  # [HZ] Sampling 1ms
 igbt_lp_ft_t = 1 / (Tau_IGBT_T * (2 * math.pi))  # [Hz]
 diode_lp_ft_t = 1 / (Tau_DIODE_T * (2 * math.pi))  # [Hz]
 
-RTH_IGBT_R = 0.14  # [K/W]
-RTH_DIODE_R = 0.2  # [K/W]
-Tau_IGBT_R = 0.04  # [s]
-Tau_DIODE_R = 0.04  # [s]
 
 
 # dove :
@@ -161,47 +195,30 @@ igbt_lp_fcut_r = 4000  # [mHz]  -> 4HZ -> 0,25 sec
 diode_lp_fcut_r = 4000  # [mHz]	 -> 4Hz -> 0,25 sec
 
 # Frequenza di campionamento deve essere almeno 10 volte quidni 40Hz
+# Dato che la frequenza di campinamento deve essere almeno 1/10 della frequenza di taglio possiamo unare anche 100Hz per la fequenza di campionamento
+# in modo da eseguire il camionamento ogni 10ms il che ci permette di andare sotto main
 f_sample_r = 40  # [Hz] -> Ogni 25ms
 
 
-# Dato che la frequenza di campinamento deve essere almeno 1/10 della frequenza di taglio possiamo unare anche 100Hz per la fequenza di campionamento
-# in modo da eseguire il camionamento ogni 10ms il che ci permette di andare sotto main
 
 def divshx(val_, shift_):
-    return (val_ + (1 << (shift_ - 1))) >> shift_
+    return (int(val_) + (1 << (shift_ - 1))) >> shift_
 
 
-# Conversione da Kelvin a Watt nel caso reale, utilizzando moltiplica e shift
-def RTH_IGBT_K2W_R(k_):
-    return int(divshx(int(k_) * 457, 6))  # < = 100/14 = mul (457)	 sh (6)	 err% (0.03125000000000533)
+def igbt_w_to_deg_t(w_):
+    return RTH_IGBT_T * w_
 
+def diode_w_to_deg_t(w_):
+    return RTH_DIODE_T * w_
 
-def RTH_DIODE_K2W_R(k_):
-    return int(5 * k_)  # = 100/20 [K/W]
+def igbt_wcu_to_deg_r(wcu_):
+    return RTH_IGBT_R(power_wcu_2_w(wcu_))
 
-def celsius_2_kelvin_t(val_):
-    return float(val_ + 273.15)
+def diode_wcu_to_deg_r(wcu_):
+    return RTH_DIODE_R(power_wcu_2_w(wcu_))
 
-
-def kelvin_2_celsius_t(val_):
-    return val_ - 273.15
-
-
-def kelvin_2_kelvincu(val_: int):
-    return float(val_ << (CU_SHIFT + FreqShift))
-
-
-def watt_2_kelvin_t(w_):
-    return RTH_IGBT_T * w_      # K/W * W = K
-
-
-def watt_to_deg_t(w_):
-    kelvin = watt_2_kelvin_t(w_)
-    deg = kelvin_2_celsius_t(kelvin)
 
 EDGE_DEGREE = 50
-edge_kelvin = int(celsius_2_kelvin_t(EDGE_DEGREE))
-edge_kelvin_cu = kelvin_2_kelvincu(int(edge_kelvin))
 
 
 def rpt_print_constants():
@@ -215,8 +232,8 @@ def rpt_print_constants():
     rpt_print_d("igtb_offset_t [W]", igbt_offset_theo())
 
     rpt_print("\nCustom calculation\n")
-    rpt_print_d("igbt_factor_r [V<<CU_SHIFT] ", igbt_factor_real())
-    rpt_print_d("igtb_offset_r [W<<CU_SHIFT]", igbt_offset_real())
+    rpt_print_d("igbt_factor_r [VCU] ", igbt_factor_real())
+    rpt_print_d("igtb_offset_r [WCU]", igbt_offset_real())
 
     # qui ricalcolo il fattore reale ma partendo la teorico ed eseguendo tutte le operazioni senza arrotondamento a INT
     # in questo modo vedo l'errore commesso nel calcolo reale ripetto a quello teorico
@@ -235,8 +252,8 @@ def rpt_print_constants():
     rpt_print_d("diode_offset_t [W]", diode_offset_theo())
 
     rpt_print("\nCustom calculation\n")
-    rpt_print_d("diode_factor_r [V<<CU_SHIFT] ", diode_factor_real())
-    rpt_print_d("diode_offset_r [W<<CU_SHIFT]", diode_offset_real())
+    rpt_print_d("diode_factor_r [VCU] ", diode_factor_real())
+    rpt_print_d("diode_offset_r [WCU]", diode_offset_real())
 
     # qui ricalcolo il fattore reale ma partendo la teorico ed eseguendo tutte le operazioni senza arrotondamento a INT
     # in questo modo vedo l'errore commesso nel calcolo reale ripetto a quello teorico
@@ -263,4 +280,8 @@ def print_start_data():
     rpt_print_d("pwm_frequency_hz", pwm_frequency_hz)
     rpt_print_d("pwm_period_uS", pwm_period_uS)
     rpt_print_d("pwm_period_uS", pwm_period_uS)
+    
+    rpt_print_d("RTH_IGBT_T", RTH_IGBT_T)
+    rpt_print_d("RTH_DIODE_T", RTH_DIODE_T)
+    
     rpt_print_constants()

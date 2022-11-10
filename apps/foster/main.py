@@ -13,21 +13,23 @@ import numpy as np
 
 from foster import PowerData, PowerSample, DataType, DataFormat
 from report import rpt_open, rpt_print, rpt_print_d, rpt_sep
-from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty,current_lsb2A_theo, current_A2lsb_theo
+from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty,current_lsb2A_theo, perc_err
 import csv
 import pandas
 
 def calculate_from_arrays(currents_, compares_):
 
-    pwd = PowerData()
+    pwd = PowerData(False)
     pwd.CalcVectors(currents_, compares_)
 
     plt.subplot(3, 2, 1, title="INPUT")
+    plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_current(), 'm', label="current")
     plt.plot(pwd.samples, pwd.get_compare(), 'b', label="compares")
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 3, title="DATA REAL")
+    plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_real_WCU), 'r', label="pit_r")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_real_WCU), 'g', label="pdb_r")
     #plt.plot(samples, pib_v_r, 'y', label="pib_r")
@@ -35,6 +37,7 @@ def calculate_from_arrays(currents_, compares_):
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 4, title="DATA THEORICAL")
+    plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_theo_W), 'r', label="pit_t")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_theo_W), 'g', label="pdb_t")
     #plt.plot(samples, pib_v_t, 'y', label="pib_t")
@@ -42,6 +45,7 @@ def calculate_from_arrays(currents_, compares_):
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 5, title="COMPARE REAL-THEO")
+    plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_real_WCU), 'r', label="pit_r")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_real_WCU), 'g', label="pdb_r")
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_theo_WCU), 'r', label="pit_t", linestyle='dashed')
@@ -51,13 +55,13 @@ def calculate_from_arrays(currents_, compares_):
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 6, title="ERROR %")
+    plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_error), 'r', label="pit_e")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_error), 'g', label="pdb_e")
     #plt.plot(samples, pib_v_error, 'y', label="pib_e")
     #plt.plot(samples, pdt_v_error, 'b', label="pdt_e")
     plt.legend(title='Legend')
 
-    plt.grid(axis='x', color='0.95')
     plt.show()
 
 
@@ -94,37 +98,75 @@ def calculate_from_tooth():
 def calculate_single(curr_, cmp_):
     rpt_sep()
     rpt_print("SINGLE CALCULATION")
+    rpt_print("for current(" + str(curr_) + ")[lsb] and compare(" + str(cmp_) + "/" + str(
+        pwm_max_duty) + ") the calc values are: ")
     rpt_print("current: " + str(curr_) + "[lsb]")
     rpt_print("current: " + str(current_lsb2A_theo(curr_)) + "[A]")
-    
+
     curr_lsb = curr_
-    power_data = PowerData()
-    sample = power_data.calc_single(curr_lsb,cmp_)
+    power_data = PowerData(False)
+    sample = power_data.CalcSingle(curr_lsb,cmp_)
     if sample:
         rpt_sep()
-        rpt_print("for current(" + str(curr_lsb) + ")[lsb] and compare(" + str(cmp_) + "/" +str(pwm_max_duty) + ") the calc values are: ")
+        rpt_print("DATA IN WATT")
         dtype = DataType.PIT
-        rpt_print("PIT\n\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
+        rpt_print("PIT\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
             "theorical[W](" + str(sample.get_value(dtype | DataFormat.data_theo_W)) + ")\n\t"
             "theorical[WCU](" + str(sample.get_value(dtype | DataFormat.data_theo_WCU)) + ")\n\t"
-            "Error[%](" + str(sample.get_value(dtype | DataFormat.theo_real_error_perc)) + ")\n\n")
-
+            "Error[%](" + str(sample.get_value(dtype | DataFormat.data_error)) + ")\n")
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
         dtype = DataType.PDB
-        rpt_print("PDB\n\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
+        rpt_print("PDB\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
             "Theorical[W](" + str(sample.get_value(dtype | DataFormat.data_theo_W)) + ")\n\t"
             "Theorical[WCU](" + str(sample.get_value(dtype | DataFormat.data_theo_WCU)) + ")\n\t"
-            "Error[%](" + str(sample.get_value(dtype | DataFormat.theo_real_error_perc)) + ")\n")
+            "Error[%](" + str(sample.get_value(dtype | DataFormat.data_error)) + ")\n")
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
 
         dtype = DataType.PIB
-        rpt_print("PIB\n\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
+        rpt_print("PIB\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
             "Theorical[W](" + str(sample.get_value(dtype | DataFormat.data_theo_W)) + ")\n\t"
             "Theorical[WCU](" + str(sample.get_value(dtype | DataFormat.data_theo_WCU)) + ")\n\t"
-            "Error[%](" + str(sample.get_value(dtype | DataFormat.theo_real_error_perc)) + ")\n")
+            "Error[%](" + str(sample.get_value(dtype | DataFormat.data_error)) + ")\n")
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+
         dtype = DataType.PDT
-        rpt_print("PDT\n\t(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
+        rpt_print("PDT\tReal(" + str(sample.get_value(dtype | DataFormat.data_real_WCU)) + ")\n\t"
             "Theorical[W](" + str(sample.get_value(dtype | DataFormat.data_theo_W)) + ")\n\t"
             "Theorical[WCU](" + str(sample.get_value(dtype | DataFormat.data_theo_WCU)) + ")\n\t"
-            "Error[%](" + str(sample.get_value(dtype | DataFormat.theo_real_error_perc)) + ")\n")
+            "Error[%](" + str(sample.get_value(dtype | DataFormat.data_error)) + ")\n")
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+
+        rpt_sep()
+        rpt_print("DATA IN DEGREE")
+        dtype = DataType.PIT
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+        rpt_print("PIT\tReal[°C](" + str(valr) + ")\n\t"
+            "theorical[°C](" + str(valt) + ")\n\t"
+            "Error[%](" + str(perc_err(valr,valt)) + ")\n")
+        dtype = DataType.PDB
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+        rpt_print("PDB\tReal[°C](" + str(valr) + ")\n\t"
+            "theorical[°C](" + str(valt) + ")\n\t"
+            "Error[%](" + str(perc_err(valr,valt)) + ")\n")
+        dtype = DataType.PIB
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+        rpt_print("PIB\tReal[°C](" + str(valr) + ")\n\t"
+            "theorical[°C](" + str(valt) + ")\n\t"
+            "Error[%](" + str(perc_err(valr, valt)) + ")\n")
+        dtype = DataType.PDT
+        valr = sample.get_value(dtype | DataFormat.data_real_deg)
+        valt = sample.get_value(dtype | DataFormat.data_theo_deg)
+        rpt_print("PDT\tReal[°C](" + str(valr) + ")\n\t"
+            "theorical[°C](" + str(valt) + ")\n\t"
+            "Error[%](" + str(perc_err(valr,valt)) + ")\n")
+
     return power_data
     
 
