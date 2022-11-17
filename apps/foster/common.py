@@ -1,5 +1,6 @@
 # Output file for the report
-from report import rpt_print_d, rpt_print, rpt_sep
+
+from mb_common_lib.report import rpt_print_d, rpt_print, rpt_sep
 
 def DivToMulshift(value_):
     shift = 0

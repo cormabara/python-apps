@@ -1,6 +1,6 @@
 # @file File with all conversion factor and conversion functions
 
-from report import rpt_print, rpt_print_d, rpt_sep
+from mb_common_lib.report import rpt_print, rpt_print_d, rpt_sep
 import math
 from common import CheckIntOverflow
 
@@ -270,9 +270,9 @@ def print_start_data():
     rpt_print("\nCURRENT DATA")
     rpt_print_d("lsb2a_factor",lsb2a_factor)
     rpt_print_d("a2lsb_factor",a2lsb_factor)    
-    rpt_print_d("MAX_CURRENT_A",MAX_CURRENT_A)
-    rpt_print_d("MAX_CURRENT_LSB",MAX_CURRENT_LSB)
-    rpt_print_d("MIN_CURRENT_LSB",MIN_CURRENT_LSB)
+    rpt_print_d("MAX_CURRENT [A]",MAX_CURRENT_A)
+    rpt_print_d("MAX_CURRENT [LSB]",MAX_CURRENT_LSB)
+    rpt_print_d("MIN_CURRENT [LSB]",MIN_CURRENT_LSB)
     
     rpt_print_d("FreqShift", FreqShift)
     rpt_print_d("curr_factor",curr_factor)

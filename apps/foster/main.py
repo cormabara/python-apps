@@ -3,16 +3,13 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-import sys
-sys.path.append("../../tools")
-
 import math
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
 from foster import PowerData, PowerSample, DataType, DataFormat
-from report import rpt_open, rpt_print, rpt_print_d, rpt_sep
+from mb_common_lib.report import rpt_open, rpt_print, rpt_print_d, rpt_sep
 from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty,current_lsb2A_theo, perc_err
 import csv
 import pandas

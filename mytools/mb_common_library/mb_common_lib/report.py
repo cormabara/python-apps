@@ -3,10 +3,9 @@
 REPORT_SECTION_SEP = "---------------------------------------------\n"
 
 
-def rpt_open():
+def rpt_open(path_):
     out_file = open("./report.txt", "w")
     out_file.close()
-
 
 
 def rpt_print_d(str_,var_):
@@ -22,6 +21,10 @@ def rpt_print(str_):
     out_file.write(str_+"\n")
     out_file.close()
 
+
 def rpt_sep():
     rpt_print(REPORT_SECTION_SEP)
 
+
+def rpt_close():
+    pass
