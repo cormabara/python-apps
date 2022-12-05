@@ -126,7 +126,7 @@ V_{uv[lsb]} = \\
 $$
 
 > Da notare che eseguendo il calcolo in lsb abbiamo anche una maggiore risoluzione
-    
+
 ## Algoritmo
 Guardando come è messo il software la cosa migliore è avere i campioni sotto interrupt:
 Vd,Id,Vq,Iq sono tutti disponibili sotto irq dovrebbero solo essere salvati in una lista come quella della temperatura

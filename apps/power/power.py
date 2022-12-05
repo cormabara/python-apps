@@ -281,6 +281,16 @@ class PowerSampleS(PowerSample):
         powSva = int(glbl_dice.current.Lsb2A(powSlsb))
         self.DbgPrint("Power S [VA]: " + str(powSva))
         self.outRowReal[OutMDataReal.o_m_powerS_VA] = int(powSva)
+    def _PowS_Lsblsb_to_VA(self)
+        pow_temp = powSlsb
+        pow_temp = pow_temp / 2^14;
+        pow_temp *= glbl_dice.CData.;
+    pow_temp >>= 8;
+    pow_temp = divshx(((pow_temp) * 131), 5); // Pow_lsb * curr_factor / 1000  ->    mul(131)
+    sh(17)
+    err % (0.05493164062500208)
+    return pow_temp;
+    }
 
     def _CalcPowerS_Theo(self,iir_filter_: MyIIRFilter):
         self._CalcTon_S()
@@ -321,13 +331,14 @@ class PowerSampleP(PowerSample):
         '''
         wq_lsblsb = int(self.inRow[InMData.i_m_vqref_LSB] * self.inRow[InMData.i_m_iqfbk_LSB])
         wd_lsblsb = int(self.inRow[InMData.i_m_vdref_LSB] * self.inRow[InMData.i_m_idfbk_LSB])
-        powPlsb = int(wq_lsblsb + wd_lsblsb)
+        powPlsb = wq_lsblsb + wd_lsblsb
+        check_value(powPlsb, self.debugprint)
         self.outRowReal[OutMDataReal.o_m_powerP_lsblsb] = powPlsb
         self.DbgPrint("Power P [lsb]: " + str(powPlsb))
 
     def _CalcPowerP_Real_W(self):
         '''
-        COnversione della potenza da lsb * lsb in watt
+        COnversione della potenza da lsb * lsb in watt, attenzione overflow
         '''
         powPlsb = self.outRowReal[OutMDataReal.o_m_powerP_lsblsb]
         powPw = int(glbl_dice.current.Lsb2A(glbl_dice.voltage.Lsbph_2_Volt(self.inRow[InMData.i_m_vbus_V], powPlsb)))

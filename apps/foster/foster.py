@@ -1,6 +1,6 @@
 # Stima della temperatura con Foster
 
-from report import rpt_print_d, rpt_print, rpt_sep
+from mb_common_lib.report import rpt_print, rpt_print_d, rpt_sep
 from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, current_lsb2A_theo
 from constants import igbt_factor_real, igbt_offset_real,diode_factor_real,diode_offset_real
 from constants import igbt_factor_theo, igbt_offset_theo,diode_factor_theo,diode_offset_theo
@@ -311,7 +311,7 @@ class PowerData:
             rpt_sep()
             rpt_print("theoretical factor and offset estimation")
             bkp = self.debug_print
-            self.debug_print = False
+            self.debug_print = True
             dbg_val = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var)
             dbg_val_compl = self.__value_convert(igbt_factor_real(), abs(current_lsb_), mul_var_compl)
             dbg_offs = igbt_offset_real()
