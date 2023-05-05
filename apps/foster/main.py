@@ -10,9 +10,10 @@ import numpy as np
 
 from foster import PowerData, PowerSample, DataType, DataFormat
 from mb_common_lib.report import rpt_open, rpt_print, rpt_print_d, rpt_sep
-from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty,current_lsb2A_theo, perc_err
+from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty, current_lsb2A_theo, perc_err
 import csv
 import pandas
+
 
 def calculate_from_arrays(currents_, compares_):
 
@@ -29,16 +30,16 @@ def calculate_from_arrays(currents_, compares_):
     plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_real_WCU), 'r', label="pit_r")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_real_WCU), 'g', label="pdb_r")
-    #plt.plot(samples, pib_v_r, 'y', label="pib_r")
-    #plt.plot(samples, pdt_v_r, 'b', label="pdt_r")
+    # plt.plot(samples, pib_v_r, 'y', label="pib_r")
+    # plt.plot(samples, pdt_v_r, 'b', label="pdt_r")
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 4, title="DATA THEORICAL")
     plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_theo_W), 'r', label="pit_t")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_theo_W), 'g', label="pdb_t")
-    #plt.plot(samples, pib_v_t, 'y', label="pib_t")
-    #plt.plot(samples, pdt_v_t, 'b', label="pdt_t")
+    # plt.plot(samples, pib_v_t, 'y', label="pib_t")
+    # plt.plot(samples, pdt_v_t, 'b', label="pdt_t")
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 5, title="COMPARE REAL-THEO")
@@ -47,46 +48,47 @@ def calculate_from_arrays(currents_, compares_):
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_real_WCU), 'g', label="pdb_r")
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_theo_WCU), 'r', label="pit_t", linestyle='dashed')
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_theo_WCU), 'g', label="pdb_t", linestyle='dashed')
-    #plt.plot(samples, pib_v_r, 'y', label="pib_r")
-    #plt.plot(samples, pdt_v_r, 'b', label="pdt_r")
+    # plt.plot(samples, pib_v_r, 'y', label="pib_r")
+    # plt.plot(samples, pdt_v_r, 'b', label="pdt_r")
     plt.legend(title='Legend')
 
     plt.subplot(3, 2, 6, title="ERROR %")
     plt.grid(color='0.95')
     plt.plot(pwd.samples, pwd.get_values(DataType.PIT | DataFormat.data_error), 'r', label="pit_e")
     plt.plot(pwd.samples, pwd.get_values(DataType.PDB | DataFormat.data_error), 'g', label="pdb_e")
-    #plt.plot(samples, pib_v_error, 'y', label="pib_e")
-    #plt.plot(samples, pdt_v_error, 'b', label="pdt_e")
+    # plt.plot(samples, pib_v_error, 'y', label="pib_e")
+    # plt.plot(samples, pdt_v_error, 'b', label="pdt_e")
     plt.legend(title='Legend')
 
     plt.show()
 
 
-
 def calculate_from_csv(filename_):
     rpt_print("\nCALCULATE FROM FILE: " + filename_)
-    current = pandas.read_csv(filename_,usecols =[0],header=12 ).to_numpy()
-    compare = pandas.read_csv(filename_,usecols =[1],header=12 ).to_numpy()
+    current = pandas.read_csv(filename_, usecols=[0], header=12).to_numpy()
+    compare = pandas.read_csv(filename_, usecols=[1], header=12).to_numpy()
     calculate_from_arrays(current, compare)
+
 
 def calculate_from_sin():
     rpt_print("\nCALCULATE FROM ARRAY")
     samples = np.arange(0, 1000, 1)  # Get x values of the sine wave
-    compare_v = ((pwm_max_duty / 2)-1) * np.sin( (samples % 360) * np.pi / 180)
+    compare_v = ((pwm_max_duty / 2)-1) * np.sin((samples % 360) * np.pi / 180)
     compare_v += (pwm_max_duty / 2)
-    #compare_v = [(3*pwm_max_duty / 4) for i in samples]
+    # compare_v = [(3*pwm_max_duty / 4) for i in samples]
 
     samples = np.arange(1000, 2000, 1)  # Get x values of the sine wave
     current_v = (((MAX_CURRENT_LSB - MIN_CURRENT_LSB) / 2)-1) * np.sin((samples % 360) * np.pi / 180)
     current_v += (MAX_CURRENT_LSB + MIN_CURRENT_LSB) / 2
-    #current_v = [(3*MAX_CURRENT_LSB / 4) for i in samples]
+    # current_v = [(3*MAX_CURRENT_LSB / 4) for i in samples]
     calculate_from_arrays(current_v, compare_v)
+
 
 def calculate_from_tooth():
     rpt_print("\nCALCULATE FROM ARRAY")
     samples = np.arange(0, pwm_max_duty, pwm_max_duty/1000)  # Get x values of the sine wave
     compare_v = samples
-    samples = np.arange( MIN_CURRENT_LSB, MAX_CURRENT_LSB, (MAX_CURRENT_LSB-MIN_CURRENT_LSB) / 1000 )  # Get x values of the sine wave
+    samples = np.arange(MIN_CURRENT_LSB, MAX_CURRENT_LSB, (MAX_CURRENT_LSB-MIN_CURRENT_LSB) / 1000)  # Get x values of the sine wave
     current_v = samples
     calculate_from_arrays(current_v, compare_v)
 
@@ -102,7 +104,7 @@ def calculate_single(curr_, cmp_):
 
     curr_lsb = curr_
     power_data = PowerData(False)
-    sample = power_data.CalcSingle(curr_lsb,cmp_)
+    sample = power_data.CalcSingle(curr_lsb, cmp_)
     if sample:
         rpt_sep()
         rpt_print("DATA IN WATT")
@@ -162,7 +164,7 @@ def calculate_single(curr_, cmp_):
         valt = sample.get_value(dtype | DataFormat.data_theo_deg)
         rpt_print("PDT\tReal[°C](" + str(valr) + ")\n\t"
             "theorical[°C](" + str(valt) + ")\n\t"
-            "Error[%](" + str(perc_err(valr,valt)) + ")\n")
+            "Error[%](" + str(perc_err(valr, valt)) + ")\n")
 
     return power_data
     
@@ -176,7 +178,7 @@ if __name__ == '__main__':
     print_start_data()
 
     if len(sys.argv) == 3 and sys.argv[1] and sys.argv[2]:
-        calculate_single(int(sys.argv[1]),int(sys.argv[2]))
+        calculate_single(int(sys.argv[1]), int(sys.argv[2]))
     elif len(sys.argv) == 2 and sys.argv[1]:
         calculate_from_csv(sys.argv[1])
     else:

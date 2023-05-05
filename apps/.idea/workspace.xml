@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../mytools/mb_common_library/mb_common_lib/types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/foster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/foster/.idea/foster.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/foster/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/foster/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/foster/report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/mb_common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/mb_common.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/mb_dice_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/mb_dice_library.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/mb_dice_lib/iir_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/mb_dice_lib/iir_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/tests/test_dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/tests/test_dice.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OJjaLfdxqtHvaO14cTw2xMsGTY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/deimo/lavori/python/python-apps/mytools/mb_dice_library",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python.IIR_Filter_test">
+    <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-sdk-3.9/kivy-venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/IIR_Filter_test.py" />
+      <option name="PARAMETERS" value="200 100 0 8000" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pos_loop.conversions" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-sdk-3.9/kivy-venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pos_loop.conversions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.pos_loop.conversions" />
+      <item itemvalue="Python.IIR_Filter_test" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="" />
+      <created>1681285640582</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681285640582</updated>
+    </task>
+    <servers />
+  </component>
+</project>
