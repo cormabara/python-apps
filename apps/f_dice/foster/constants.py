@@ -201,9 +201,6 @@ f_sample_r = 40  # [Hz] -> Ogni 25ms
 
 
 
-def divshx(val_, shift_):
-    return (int(val_) + (1 << (shift_ - 1))) >> shift_
-
 
 def igbt_w_to_deg_t(w_):
     return RTH_IGBT_T * w_

@@ -5,23 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../mytools/mb_common_library/mb_common_lib/types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foster/.idea/foster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/foster/.idea/foster.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foster/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/foster/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foster/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/foster/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foster/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/foster/report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/mb_common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/mb_common.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_common_library/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/mb_dice_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/mb_dice_library.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/mb_dice_lib/iir_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/mb_dice_lib/iir_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/tests/test_dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/tests/test_dice.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/afe_rectifier.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_const.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_decoupling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/dice.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/dice_tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mytools/mb_common_library/tests/test_bench.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/mb_dice_lib/pid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cooling_hysteresis.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/cooling_hysteresis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/foster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/foster.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/IIR_Filter" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/IIR_Filter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/docs/ISD_foster_model.html" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/docs/ISD_foster_model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/docs/ISD_foster_model.md" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/docs/ISD_foster_model.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/foster.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/foster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/report.csv" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/report.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foster/report.txt.new" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/foster/report.txt.new" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pos_loop.conversions.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/pos_loop.conversions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/scr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/power.iml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/power.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/dice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/iir_filer.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/iir_filer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/power.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/power.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/sys_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/sys_timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/power/utilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tetael_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/tetael_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mytools/mb_common_library/tests/test_report.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +69,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/deimo/lavori/python/python-apps/mytools/mb_dice_library",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/deimo/lavori/python/python-apps/mytools/mb_dice_library&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.IIR_Filter_test">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />

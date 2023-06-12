@@ -1,9 +1,9 @@
 # This is hysteresis simulation
 
 import sys
-sys.path.insert(1, sys.path[5] + '../tools/')
+sys.path.insert(1, sys.path[5] + '../dice_tools.py/')
 
-sys.path.append("../tools")
+sys.path.append("../dice_tools.py")
 
 import numpy as np
 

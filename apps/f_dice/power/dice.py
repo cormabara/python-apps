@@ -1,5 +1,5 @@
 from enum import Enum,IntEnum
-
+from dice.dice_tools
 
 class Platforms(Enum):
     ALICONV = "ALICONV"
@@ -11,9 +11,6 @@ class TimeUnity(float, Enum):
     S_to_nS = 1E9,
     S_to_10nS = 1E8,
 
-
-def divshx(val_, shift_):
-    return (int(val_) + (1 << (shift_ - 1))) >> shift_
 
 
 def CheckIntOverflow(d_, numbits_):

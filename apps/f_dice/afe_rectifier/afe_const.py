@@ -1,0 +1,10 @@
+import math
+
+
+class AfeConst:
+    CURRFACTOR = 12845 # Iu[mA] = (Iu[LSB] * CurrFactor / 1024)
+    MAX_NOMINALCURR_RMS_MA = 80000
+    MAX_PEAKCURR_RMS_MA = 180000
+    MAX_OVERCURR_RMS_MA = 216000
+
+    MAX_PEAKCURR_MA = MAX_PEAKCURR_RMS_MA * math.sqrt(2)
