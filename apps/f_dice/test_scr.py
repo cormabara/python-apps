@@ -1,7 +1,5 @@
-import numpy
-import numpy as np
-from mb_common_lib.report import rpt_open, rpt_print, rpt_close
-from tools import SinForm
+from mb_common_lib.report import rpt_open, rpt_print
+from f_dice.lib.tools import SinForm
 import matplotlib.pyplot as plt
 
 

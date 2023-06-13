@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10b7c850-760a-4873-b4e7-15cd55e0113b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../mb_common_library/mb_common_lib/types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/foster/.idea/foster.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/foster/.idea/foster.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/foster/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/foster/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/foster/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/foster/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/foster/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/foster/report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apps/report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mb_common_library/.idea/mb_common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../mb_common_library/.idea/mb_common.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mb_common_library/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mb_common_library/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mb_common_library/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../mb_common_library/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mb_dice_library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mb_dice_library.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../apps/f_dice/test_pll.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/f_dice/modules/pll.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/f_dice/modules/pll.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mb_dice_lib/iir_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/mb_dice_lib/iir_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_dice.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,14 +27,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/deimo/lavori/python/python-apps/mytools/mb_dice_library/tests/test_dice.py",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/deimo/lavori/python/python-apps/mytools/mb_dice_library/tests/test_dice.py&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="test_dice" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="mb_dice_library" />

@@ -1,3 +1,0 @@
-/home/deimo/lavori/python/python-apps/apps/IIR_Filter_test.py
-cut frequency 	[mHz]: 200
-sample frequency	[Hz] : 100

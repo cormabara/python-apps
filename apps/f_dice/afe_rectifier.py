@@ -1,11 +1,14 @@
 """
 In this module the definition of the DICE RECTIFIER application
 """
+from dataclasses import dataclass
+from mb_dice_lib.pid import DicePid
 
-from tools import SinForm
+from f_dice.modules.scr import ScrBridge
+from f_dice.lib.tools import SinForm
 
 
-class PhasesPll:
+class InPhasesPll:
 
     @dataclass
     class Inputs:
@@ -17,7 +20,6 @@ class PhasesPll:
     class Outputs:
         mainVBus: int
 
-
     def __init__(self):
         self.scr = ScrBridge()
 
@@ -25,6 +27,7 @@ class PhasesPll:
 class VbusPid:
 
     def __init__(self):
+        self.pid = DicePid()
         pass
 
 
@@ -63,6 +66,6 @@ class AfeRectifier:
         vbusPid = VbusPid()
 
     def execute(self):
-        mainVBus = scrBridge
+        pass
 
 
