@@ -21,20 +21,53 @@ import math
 import sys
 from array import array
 
+import math
 from matplotlib import pyplot as plt
 from enum import Enum, IntEnum
 import numpy as np
 import queue
 
-from iir_filer import MyIIRFilter
 from dice import ThDice, Platforms, TimeUnity, CheckIntOverflow
 from mb_common_lib.report import rpt_print, rpt_sep, rpt_print_d
-from sys_timer import SysTimer
-from utilities import perc_err
 
+from f_dice.lib.my_timers import SysTimer
+from f_dice.lib.tools import perc_err, divshx
 
 FreqShift = 1  # shift of the base frequency da 100uS a 200uS shift = 1
 glbl_dice = ThDice(Platforms.ALICONV, FreqShift)
+
+
+class MyIIRFilter:
+    _Fsample_Hz: float  # Cut frequency of the filter in Hz
+    _Fcut_Hz: float  # Sample frequency in Hz
+    _accumulator: float  # Accumulator for the filter
+
+    _Wt: float  # Time constant of the filter
+
+    def __init__(self, freq_sample_Hz_: float, freq_cut_Hz_: float):
+        ''' Constructor of the filter with sample frequency and cut frequeny
+        If cut frequency is 0 the filter is disabled '''
+        self._Fsample_Hz = freq_sample_Hz_
+        self._Fcut_Hz = freq_cut_Hz_
+        self._Wt = (self._Fcut_Hz * 2 * math.pi * (pow(2, 16))) / self._Fsample_Hz
+        self._accumulator = 0
+
+    # Reset the accumulator of the filter
+    def Reset(self):
+        self._accumulator = 0
+
+    # Add a sample to filter and return the filtered value
+    def Sample(self, sample_):
+        if self._Fcut_Hz != 0:
+            err = sample_ - self._accumulator / pow(2, 16)
+            self._accumulator = self._accumulator + (err * self._Wt)
+            return self._accumulator / pow(2, 16)
+        else:
+            return sample_
+
+    # Get the value of the filter
+    def GetVal(self):
+        val = self._accumulator / pow(2, 16)
 
 
 # This function take a fload, evaluate the rounding error to int, check the overflow and return
@@ -281,16 +314,15 @@ class PowerSampleS(PowerSample):
         powSva = int(glbl_dice.current.Lsb2A(powSlsb))
         self.DbgPrint("Power S [VA]: " + str(powSva))
         self.outRowReal[OutMDataReal.o_m_powerS_VA] = int(powSva)
-    def _PowS_Lsblsb_to_VA(self)
-        pow_temp = powSlsb
-        pow_temp = pow_temp / 2^14;
-        pow_temp *= glbl_dice.CData.;
-    pow_temp >>= 8;
-    pow_temp = divshx(((pow_temp) * 131), 5); // Pow_lsb * curr_factor / 1000  ->    mul(131)
-    sh(17)
-    err % (0.05493164062500208)
-    return pow_temp;
-    }
+
+    def _PowS_Lsblsb_to_VA(self, powIn_):
+        pow_temp = powIn_
+        pow_temp = pow_temp / 2^14
+        # pow_temp *= glbl_dice.CData.
+        pow_temp >>= 8;
+        # Pow_lsb * curr_factor / 1000  ->    mul(131)  sh(17)   err % (0.05493164062500208)
+        pow_temp = divshx((pow_temp * 131), 5);
+        return pow_temp
 
     def _CalcPowerS_Theo(self,iir_filter_: MyIIRFilter):
         self._CalcTon_S()

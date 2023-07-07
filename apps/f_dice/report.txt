@@ -1,0 +1,4 @@
+Zerocross simulation
+zerocross_uv: 210.0
+zerocross_vw: 90.0
+zerocross_wu: 330.0

@@ -1,14 +1,15 @@
 # Stima della temperatura con Foster
 
-from mb_common_lib.report import rpt_print, rpt_print_d, rpt_sep
-from constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, current_lsb2A_theo
-from constants import igbt_factor_real, igbt_offset_real,diode_factor_real,diode_offset_real
-from constants import igbt_factor_theo, igbt_offset_theo,diode_factor_theo,diode_offset_theo
-from constants import pwm_max_duty, curr_factor,perc_err
-from constants import power_w_2_wcu, lsb2a_factor
-from constants import igbt_wcu_to_deg_r,diode_wcu_to_deg_r,igbt_w_to_deg_t,diode_w_to_deg_t
-from common import CheckIntOverflow
 import sys
+
+from mb_common_lib.report import rpt_print, rpt_sep
+
+from f_dice.modules.foster.constants import perc_err, power_w_2_wcu, current_lsb2A_theo, igbt_factor_theo, \
+    igbt_offset_theo, igbt_w_to_deg_t, diode_factor_theo, diode_offset_theo, diode_w_to_deg_t, pwm_max_duty, \
+    igbt_factor_real, diode_factor_real, curr_factor, diode_wcu_to_deg_r, igbt_wcu_to_deg_r, diode_offset_real, \
+    igbt_offset_real
+from f_dice.modules.power.dice import CheckIntOverflow
+
 
 class DataFormat(int):
     data_theo_W = 0x0100
@@ -272,27 +273,27 @@ class PowerData:
 
     	where:
 	    PwmMaxDuty = CMP_RATE_BASE * shift_freq_factor
-	    pwm_frequency_hz = SYSTMR_BASE_FREQ_HZ / shift_freq_factor
+	    pwm_frequency_hz = PWM_BASE_FREQ_HZ / shift_freq_factor
 	    Curr[A] = (current_lsb * CURR_FACTOR) / (1024 * 1000)
 
         if Power = Power1 + Power2
 
         Power1 = (VCE_IGBT_V * ((current_lsb * CURR_FACTOR) / (1024 * 1000)) * compare_ * CUSTOM_FACTOR)/ (CMP_RATE_BASE * shift_freq_factor)
-        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
+        Power2 = (IGBT_E_W * PWM_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
 
         Power1 = (VCE_IGBT_V * current_lsb * CURR_FACTOR * compare_ * CUSTOM_FACTOR) / ( 1024 * 1000 * CMP_RATE_BASE * shift_freq_factor )
-        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ) / shift_freq_factor
+        Power2 = (IGBT_E_W * PWM_BASE_FREQ_HZ) / shift_freq_factor
 
 	    Vars = compare_ * current_lsb
 
         Power1 = Vars * (VCE_IGBT_V * CURR_FACTOR * CUSTOM_FACTOR ) / ( 1024 * 1000 * CMP_RATE_BASE * shift_freq_factor )
-        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
+        Power2 = (IGBT_E_W * PWM_BASE_FREQ_HZ * CUSTOM_FACTOR) / shift_freq_factor
 
         Power1 = Vars * ( (VCE_IGBT_V * CURR_FACTOR * CUSTOM_FACTOR) / ( 1024 * 1000 * CMP_RATE_BASE ) ) / shift_freq_factor
-        Power2 = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ  * CUSTOM_FACTOR) / shift_freq_factor
+        Power2 = (IGBT_E_W * PWM_BASE_FREQ_HZ  * CUSTOM_FACTOR) / shift_freq_factor
 
         but igbt_factor_real = (VCE_IGBT_V * CUSTOM_FACTOR) / CMP_RATE_BASE
-            igbt_offset_real = (IGBT_E_W * SYSTMR_BASE_FREQ_HZ  * CUSTOM_FACTOR)
+            igbt_offset_real = (IGBT_E_W * PWM_BASE_FREQ_HZ  * CUSTOM_FACTOR)
 
         Power1 = Vars * ( (igbt_factor_real * CURR_FACTOR) / ( 1024 * 1000) ) / shift_freq_factor )
         Power2 = igbt_offset_real / shift_freq_factor
@@ -305,7 +306,7 @@ class PowerData:
         dove real_2_theo(real): theo = (real/shift_freq_factor)/CUSTOM_FACTOR  """
         # rpt_print("REAL CALCULATION: current(" + str(current_lsb_) + ") - compare(" + str(compare_) + ")")
         mul_var = compare_
-        mul_var_compl =  pwm_max_duty - compare_
+        mul_var_compl = pwm_max_duty - compare_
 
         if self.debug_print:
             rpt_sep()

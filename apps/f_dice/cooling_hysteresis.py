@@ -1,14 +1,10 @@
 # This is hysteresis simulation
 
 import sys
-sys.path.insert(1, sys.path[5] + '../dice_tools.py/')
-
-sys.path.append("../dice_tools.py")
-
 import numpy as np
 
 import matplotlib.pyplot as plot
-from  report import rpt_open, rpt_print_d, rpt_print
+from  mb_common_lib.report import rpt_open, rpt_print_d, rpt_print
 
 if len(sys.argv) < 3:
 	print("Cooling Hysteresis needs 3 parameters:"

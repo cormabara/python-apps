@@ -2,7 +2,7 @@
 
 from mb_common_lib.report import rpt_print, rpt_print_d, rpt_sep
 import math
-from common import CheckIntOverflow
+from f_dice.lib.tools import divshx
 
 ALICONV = "ALICONV"
 ISD2 = "ISDPRO"
@@ -52,17 +52,16 @@ else:
 
     # = 1,46 = 146/100 mul (93)	 sh (6)	 err% (0.47089041095890166)
     def RTH_IGBT_R(w_):
-        return divshx((w_) * 93, 6)	 		
+        return divshx((w_) * 93, 6)
+
     # = 1,85 = 185/100 mul (59)	 sh (5)	 err% (0.3378378378378426)
     def RTH_DIODE_R(w_):		
         return divshx((w_) * 59, 5)			
 
 
-
 # Dati di partenza dell'algoritmo descritto da Nick
 ALT_CPU_FREQ  = 100000000
-SYSTMR_BASE_FREQ_HZ = 10000  # base frequency of the pwm
-
+PWM_BASE_FREQ_HZ = 20000 # base frequency of the PWM
 
 # Costanti energia prese dal datasheet
 IGBT_E_W = (IGBT_EON_W + IGBT_EOFF_W)  # Energia dissipata da IGBT [W]
@@ -77,8 +76,8 @@ FreqShift = 1  # shift of the base frequency da 100uS a 200uS shift = 1
 shift_freq_factor = (1 << FreqShift)
 CUSTOM_FACTOR = 1 << CU_SHIFT
 
-CMP_RATE_BASE = int( (ALT_CPU_FREQ/SYSTMR_BASE_FREQ_HZ)/2)  # reference value for the compare
-pwm_frequency_hz = int(ALT_CPU_FREQ/SYSTMR_BASE_FREQ_HZ) >> FreqShift      # [hz]
+CMP_RATE_BASE = int( (ALT_CPU_FREQ/PWM_BASE_FREQ_HZ)/2)  # reference value for the compare
+pwm_frequency_hz = int(ALT_CPU_FREQ/PWM_BASE_FREQ_HZ) >> FreqShift      # [hz]
 pwm_period_uS = (1/pwm_frequency_hz)*(1E6)                                  # periodo del pwm in uS
 pwm_max_duty = CMP_RATE_BASE << FreqShift
 
@@ -119,8 +118,7 @@ def igbt_offset_theo():
 
 # Offset calculation [W << CUST_SHIFT]
 def igbt_offset_real():
-    return int((IGBT_EON_W + IGBT_EOFF_W) * CUSTOM_FACTOR * SYSTMR_BASE_FREQ_HZ)
-    # return 0
+    return int((IGBT_EON_W + IGBT_EOFF_W) * CUSTOM_FACTOR * PWM_BASE_FREQ_HZ)
 
 
 def diode_factor_theo():
@@ -138,7 +136,7 @@ def diode_offset_theo():
 
 # Offset calculation [W << CUST_SHIFT]
 def diode_offset_real():
-    return int(DIODE_EREC_W * CUSTOM_FACTOR * SYSTMR_BASE_FREQ_HZ)
+    return int(DIODE_EREC_W * CUSTOM_FACTOR * PWM_BASE_FREQ_HZ)
     #return 0
 
 

@@ -15,7 +15,7 @@ def MyPlot(r_, c_, i_, title_, x_, s1_, s2_, s3_):
     plt.legend(title='Legend')
 
 
-rpt_open("./debug.txt")
+rpt_open("./output/debug.txt")
 rpt_print("Zerocross simulation")
 sinOutput1 = SinForm(0, 720)
 sinOutput2 = SinForm(120, 720)

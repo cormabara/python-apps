@@ -1,5 +1,4 @@
 from enum import Enum,IntEnum
-from dice.dice_tools
 
 class Platforms(Enum):
     ALICONV = "ALICONV"
@@ -23,8 +22,8 @@ def CheckIntOverflow(d_, numbits_):
 
 class DConst:
     ALT_CPU_FREQ = 100000000
-    SYSTMR_BASE_FREQ_HZ = 10000  # base frequency of the pwm
-    CMP_RATE_BASE = int((ALT_CPU_FREQ / SYSTMR_BASE_FREQ_HZ) / 2)  # reference value for the compare
+    PWM_BASE_FREQ_HZ = 20000  # base frequency of the pwm
+    CMP_RATE_BASE = int((ALT_CPU_FREQ / PWM_BASE_FREQ_HZ) / 2)  # reference value for the compare
 
     ALICONV_CURR_FACTOR = 1536
     ISDPRO_CURR_FACTOR  = 12845
@@ -59,7 +58,7 @@ class Dice:
         self.platform = platform_
         self.const_data = DConst()
         self.freq_shift = freq_shift_
-        self.pwm_frequency_hz = int(self.const_data.ALT_CPU_FREQ / self.const_data.SYSTMR_BASE_FREQ_HZ) >> self.freq_shift  # [hz]
+        self.pwm_frequency_hz = int(self.const_data.ALT_CPU_FREQ / self.const_data.PWM_BASE_FREQ_HZ) >> self.freq_shift  # [hz]
         self.pwm_period_S = (1 / self.pwm_frequency_hz)  # periodo del pwm in uS
         self.pwm_max_duty = self.const_data.CMP_RATE_BASE << self.freq_shift
         self.PWM_DEAD_TIME_S = self.const_data.ALICONV_PWM_DEAD_TIME_S if self.platform == Platforms.ALICONV \

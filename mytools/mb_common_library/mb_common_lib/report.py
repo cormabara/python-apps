@@ -3,7 +3,8 @@
 REPORT_SECTION_SEP = "---------------------------------------------\n"
 
 
-def rpt_open(path_):
+def rpt_open(path_ = ""):
+
     out_file = open("./report.txt", "w")
     out_file.close()
 

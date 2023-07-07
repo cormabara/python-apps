@@ -1,5 +1,5 @@
 import math
-from f_dice.dice_tools import divshx, voltage_V2DriveIu
+from f_dice.lib.tools import divshx
 from f_dice.lib.tools import CheckIntOverflow
 import matplotlib.pyplot as plt
 
