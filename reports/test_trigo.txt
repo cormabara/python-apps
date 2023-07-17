@@ -1,0 +1,2 @@
+This is the report file: 
+CALCULATE FROM FILE: /home/deimo/lavori/dice/temp/osc_acquisition.osc.csv

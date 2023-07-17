@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10b7c850-760a-4873-b4e7-15cd55e0113b" name="Changes" comment="" />
+    <list default="true" id="10b7c850-760a-4873-b4e7-15cd55e0113b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../apps/f_dice/test_trigo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/f_dice/modules/pll_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apps/f_dice/test_pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apps/f_dice/test_pll_2.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

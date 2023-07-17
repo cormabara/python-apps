@@ -78,13 +78,16 @@ class Pll_2:
         self.step = 2 * math.pi * frequency_ / self.sample_frequency_hz
         self.amplitude_in = amplitude_
         self.frequency_in = frequency_
+        self.omega_in_rad = (self.frequency_in * 2 * math.pi)
+        print(str(self.frequency_in))
+        print(str(self.omega_in_rad))
+
 
     def _loopCreateInputs(self, theta_rad_):
         """This function prepare all inputs for the PLL calculation"""
         self.theta_in_rad = theta_rad_
         self.theta_in_trigo = (theta_rad_ * self.REAL_THETA_FACTOR) % self.REAL_THETA_MUL
         self.omega_in_rad = (self.frequency_in * 2 * math.pi)
-
         self.in_sinU = self.amplitude_in * math.sin(theta_rad_)
         cosU = self.amplitude_in * math.cos(theta_rad_)
         cosV = self.amplitude_in * math.cos(theta_rad_ - ((2 * math.pi) / 3))
@@ -141,14 +144,14 @@ class Pll_2:
         tmp_omega = self.effort + (self.OMEGA_REF_HZ * (2 ** self.NEWSHIFT))
 
         tmp_teta = self.my_integrator.outputPI(tmp_omega)
-        self.teta_out_1024 = ((tmp_teta * self.REAL_THETA_FACTOR) / (2 ** self.NEWSHIFT)) % self.REAL_THETA_MUL
-        self.prev_theta_out = self.teta_out_1024
+        self.theta_out_1024 = ((tmp_teta * self.REAL_THETA_FACTOR) / (2 ** self.NEWSHIFT)) % self.REAL_THETA_MUL
+        self.prev_theta_out = self.theta_out_1024
 
         self.omega_out = tmp_omega / (2 ** self.NEWSHIFT)
 
         self.real_teta_out = tmp_teta
         self.real_omega_out = tmp_omega
-        self.theta_out_rad = (self.teta_out_1024 / self.REAL_THETA_FACTOR) % (2 * math.pi)
+        self.theta_out_rad = (self.theta_out_1024 / self.REAL_THETA_FACTOR) % (2 * math.pi)
         self.out_sinU = (self.Ed / (2**self.NEWSHIFT)) * math.sin(self.theta_out_rad)
 
     def Calculate(self, real_, theta_in_):
