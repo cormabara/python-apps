@@ -11,14 +11,6 @@ def errorOnOverflow32(d_):
 	return False
 
 
-def MyPlot(r_, c_, i_, title_, x_, y_):
-	ptmp = plt.subplot(r_, c_, i_)
-	plt.title = title_
-	plt.grid(color='0.95')
-	plt.plot(x_, y_, 'm', label=title_)
-	ptmp.set_xlabel("x")
-	ptmp.set_ylabel("y")
-	plt.legend(title=title_)
 
 
 VBUS_FBK_V = 600

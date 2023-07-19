@@ -11,15 +11,6 @@ class TimeUnity(float, Enum):
     S_to_10nS = 1E8,
 
 
-
-def CheckIntOverflow(d_, numbits_):
-    if abs(d_) > ((2 ** (numbits_-1)) - 1):
-        # rpt_print("int32 overflow: " + str(d_))
-        return True
-    else:
-        return False
-
-
 class DConst:
     ALT_CPU_FREQ = 100000000
     PWM_BASE_FREQ_HZ = 20000  # base frequency of the pwm

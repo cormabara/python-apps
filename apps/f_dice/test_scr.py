@@ -1,18 +1,6 @@
 from mb_common_lib.report import rpt_open, rpt_print
-from f_dice.lib.tools import SinForm
+from f_dice.lib.tools import SinForm, MyPlot
 import matplotlib.pyplot as plt
-
-
-def MyPlot(r_, c_, i_, title_, x_, s1_, s2_, s3_):
-    ptmp = plt.subplot(r_, c_, i_)
-    plt.title = title_
-    plt.grid(color='0.95')
-    plt.plot(x_, s1_, 'm', label="output1")
-    plt.plot(x_, s2_, 'y', label="output2")
-    plt.plot(x_, s3_, 'g', label="output3")
-    ptmp.set_xlabel("angle")
-    ptmp.set_ylabel("values")
-    plt.legend(title='Legend')
 
 
 rpt_open("./output/debug.txt")

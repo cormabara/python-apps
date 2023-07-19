@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/f_dice/test_trigo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_decoupling.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_decoupling.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/power/dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/power/dice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/power/power.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/power/power.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/f_dice/test_pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_pll_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mytools/mb_dice_library/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_scr.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_scr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_trigo.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_trigo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/test_trigo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/test_trigo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +51,7 @@
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_trigo">
+  <component name="RunManager" selected="Python.test_pll_2">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -174,7 +178,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_pll_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test_pll_2" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -187,7 +191,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_pll_2.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="loop" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -237,7 +241,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_trigo" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="test_trigo file old" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -250,7 +254,70 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
-      <option name="PARAMETERS" value="$PROJECT_DIR$/../../../dice/temp/osc_acquisition.osc.csv" />
+      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-old.osc.csv" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_trigo file" type="PythonConfigurationType" factoryName="Python">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-sdk-3.9/kivy-venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
+      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-new.osc.csv" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_trigo run" type="PythonConfigurationType" factoryName="Python">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-sdk-3.9/kivy-venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
+      <option name="PARAMETERS" value="run" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_trigo simple" type="PythonConfigurationType" factoryName="Python">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-sdk-3.9/kivy-venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
+      <option name="PARAMETERS" value="simple" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -275,19 +342,21 @@
     <list>
       <item itemvalue="Python.pos_loop.conversions" />
       <item itemvalue="Python.IIR_Filter_test" />
-      <item itemvalue="Python.test_trigo" />
+      <item itemvalue="Python.test_trigo file" />
+      <item itemvalue="Python.test_trigo file old" />
+      <item itemvalue="Python.test_trigo simple" />
+      <item itemvalue="Python.test_trigo run" />
       <item itemvalue="Python.test_scr" />
       <item itemvalue="Python.test_foster" />
       <item itemvalue="Python.test_power" />
       <item itemvalue="Python.test plot" />
+      <item itemvalue="Python.test_pll_2" />
       <item itemvalue="Python.pll_2" />
       <item itemvalue="Python.my_trigo" />
-      <item itemvalue="Python.test_pll_2" />
       <item itemvalue="Python tests.Python tests in test_trigo.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_pll_2" />
         <item itemvalue="Python tests.Python tests in test_trigo.py" />
         <item itemvalue="Python.my_trigo" />
         <item itemvalue="Python.pll_2" />
@@ -318,6 +387,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/f_dice/test_pll_2.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

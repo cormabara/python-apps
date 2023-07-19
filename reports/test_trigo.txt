@@ -1,2 +1,2 @@
 This is the report file: 
-CALCULATE FROM FILE: /home/deimo/lavori/dice/temp/osc_acquisition.osc.csv
+CALCULATE FROM FILE: /home/deimo/lavori/python/python-apps/inputs/sin-cos-old.osc.csv

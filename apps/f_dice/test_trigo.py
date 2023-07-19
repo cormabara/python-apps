@@ -124,6 +124,11 @@ def sinCosTest(deep_, amplitude_):
     report.rpt_sep()
 
     report.rpt_sep()
+    report.rpt_print("## Trigo Sin table")
+    report.rpt_print("Sin len: " + str(len(TabSin)))
+    report.rpt_print("Sin : " + str(TabSin))
+
+    report.rpt_sep()
     report.rpt_print("## Sin table")
     report.rpt_print("Sin len: " + str(len(sin_table)))
     report.rpt_print("Sin : " + str(sin_table))
@@ -150,8 +155,8 @@ def sinCosTest(deep_, amplitude_):
     report.rpt_print("Cos error : " + str(cos_error))
     report.rpt_print("Cos error % : " + str(cos_error_perc))
 
-    MyPlot(1, 1, 1, "Sin Error", in_s, sin_error_perc, cos_error_perc)
-    plt.show()
+    plot = MyPlot(1, 1, 1, "Sin Error", in_s, sin_error_perc, cos_error_perc)
+    plot.show()
 
 
 def fromCsv(filename_):
@@ -202,17 +207,21 @@ def sinCosTestCsv(filename_: string):
     error_th_tab = mymatrix[Columns.THEO_SIN] - mymatrix[Columns.TAB_SIN]
     error_tab_osc = mymatrix[Columns.THEO_SIN] - mymatrix[Columns.OSC_SIN]
 
-    graphrange = 1024
+    graphrange = 4096
 
-    plot = MyPlot(2, 1, 1, "sin", index_v[0:graphrange], mymatrix[Columns.OSC_SIN][0:graphrange], mymatrix[Columns.THEO_SIN][0:graphrange],
+    plot = MyPlot(3, 1, 1, "sin", index_v[0:graphrange], mymatrix[Columns.OSC_SIN][0:graphrange], mymatrix[Columns.THEO_SIN][0:graphrange],
                   mymatrix[Columns.TAB_SIN][0:graphrange])
-    MyPlot(2, 1, 2, "error", index_v[0:graphrange], error_th_osc[0:graphrange])
+    MyPlot(3, 1, 2, "error", index_v[0:graphrange], error_th_osc[0:graphrange])
+
+    MyPlot(3, 1, 3, "error", index_v[0:graphrange], mymatrix[Columns.OSC_SIN][0:graphrange], mymatrix[Columns.THEO_SIN][0:graphrange], error_th_osc[0:graphrange])
+
     plot.show()
 
 
-if len(sys.argv) == 2 and sys.argv[1]:
-    sinCosTestCsv(sys.argv[1])
-else:
-    sinCosTest(SIMTABDIM, 2 ** TRIGO_SHIFT)
-
-# runTest()
+if len(sys.argv) >= 2:
+    if sys.argv[1] == "file":
+        sinCosTestCsv(sys.argv[2])
+    elif sys.argv[1] == "simple":
+        sinCosTest(SIMTABDIM, 2 ** TRIGO_SHIFT)
+    else:
+        runTest()
