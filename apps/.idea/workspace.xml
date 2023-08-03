@@ -6,14 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_decoupling.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/afe_rectifier/afe_decoupling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/power/dice.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/power/dice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/power/power.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/power/power.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/test_pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_pll_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/test_scr.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_scr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/test_trigo.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_trigo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reports/test_trigo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/test_trigo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +43,7 @@
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_pll_2">
+  <component name="RunManager" selected="Python.test_trigo file_new">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -254,7 +246,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
-      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-old.osc.csv" />
+      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-old-carate.osc.csv" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -262,7 +254,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_trigo file" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="test_trigo file_new" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -275,7 +267,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_trigo.py" />
-      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-new.osc.csv" />
+      <option name="PARAMETERS" value="file $PROJECT_DIR$/../inputs/sin-cos-new-carate.osc.csv" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -342,7 +334,7 @@
     <list>
       <item itemvalue="Python.pos_loop.conversions" />
       <item itemvalue="Python.IIR_Filter_test" />
-      <item itemvalue="Python.test_trigo file" />
+      <item itemvalue="Python.test_trigo file_new" />
       <item itemvalue="Python.test_trigo file old" />
       <item itemvalue="Python.test_trigo simple" />
       <item itemvalue="Python.test_trigo run" />
@@ -392,6 +384,11 @@
           <url>file://$PROJECT_DIR$/f_dice/test_pll_2.py</url>
           <line>174</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/f_dice/test_trigo.py</url>
+          <line>209</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
