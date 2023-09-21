@@ -56,10 +56,10 @@ class PhasesPll:
         # Calculation of the PI input
         self.zz = self.error * math.cos(self.last_out_phi)
         # output of the PI
-        self.delta_omega = self.freqPi.outputPI(self.zz)
+        self.delta_omega = self.freqPi.output(self.zz)
         self.omega = self.delta_omega + self.ref_omega
         # Integration to obtain the angle
-        self.out_phi = self.freqInt.outputPI(self.omega) % (2 * math.pi)
+        self.out_phi = self.freqInt.output(self.omega) % (2 * math.pi)
         self.last_out_phi = self.out_phi
         self.output = math.sin(self.last_out_phi)
 

@@ -2,7 +2,7 @@
 In this module the definition of the DICE RECTIFIER application
 """
 from dataclasses import dataclass
-from mb_dice_lib.pid import DicePid
+from f_dice.lib.my_pid import MyPid
 
 from f_dice.modules.scr import ScrBridge
 from f_dice.lib.tools import SinForm
@@ -27,7 +27,7 @@ class InPhasesPll:
 class VbusPid:
 
     def __init__(self):
-        self.pid = DicePid()
+        self.pid = MyPid()
         pass
 
 

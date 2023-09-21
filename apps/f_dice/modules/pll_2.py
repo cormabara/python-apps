@@ -198,7 +198,7 @@ class Pll_2:
 
         tmp_omega = self.effort + (self.OMEGA_REF_HZ * (2 ** self.NEW_SHIFT))
 
-        tmp_teta = self.my_integrator.outputPI(tmp_omega)
+        tmp_teta = self.my_integrator.output(tmp_omega)
         self.theta_out_custom = ((tmp_teta * self.THETA_RAD_TO_CUSTOM) / (
                     2 ** self.NEW_SHIFT)) % self.THETA_CUSTOM_RANGE
         self.prev_theta_out = self.theta_out_custom
@@ -248,7 +248,7 @@ class Pll_2:
 
         self._loop_PidParsCalculation(real_)
 
-        self.effort = self.my_pi.outputPI(self.Eq)
+        self.effort = self.my_pi.output(self.Eq)
 
         self._loop_CalculateOutputs()
 

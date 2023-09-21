@@ -4,8 +4,8 @@ import sys
 import keyboard
 import msvcrt
 import matplotlib.pyplot as plt
-from mb_common_lib.report import rpt_open,rpt_print,rpt_close
-from mb_dice_lib.pid import DicePid
+from f_dice.lib.report import rpt_open,rpt_print,rpt_close
+from f_dice.lib.my_pid import MyPid
 
 SAMPLES = 40
 
@@ -36,7 +36,7 @@ rpt_print(sys.argv[0])
 vref = input("Insert reference")
 vfbk = 0
 
-pid = DicePid()
+pid = MyPid()
 pid.setProportional(1, 0)
 pid.setIntegral(1, 0)
 pid.antiwindup_max = 100
@@ -61,7 +61,7 @@ cmdexit = False
 
 while not cmdexit:
     guiInput()
-    output[index] = pid.outputPI(vref-vfbk)
+    output[index] = pid.output(vref - vfbk)
     if index == SAMPLES:
         shift = 1;
         for shift in SAMPLES-1:

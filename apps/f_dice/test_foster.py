@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from modules.foster.foster import PowerData, PowerSample, DataType, DataFormat
-from mb_common_lib.report import rpt_open, rpt_print, rpt_print_d, rpt_sep
+from f_dice.lib.report import rpt_open, rpt_print, rpt_print_d, rpt_sep
 from modules.foster.constants import MAX_CURRENT_LSB, MIN_CURRENT_LSB, print_start_data, pwm_max_duty, current_lsb2A_theo, perc_err
 import csv
 import pandas
@@ -171,7 +171,7 @@ def calculate_single(curr_, cmp_):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    rpt_open("../output/rpt_test_foster.txt")
+    rpt_open("../../reports")
 
     # iter_current_error()
 

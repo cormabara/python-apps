@@ -1,6 +1,6 @@
 # @file File with all conversion factor and conversion functions
 
-from mb_common_lib.report import rpt_print, rpt_print_d, rpt_sep
+from f_dice.lib.report import rpt_print, rpt_print_d, rpt_sep
 import math
 from f_dice.lib.tools import divshx
 

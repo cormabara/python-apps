@@ -2,13 +2,13 @@
 
 import sys
 
-from mb_common_lib.report import rpt_print, rpt_sep
+from f_dice.lib.report import rpt_print, rpt_sep
 
 from f_dice.modules.foster.constants import perc_err, power_w_2_wcu, current_lsb2A_theo, igbt_factor_theo, \
     igbt_offset_theo, igbt_w_to_deg_t, diode_factor_theo, diode_offset_theo, diode_w_to_deg_t, pwm_max_duty, \
     igbt_factor_real, diode_factor_real, curr_factor, diode_wcu_to_deg_r, igbt_wcu_to_deg_r, diode_offset_real, \
     igbt_offset_real
-from f_dice.modules.power.dice import CheckIntOverflow
+from f_dice.lib.tools import CheckIntOverflow
 
 
 class DataFormat(int):

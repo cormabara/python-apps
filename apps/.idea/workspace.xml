@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/div_error_onshift.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/modules/pll_encoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f_dice/test_pll_encoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/afe_rectifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/afe_rectifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/div_2_mulshift.py" beforeDir="false" afterPath="$PROJECT_DIR$/div_2_mulshift.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/common.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/foster/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/foster.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/foster/foster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/pid_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/pid_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_foster.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_foster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_scr.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_scr.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +52,13 @@
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/f_dice" />
       <recent name="$PROJECT_DIR$/f_dice/modules" />
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_trigo file_new">
+  <component name="RunManager" selected="Python tests.test_pll_encoder">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,6 +80,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="div_error_onshift" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/div_error_onshift.py" />
+      <option name="PARAMETERS" value="1024 1 256 5000" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="my_trigo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,27 +114,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/lib/my_trigo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pll_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="apps" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice/modules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/modules/pll_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,7 +198,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_pll_2.py" />
-      <option name="PARAMETERS" value="loop" />
+      <option name="PARAMETERS" value="run" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -317,6 +332,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests in test_foster.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/f_dice/test_foster.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests in test_trigo.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="apps" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -331,27 +360,45 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="test_pll_encoder" type="tests" factoryName="Autodetect" temporary="true">
+      <module name="apps" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/f_dice/test_pll_encoder.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.pos_loop.conversions" />
       <item itemvalue="Python.IIR_Filter_test" />
-      <item itemvalue="Python.test_trigo file_new" />
-      <item itemvalue="Python.test_trigo file old" />
-      <item itemvalue="Python.test_trigo simple" />
-      <item itemvalue="Python.test_trigo run" />
-      <item itemvalue="Python.test_scr" />
-      <item itemvalue="Python.test_foster" />
-      <item itemvalue="Python.test_power" />
+      <item itemvalue="Python.pos_loop.conversions" />
       <item itemvalue="Python.test plot" />
+      <item itemvalue="Python.test_foster" />
       <item itemvalue="Python.test_pll_2" />
-      <item itemvalue="Python.pll_2" />
+      <item itemvalue="Python.test_power" />
+      <item itemvalue="Python.test_scr" />
+      <item itemvalue="Python.test_trigo file old" />
+      <item itemvalue="Python.test_trigo file_new" />
+      <item itemvalue="Python.test_trigo run" />
+      <item itemvalue="Python.test_trigo simple" />
+      <item itemvalue="Python.div_error_onshift" />
       <item itemvalue="Python.my_trigo" />
+      <item itemvalue="Python tests.Python tests in test_foster.py" />
       <item itemvalue="Python tests.Python tests in test_trigo.py" />
+      <item itemvalue="Python tests.test_pll_encoder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.test_pll_encoder" />
+        <item itemvalue="Python.div_error_onshift" />
+        <item itemvalue="Python tests.Python tests in test_foster.py" />
         <item itemvalue="Python tests.Python tests in test_trigo.py" />
         <item itemvalue="Python.my_trigo" />
-        <item itemvalue="Python.pll_2" />
       </list>
     </recent_temporary>
   </component>
@@ -381,14 +428,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/f_dice/test_pll_2.py</url>
-          <line>174</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/f_dice/test_trigo.py</url>
           <line>209</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/f_dice/lib/tools.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/f_dice/lib/tools.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
