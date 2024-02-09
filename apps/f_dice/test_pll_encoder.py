@@ -28,7 +28,7 @@ ELESHAFT_NUMSAMPLES = int((DEEP_SEC / ELESHAFT_SAMPLE_TIME) + 1)  # eleshaft sam
 
 ENCODER_REFSPEED_RPM = 100  # Velocità di riferimento in rpm
 OMEGA_NOISE_RPM = 12000  # frequenza del rumore sinusoidale in rpm
-QEP_RESOLUTION = 4096
+QEP_RESOLUTION = 40960
 MAXSPEED= 2**31                  # Limit for the speed (antiwindup)
 MAXERRI = S32_MAX        # Limit for the integral error
 

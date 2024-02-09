@@ -8,9 +8,9 @@ import numpy as np
 from f_dice.lib.my_pid import MyPid
 
 
-class PhasesPll:
+class PhasesPllOld:
 
-    def __init__(self):
+    def __init__(self,rm_):
         self.ref_omega = None
         self.sin_output = None
         self.msecRange = None
@@ -35,14 +35,14 @@ class PhasesPll:
         self.Ki3 = 0.1
         self.ShiftKi3 = 0
 
-        self.freqPi = MyPid()
+        self.freqPi = MyPid(rm_)
         self.freqPi.setIntegral(self.Ki1, self.ShiftKi1)
         self.freqPi.setProportional(self.Kp1, self.ShiftKp1)
 
-        self.freqInt = MyPid()
+        self.freqInt = MyPid(rm_)
         self.freqInt.setIntegral(self.Ki2, self.ShiftKi2)
 
-        self.amplInt = MyPid()
+        self.amplInt = MyPid(rm_)
         self.amplInt.setIntegral(self.Ki3, self.ShiftKi3)
 
     def Iterate(self, in_: float):

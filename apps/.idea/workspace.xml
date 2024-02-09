@@ -5,21 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/div_error_onshift.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f_dice/modules/pll_encoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f_dice/test_pll_encoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generic-apps/socket-connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/apps.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/apps.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/afe_rectifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/afe_rectifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/div_2_mulshift.py" beforeDir="false" afterPath="$PROJECT_DIR$/div_2_mulshift.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/common.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/foster/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/foster.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/foster/foster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/pll_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/pid_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/pid_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/test_foster.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_foster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/f_dice/test_scr.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_scr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/div_2_mulshift.py" beforeDir="false" afterPath="$PROJECT_DIR$/generic-apps/div_2_mulshift.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/div_error_onshift.py" beforeDir="false" afterPath="$PROJECT_DIR$/generic-apps/div_error_onshift.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/IIR_Filter_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/IIR_Filter_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/foster/docs/ISD_foster_model.html" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/foster/docs/ISD_foster_model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/modules/pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/modules/phases_pll.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_pll_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_pll_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_phases_pll.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/f_dice/test_pll_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/f_dice/test_pll_encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pwd_store/source/datafile.json" beforeDir="false" afterPath="$PROJECT_DIR$/pwd_store/source/datafile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/speed_calc.py" beforeDir="false" afterPath="$PROJECT_DIR$/generic-apps/speed_calc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/generic-apps/test_plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reports/pll_encoder_test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../reports/pll_encoder_test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +34,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2OJjaLfdxqtHvaO14cTw2xMsGTY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -41,9 +46,12 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.socket-connection.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_phases_pll.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/deimo/lavori/python/python-apps/apps/f_dice/lib&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/marco/lavori/python/sargans-app&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
@@ -52,15 +60,17 @@
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/basic_tools" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/f_dice" />
       <recent name="$PROJECT_DIR$/f_dice/modules" />
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.test_pll_encoder">
+  <component name="RunManager" selected="Python.test_phases_pll">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -82,6 +92,7 @@
     </configuration>
     <configuration name="div_error_onshift" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -92,7 +103,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/div_error_onshift.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_tools/div_error_onshift.py" />
       <option name="PARAMETERS" value="1024 1 256 5000" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -101,19 +112,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="my_trigo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice/lib" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pwd_store/source" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/lib/my_trigo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pwd_store/source/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -124,6 +136,7 @@
     </configuration>
     <configuration name="pos_loop.conversions" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -143,8 +156,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="socket-connection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/generic-apps" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generic-apps/socket-connection.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test plot" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -155,7 +191,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_plot.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_tools/test_plot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -166,6 +202,7 @@
     </configuration>
     <configuration name="test_foster" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -185,8 +222,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_pll_2" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="test_phases_pll" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -197,8 +235,30 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_pll_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_phases_pll.py" />
       <option name="PARAMETERS" value="run" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_phases_pll_old" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="apps" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/f_dice/test_phases_pll_old.py" />
+      <option name="PARAMETERS" value="1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -208,6 +268,7 @@
     </configuration>
     <configuration name="test_power" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -229,6 +290,7 @@
     </configuration>
     <configuration name="test_scr" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -250,6 +312,7 @@
     </configuration>
     <configuration name="test_trigo file old" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -271,6 +334,7 @@
     </configuration>
     <configuration name="test_trigo file_new" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -292,6 +356,7 @@
     </configuration>
     <configuration name="test_trigo run" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -313,6 +378,7 @@
     </configuration>
     <configuration name="test_trigo simple" type="PythonConfigurationType" factoryName="Python">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -332,41 +398,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_foster.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="apps" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/f_dice/test_foster.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests in test_trigo.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="apps" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/f_dice/test_trigo.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="test_pll_encoder" type="tests" factoryName="Autodetect" temporary="true">
       <module name="apps" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/software/python-venv-std/bin/python" />
+      <option name="SDK_NAME" value="Python 3.10 (python-venv-std)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/f_dice" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
@@ -375,32 +415,38 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.test_phases_pll_old" />
       <item itemvalue="Python.IIR_Filter_test" />
       <item itemvalue="Python.pos_loop.conversions" />
       <item itemvalue="Python.test plot" />
       <item itemvalue="Python.test_foster" />
-      <item itemvalue="Python.test_pll_2" />
+      <item itemvalue="Python.test_phases_pll" />
       <item itemvalue="Python.test_power" />
       <item itemvalue="Python.test_scr" />
       <item itemvalue="Python.test_trigo file old" />
       <item itemvalue="Python.test_trigo file_new" />
       <item itemvalue="Python.test_trigo run" />
       <item itemvalue="Python.test_trigo simple" />
+      <item itemvalue="Python.socket-connection" />
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.div_error_onshift" />
-      <item itemvalue="Python.my_trigo" />
-      <item itemvalue="Python tests.Python tests in test_foster.py" />
-      <item itemvalue="Python tests.Python tests in test_trigo.py" />
       <item itemvalue="Python tests.test_pll_encoder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.socket-connection" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python tests.test_pll_encoder" />
         <item itemvalue="Python.div_error_onshift" />
-        <item itemvalue="Python tests.Python tests in test_foster.py" />
-        <item itemvalue="Python tests.Python tests in test_trigo.py" />
-        <item itemvalue="Python.my_trigo" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -431,16 +477,6 @@
           <url>file://$PROJECT_DIR$/f_dice/test_trigo.py</url>
           <line>209</line>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/f_dice/lib/tools.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/f_dice/lib/tools.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -13,11 +13,11 @@ from f_dice.lib.my_pid import MyPid
 from f_dice.lib.tools import shift_dx, shift_sx, CheckIntOverflow, CheckSigned32, CheckUnsigned32
 
 
-class Pll_2:
+class PhasesPll:
     AMPLITUDE_MAX = 500
     ADC_NUMBITS = 16
-    FREQUENCY_REF = 50
-    OMEGA_REF_HZ = 2 * math.pi * FREQUENCY_REF
+    FREQUENCY_REF_HZ = 50
+    OMEGA_REF_HZ = 2 * math.pi * FREQUENCY_REF_HZ
     PLL_BAND = 20
 
     THETA_CUSTOM_RANGE = TRIGO_THETA_RANGE
@@ -34,7 +34,7 @@ class Pll_2:
     I_KI_SHIFT = 16
     NEW_SHIFT = 8
 
-    def __init__(self, sample_frequency_, deep_):
+    def __init__(self, sample_frequency_, deep_,rm_):
 
         self.sample_frequency_hz = sample_frequency_
         self.deep = deep_
@@ -72,15 +72,15 @@ class Pll_2:
         self.effort = None
 
         # devices
-        self.my_pi = MyPid()
-        self.my_integrator = MyPid()
+        self.my_pi = MyPid(rm_)
+        self.my_integrator = MyPid(rm_)
         self.adc = ADConv(0, self.AMPLITUDE_MAX, self.ADC_NUMBITS)
 
         # Settatura del fattore dell'integrale
         self.i_ki = ((2 ** self.I_KI_SHIFT) / self.sample_frequency_hz)
         self.my_integrator.setIntegral(self.i_ki, self.I_KI_SHIFT)
 
-        BASE_STEP_CUSTOM = TRIGO_THETA_RANGE * self.FREQUENCY_REF / self.sample_frequency_hz
+        BASE_STEP_CUSTOM = TRIGO_THETA_RANGE * self.FREQUENCY_REF_HZ / self.sample_frequency_hz
 
         self.winRange = int(4 * TRIGO_THETA_RANGE / BASE_STEP_CUSTOM)
         wr = self.winRange

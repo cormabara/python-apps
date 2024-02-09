@@ -1,5 +1,5 @@
 """
-This module is the second implementation for the PLL on input phases
+This module is the implementation for the PLL on input phases
 """
 import sys
 from random import randint
@@ -11,13 +11,13 @@ from collections import deque
 from f_dice.lib.range_limits import wrap_out_of_range
 from f_dice.lib.report import rpt_open, rpt_print
 from f_dice.lib.tools import MyPlot
-from f_dice.modules.pll_2 import Pll_2
+from f_dice.modules.phases_pll import PhasesPll
 
-rpt_open("../../", "test_pll2.rpt")
+rpt_open("../../", "test_phases_pll.rpt")
 real_mode = False
 SAMPLE_FREQUENCY_HZ = 10000
 DEEP = 5 * TRIGO_THETA_RANGE
-test_pll: Pll_2 = None
+test_pll: PhasesPll = None
 
 
 def newStimulus(amplitude_=0, frequency_=0):
@@ -33,8 +33,10 @@ def newStimulus(amplitude_=0, frequency_=0):
 
 
 def pllRun():
+    """ This is the continuous run for the PLL, the DEEP is the deep
+        of the scrolling window"""
     global test_pll
-    test_pll = Pll_2(SAMPLE_FREQUENCY_HZ, DEEP)
+    test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP,False)
 
     # here we are creating sub plots
     plt.ion()
@@ -170,7 +172,7 @@ def pllRun():
 
 def pllLoop():
     global test_pll
-    test_pll = Pll_2(SAMPLE_FREQUENCY_HZ, DEEP)
+    test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP)
     test_pll.CalculateLoop(real_mode,400,50)
     pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v, test_pll.theta_park_v)
     MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_out_v, test_pll.omega_in_v)

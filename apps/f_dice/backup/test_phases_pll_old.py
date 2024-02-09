@@ -1,19 +1,19 @@
 """
-This module
+This module is intended to test the phases_pll module
+
 """
 import math
 
-import keyboard
 import numpy
 from matplotlib import pyplot as plt
 
 from f_dice.lib.tools import MyPlot
-from f_dice.modules.pll_1 import PhasesPll
+from f_dice.modules.phases_pll_old import PhasesPllOld
 from collections import deque
 
 import sys
-stimulus = float(sys.argv[1])
-test_pll = PhasesPll()
+stimulus = bool(sys.argv[1])
+test_pll = PhasesPllOld(False)
 frequency = 50
 if stimulus:
     # Using a stimulus wave
