@@ -8,11 +8,11 @@ import numpy as np
 import pandas
 from matplotlib import pyplot as plt
 
-from f_dice.lib.report import MyReport
-from f_dice.lib.types import S32_MIN, S32_MAX
-from f_dice.lib.my_trigo import TRIGO_SHIFT, TRIGO_THETA_RANGE, DirClarke, DirPark, sinAq, TabSin, TabCos, SIMTABDIM, \
+from report import MyReport
+from my_types import S32_MIN, S32_MAX
+from my_trigo import TRIGO_SHIFT, TRIGO_THETA_RANGE, DirClarke, DirPark, sinAq, TabSin, TabCos, SIMTABDIM, \
     cosAq
-from f_dice.lib.tools import shift_dx, MyPlot
+from tools import shift_dx, MyPlot
 
 report = MyReport("../../reports", "test_trigo.txt")
 

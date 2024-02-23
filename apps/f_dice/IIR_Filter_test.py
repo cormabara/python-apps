@@ -1,9 +1,9 @@
 # This is a macro to evaluate the maximum cut frequency of a filter
 
 import sys
-from lib.report import rpt_open, rpt_print, rpt_print_d, rpt_sep, rpt_close
-from lib.types import U32_MAX
-from lib.iir_filter import IIRFilter
+from report import rpt_open, rpt_print, rpt_print_d, rpt_sep, rpt_close
+from my_types import U32_MAX
+from iir_filter import IIRFilter
 import matplotlib.pyplot as plt
 
 rpt_open("./iirfilter.txt")

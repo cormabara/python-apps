@@ -4,8 +4,8 @@ import sys
 import keyboard
 import msvcrt
 import matplotlib.pyplot as plt
-from f_dice.lib.report import rpt_open,rpt_print,rpt_close
-from f_dice.lib.my_pid import MyPid
+from report import rpt_open,rpt_print,rpt_close
+from my_pid import MyPid
 
 SAMPLES = 40
 

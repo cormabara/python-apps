@@ -1,5 +1,5 @@
-from f_dice.lib.report import rpt_open, rpt_print
-from f_dice.lib.tools import SinForm, MyPlot
+from report import rpt_open, rpt_print
+from tools import SinForm, MyPlot
 import matplotlib.pyplot as plt
 
 

@@ -3,6 +3,16 @@ from collections import deque
 
 import numpy as np
 
+<<<<<<< HEAD
+from f_dice.lib.report import rpt_print
+from f_dice.lib.types import S32_MIN, S32_MAX, U32
+from numpy import int32
+
+from f_dice.lib.my_adc import ADConv
+from f_dice.lib.my_trigo import DirClarke, DirPark, TRIGO_THETA_RANGE, TRIGO_SHIFT
+from f_dice.lib.my_pid import MyPid
+from f_dice.lib.tools import shift_dx, shift_sx, CheckIntOverflow, CheckSigned32, CheckUnsigned32
+=======
 from report import rpt_print
 from my_types import S32_MIN, S32_MAX, U32
 from numpy import int32
@@ -10,15 +20,16 @@ from numpy import int32
 from my_adc import ADConv
 from my_trigo import DirClarke, DirPark, TRIGO_THETA_RANGE, TRIGO_SHIFT
 from my_pid import MyPid
-from tools import shift_dx, shift_sx, CheckUnsigned32
+from tools import shift_dx, shift_sx, CheckIntOverflow, CheckSigned32, CheckUnsigned32
+>>>>>>> ce7668e (Add mylib folder (lib was in ignore))
 
 
-class PhasesPll:
+class Pll_2:
     AMPLITUDE_MAX = 500
-    ADC_NUMBITS = 12
-    FREQUENCY_REF_HZ = 50
-    OMEGA_REF_RAD = 2 * math.pi * FREQUENCY_REF_HZ
-    PLL_BAND = 1000
+    ADC_NUMBITS = 16
+    FREQUENCY_REF = 50
+    OMEGA_REF_HZ = 2 * math.pi * FREQUENCY_REF
+    PLL_BAND = 20
 
     THETA_CUSTOM_RANGE = TRIGO_THETA_RANGE
     THETA_RAD_RANGE = 2 * math.pi
@@ -32,13 +43,13 @@ class PhasesPll:
     PI_KI_VAL = 0
     PI_KI_SHIFT = 8
     I_KI_SHIFT = 16
-    NEW_SHIFT = 0
+    NEW_SHIFT = 8
 
-    def __init__(self, sample_frequency_, deep_,rm_):
+    def __init__(self, sample_frequency_, deep_):
 
         self.sample_frequency_hz = sample_frequency_
         self.deep = deep_
-        self.real_mode = rm_
+
         # Variabili di input
         self.theta_in_custom = 0
         self.theta_in_rad = 0
@@ -52,7 +63,7 @@ class PhasesPll:
         # Variabili di output
         self.theta_out_custom = None
         self.theta_out_rad = None
-        self.omega_out_rad = 0
+        self.omega_out = 0
         self.out_sinU = 0
 
         # Variabile di appoggio
@@ -63,24 +74,26 @@ class PhasesPll:
         self.Eg = 0
         self.frequency_in = 0
         self.amplitude_in = 0
+        self.step_custom = 0
 
-        self.prev_theta_out_custom = 0         # Feedback of theta in custom unit
+        self.prev_theta_in = 0
+        self.prev_theta_out = 0
         self.alpha_beta = None
         self.ed_eq = None
         self.effort = None
 
         # devices
-        self.my_pi = MyPid(rm_)
-        self.my_integrator = MyPid(rm_)
+        self.my_pi = MyPid()
+        self.my_integrator = MyPid()
         self.adc = ADConv(0, self.AMPLITUDE_MAX, self.ADC_NUMBITS)
 
         # Settatura del fattore dell'integrale
         self.i_ki = ((2 ** self.I_KI_SHIFT) / self.sample_frequency_hz)
         self.my_integrator.setIntegral(self.i_ki, self.I_KI_SHIFT)
 
-        self.BASE_STEP_CUSTOM = TRIGO_THETA_RANGE * self.FREQUENCY_REF_HZ / self.sample_frequency_hz
+        BASE_STEP_CUSTOM = TRIGO_THETA_RANGE * self.FREQUENCY_REF / self.sample_frequency_hz
 
-        self.winRange = int(self.deep / self.BASE_STEP_CUSTOM)
+        self.winRange = int(4 * TRIGO_THETA_RANGE / BASE_STEP_CUSTOM)
         wr = self.winRange
         self.display_range = range(0, wr)
 
@@ -106,7 +119,7 @@ class PhasesPll:
         self.Ed_v = deque(iniVal, maxlen=wr)
         self.Eg_v = deque(iniVal, maxlen=wr)
         self.effort_v = deque(iniVal, maxlen=wr)
-        self.prev_theta_out_v = deque(iniVal, maxlen=wr)
+
         self.pi_kp_v = deque(iniVal, maxlen=wr)
         self.pi_ki_v = deque(iniVal, maxlen=wr)
         self.theta_park_v = deque(iniVal, maxlen=wr)
@@ -116,7 +129,8 @@ class PhasesPll:
         self.theta_out_custom_v = deque(iniVal, maxlen=wr)
         self.out_sinU_v = deque(iniVal, maxlen=wr)
 
-    def _createStimulus(self, amplitude_, frequency_):
+    def stimulus(self, amplitude_, frequency_):
+        self.step_custom = TRIGO_THETA_RANGE * frequency_ / self.sample_frequency_hz
         self.amplitude_in = amplitude_
         self.frequency_in = frequency_
         self.omega_in_rad = (self.frequency_in * 2 * math.pi)
@@ -138,29 +152,27 @@ class PhasesPll:
         self.cosV = self.adc.convert(cosV)
         self.cosW = self.adc.convert(cosW)
 
-    def _loop_ApplyPark(self):
-        """ Routine di applicazione della park. IN real mode l'angolo è in unità custom, in theo mode
-            è invece espresso in radianti """
-        if self.real_mode:
-            self.theta_park = self.prev_theta_out_custom % self.THETA_CUSTOM_RANGE
+    def _loop_ApplyPark(self, rm_):
+        """"""
+        if (rm_):
+            self.theta_park = self.prev_theta_out % self.THETA_CUSTOM_RANGE
             # self.theta_park = self.theta_in_custom
         else:
-            self.theta_park = (self.prev_theta_out_custom * self.THETA_CUSTOM_TO_RAD) % (2 * math.pi)
+            self.theta_park = (self.prev_theta_out / self.THETA_RAD_TO_CUSTOM) % (2 * math.pi)
             # self.theta_park = self.theta_in_rad
-
-        self.ed_eq = DirPark(self.real_mode, self.Alpha, self.Beta, self.theta_park, S32_MIN, S32_MAX)
+        self.ed_eq = DirPark(rm_, self.Alpha, self.Beta, self.theta_park, S32_MIN, S32_MAX)
         self.Ed = self.ed_eq[0]
         self.Eq = self.ed_eq[1]
 
-        if self.real_mode:
+        if rm_:
             self.Ed = int32(shift_dx(self.Ed, TRIGO_SHIFT - self.NEW_SHIFT))
             self.Eq = int32(shift_dx(self.Eq, TRIGO_SHIFT - self.NEW_SHIFT))
         else:
             self.Ed = self.Ed * (2 ** self.NEW_SHIFT)
             self.Eq = self.Eq * (2 ** self.NEW_SHIFT)
 
-    def _loop_PidParsCalculation(self):
-        if self.real_mode:
+    def _loop_PidParsCalculation(self, rm_):
+        if rm_:
             # Qui entriamo con Ed ed Eq che sono shiftati a sinistra di NEWSHIFT
             Ed_ = float(shift_dx(self.Ed, self.NEW_SHIFT))
             Eq_ = float(shift_dx(self.Eq, self.NEW_SHIFT))
@@ -195,17 +207,21 @@ class PhasesPll:
 
     def _loop_CalculateOutputs(self):
 
-        ref_omega = self.OMEGA_REF_RAD * (2 ** self.NEW_SHIFT)
-        tmp_omega_rad_shifted = self.effort + ref_omega
-        tmp_theta_rad_shifted = self.my_integrator.output(tmp_omega_rad_shifted)
-        self.omega_out_rad = tmp_omega_rad_shifted / (2 ** self.NEW_SHIFT)
+        tmp_omega = self.effort + (self.OMEGA_REF_HZ * (2 ** self.NEW_SHIFT))
 
-        self.theta_out_custom = (tmp_theta_rad_shifted * self.THETA_RAD_TO_CUSTOM) / (2 ** self.NEW_SHIFT)
-        self.theta_out_custom %= self.THETA_CUSTOM_RANGE
-        self.prev_theta_out_custom = self.theta_out_custom
+        tmp_teta = self.my_integrator.outputPI(tmp_omega)
+        self.theta_out_custom = ((tmp_teta * self.THETA_RAD_TO_CUSTOM) / (
+                    2 ** self.NEW_SHIFT)) % self.THETA_CUSTOM_RANGE
+        self.prev_theta_out = self.theta_out_custom
 
+        self.omega_out = tmp_omega / (2 ** self.NEW_SHIFT)
 
-        self.theta_out_rad = (self.theta_out_custom * self.THETA_CUSTOM_TO_RAD) % (2 * math.pi)
+<<<<<<< HEAD
+        self.real_teta_out = tmp_teta
+        self.real_omega_out = tmp_omega
+=======
+>>>>>>> ce7668e (Add mylib folder (lib was in ignore))
+        self.theta_out_rad = (self.theta_out_custom / self.THETA_RAD_TO_CUSTOM) % (2 * math.pi)
         self.out_sinU = (self.Ed / (2 ** self.NEW_SHIFT)) * math.sin(self.theta_out_rad)
 
     def _loop_UpdateVectors(self, sample_):
@@ -226,40 +242,41 @@ class PhasesPll:
         self.pi_ki_v.append(self.pi_ki)
         self.pi_kp_v.append(self.pi_kp)
         self.effort_v.append(self.effort)
-        self.prev_theta_out_v.append(self.prev_theta_out_custom)
+
         self.theta_out_custom_v.append(self.theta_out_custom)
         self.theta_out_rad_v.append(self.theta_out_rad)
-        self.omega_out_v.append(self.omega_out_rad)
+        self.omega_out_v.append(self.omega_out)
         self.out_sinU_v.append(self.out_sinU)
 
-    def Calculate(self, theta_in_):
+    def Calculate(self, real_, theta_in_):
         """This function execute a single iteration on the PLL using the previous value of the output
             memorized into the last out phi value"""
 
         self._loopCreateInputs(theta_in_)
-        self.alpha_beta = DirClarke(self.real_mode, self.cosU, self.cosV, self.cosW, S32_MIN, S32_MAX)
+
+        self.alpha_beta = DirClarke(real_, self.cosU, self.cosV, self.cosW, S32_MIN, S32_MAX)
         self.Alpha = self.alpha_beta[0]
         self.Beta = self.alpha_beta[1]
 
-        self._loop_ApplyPark()
+        self._loop_ApplyPark(real_)
 
-        self._loop_PidParsCalculation()
+        self._loop_PidParsCalculation(real_)
 
-        self.effort = self.my_pi.output(self.Eq)
+        self.effort = self.my_pi.outputPI(self.Eq)
 
         self._loop_CalculateOutputs()
 
-    def CalculateLoop(self, amplitude_, frequency_):
-        self._createStimulus(amplitude_, frequency_)
+    def CalculateLoop(self, real_, amplitude_, frequency_):
+        self.stimulus(amplitude_,frequency_)
 
-        self.prev_theta_out_custom = 0
+        self.prev_theta_out = 0
         theta_in = 0
         # Il for viene definito sul numero di campioni calcolati per il
         # teta di ingresso
         for sample in self.display_range:
-            self.Calculate(theta_in)
+            self.Calculate(real_, theta_in)
             self._loop_UpdateVectors(sample)
-            theta_in += self.BASE_STEP_CUSTOM
+            theta_in += self.step_custom
             self.input_sequence_v.append(theta_in)
         # Torno nel calcolo teorico per salvare vars per il confronto con il caso teorico
         self.out_amplitude = float(np.mean(self.Ed_v) / 2 ** self.NEW_SHIFT)

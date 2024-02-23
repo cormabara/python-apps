@@ -1,8 +1,8 @@
 # @file File with all conversion factor and conversion functions
 
-from f_dice.lib.report import rpt_print, rpt_print_d, rpt_sep
+from report import rpt_print, rpt_print_d, rpt_sep
 import math
-from f_dice.lib.tools import divshx
+from tools import divshx
 
 ALICONV = "ALICONV"
 ISD2 = "ISDPRO"

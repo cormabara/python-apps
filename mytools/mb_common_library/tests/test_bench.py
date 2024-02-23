@@ -1,6 +1,6 @@
 
 from mb_common_lib import report
-from mb_common_lib.types import S32_MIN, S32_MAX
+from my_types import S32_MIN, S32_MAX
 
 
 def test_lib(path_):

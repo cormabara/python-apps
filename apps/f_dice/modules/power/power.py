@@ -28,10 +28,10 @@ import numpy as np
 import queue
 
 from dice import ThDice, Platforms, TimeUnity
-from f_dice.lib.report import rpt_print, rpt_sep, rpt_print_d, MyReport
+from report import rpt_print, rpt_sep, rpt_print_d, MyReport
 
-from f_dice.lib.my_timers import SysTimer
-from f_dice.lib.tools import perc_err, divshx, CheckIntOverflow
+from my_timers import SysTimer
+from tools import perc_err, divshx, CheckIntOverflow
 
 FreqShift = 1  # shift of the base frequency da 100uS a 200uS shift = 1
 glbl_dice = ThDice(Platforms.ALICONV, FreqShift)

@@ -1,6 +1,6 @@
 import math
-from f_dice.lib.tools import divshx
-from f_dice.lib.tools import CheckIntOverflow
+from tools import divshx
+from tools import CheckIntOverflow
 import matplotlib.pyplot as plt
 
 

@@ -5,12 +5,16 @@ import math
 
 import numpy as np
 
+<<<<<<< HEAD
+from f_dice.lib.my_pid import MyPid
+=======
 from my_pid import MyPid
+>>>>>>> ce7668e (Add mylib folder (lib was in ignore))
 
 
-class PhasesPllOld:
+class PhasesPll:
 
-    def __init__(self,rm_):
+    def __init__(self):
         self.ref_omega = None
         self.sin_output = None
         self.msecRange = None
@@ -35,14 +39,14 @@ class PhasesPllOld:
         self.Ki3 = 0.1
         self.ShiftKi3 = 0
 
-        self.freqPi = MyPid(rm_)
+        self.freqPi = MyPid()
         self.freqPi.setIntegral(self.Ki1, self.ShiftKi1)
         self.freqPi.setProportional(self.Kp1, self.ShiftKp1)
 
-        self.freqInt = MyPid(rm_)
+        self.freqInt = MyPid()
         self.freqInt.setIntegral(self.Ki2, self.ShiftKi2)
 
-        self.amplInt = MyPid(rm_)
+        self.amplInt = MyPid()
         self.amplInt.setIntegral(self.Ki3, self.ShiftKi3)
 
     def Iterate(self, in_: float):
@@ -56,10 +60,10 @@ class PhasesPllOld:
         # Calculation of the PI input
         self.zz = self.error * math.cos(self.last_out_phi)
         # output of the PI
-        self.delta_omega = self.freqPi.output(self.zz)
+        self.delta_omega = self.freqPi.outputPI(self.zz)
         self.omega = self.delta_omega + self.ref_omega
         # Integration to obtain the angle
-        self.out_phi = self.freqInt.output(self.omega) % (2 * math.pi)
+        self.out_phi = self.freqInt.outputPI(self.omega) % (2 * math.pi)
         self.last_out_phi = self.out_phi
         self.output = math.sin(self.last_out_phi)
 

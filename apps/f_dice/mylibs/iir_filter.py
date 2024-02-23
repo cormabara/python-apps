@@ -1,7 +1,7 @@
 # Class for a IIR filter definition with the same algorithm used inside DICE
 
 import math
-from f_dice.lib.types import U32_MAX
+from my_types import U32_MAX
 
 
 class IIRFilter:

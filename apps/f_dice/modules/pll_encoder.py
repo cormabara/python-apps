@@ -3,12 +3,12 @@ Starting from the real position in angle (0-1023) we calculate the speed error t
 with integrator we calculate the obs_pos position. This ob_pos is used to calculate the error from real_pos
 """
 
-from f_dice.lib.my_pid import MyPid
-from f_dice.lib.my_pid import XIntegral
-from f_dice.lib.range_limits import wrap_out_of_range
-from f_dice.lib.report import rpt_print
-from f_dice.lib.tools import CheckSigned32
-from f_dice.lib.types import S32_MAX, S16_MAX, U32_MAX, S32
+from my_pid import MyPid
+from my_pid import XIntegral
+from range_limits import wrap_out_of_range
+from report import rpt_print
+from tools import CheckSigned32
+from my_types import S32_MAX, S16_MAX, U32_MAX, S32
 
 
 class PllEncoder:

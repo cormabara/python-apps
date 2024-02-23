@@ -9,12 +9,12 @@ import random
 
 import numpy as np
 
-from f_dice.lib.my_pid import XIntegral
-from f_dice.lib.report import rpt_open, rpt_print
-from f_dice.lib.tools import SinForm, Ramp
-from f_dice.lib.types import U32_MAX, S32_MAX
-from f_dice.modules.pll_encoder import PllEncoder
-from f_dice.lib.tools import MyPlot
+from my_pid import XIntegral
+from report import rpt_open, rpt_print
+from tools import SinForm, Ramp
+from my_types import U32_MAX, S32_MAX
+from apps.f_dice.modules.pll_encoder import PllEncoder
+from tools import MyPlot
 
 REAL_MODE = False
 

@@ -1,7 +1,7 @@
 """ Class for a generic PID
 """
 
-from mb_common_lib.types import S32_MAX, S32_MIN
+from my_types import S32_MAX, S32_MIN
 
 
 def saturate_out_of_range(val_, min_, max_):

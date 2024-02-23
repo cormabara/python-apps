@@ -1,4 +1,5 @@
 # Output file for the report
+import datetime
 import string
 
 REPORT_SECTION_SEP = "---------------------------------------------\n"
@@ -55,9 +56,13 @@ class MyReport:
 
     def rpt_print(self, str_):
         out_file = open(self.rpt_filename, "a")
-        print(str_)
+        print("[" + str(datetime.datetime.now()) + "] " +  str_)
         out_file.write(str_ + "\n")
         out_file.close()
+
+    def rpt_error(self, err_, str_):
+        self.rpt_print("##ERR: " + str(err_) + " ##" + str_)
+        self.rpt_print(str_)
 
     def rpt_sep(self):
         self.rpt_print(self.REPORT_SECTION_SEP)

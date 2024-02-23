@@ -7,8 +7,8 @@ import math
 import numpy
 from matplotlib import pyplot as plt
 
-from f_dice.lib.tools import MyPlot
-from f_dice.modules.phases_pll_old import PhasesPllOld
+from tools import MyPlot
+from phases_pll_old import PhasesPllOld
 from collections import deque
 
 import sys

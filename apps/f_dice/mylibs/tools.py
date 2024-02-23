@@ -1,10 +1,52 @@
+import threading
+from collections import deque
+
 import numpy
 import numpy as np
 import math
 
 from matplotlib import pyplot as plt
 
-from f_dice.lib.types import U32_MAX, S32_MAX, S32_MIN
+
+class SingletonMeta(type):
+    """ This is the meta class to create a singleton class """
+
+    _instances = {}
+    _lock = threading.Lock()
+
+    def __call__(cls, *args, **kwargs):
+        """
+        Possible changes to the value of the `__init__` argument do not affect
+        the returned instance.
+        """
+        if cls not in cls._instances:
+            with cls._lock:
+                if cls not in cls._instances:
+                    instance = super().__call__(*args, **kwargs)
+                    cls._instances[cls] = instance
+        return cls._instances[cls]
+
+
+class CnfAfe(metaclass=SingletonMeta):
+    WIN_DEEP = 1000  # Deep of the display window
+    INPUT_FREQ_HZ = 50
+    INPUT_OMEGA_RAD = 2 * math.pi * INPUT_FREQ_HZ
+    INPUT_PERIOD_S = 1/50         # Periodo del segnale di ingresso (50Hz)
+    INPUT_PERIOD_mS = INPUT_PERIOD_S * 1000         # Periodo del segnale di ingresso (50Hz)
+    INPUT_PERIOD_uS = INPUT_PERIOD_mS * 1000         # Periodo del segnale di ingresso (50Hz)
+
+    SAMPLE_FREQUENCY_HZ = 10000
+    SAMPLE_TIME_uS = 100            # Freuenza di campionamento sotto irq
+    PERIOD_IN_SAMPLES = INPUT_PERIOD_uS/SAMPLE_TIME_uS      # Sinusoide completa in sample
+    TRIGO_THETA_RANGE = 2 * math.pi
+
+    AMPLITUDE = 500
+
+    def __init__(self):
+        pass
+
+    def display_range(self):
+        return range(0, self.WIN_DEEP)
 
 
 def SinForm(phase_, range_):
@@ -19,7 +61,7 @@ def SinForm(phase_, range_):
 def Ramp(vstart_, vend_, range_):
     """ Create a ramp using vstart_ and vend_ as starting and ending vertical value.
         range is the number of points """
-    val = [(ind/range_)*(vend_-vstart_) + vstart_ for ind in range(0, range_)]
+    val = [(ind / range_) * (vend_ - vstart_) + vstart_ for ind in range(0, range_)]
     return val
 
 
@@ -118,3 +160,10 @@ def div_sqr3(value_):
     # rv ~= val_ * 591 / 1024    ==> errore = -0,03496[%]
     # rv ~= val_ * 37 / 64       ==> errore = +0,13419[%]
     return divshx((value_ * 2365), 12)
+
+
+def rmsval(fun_):
+    return np.sqrt(np.mean(fun_**2))
+
+def rmsvalfrompk(pkval_):
+    return pkval_ * math.sqrt(2) /2

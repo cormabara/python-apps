@@ -4,7 +4,7 @@ from collections import deque
 import numpy as np
 
 from f_dice.lib.report import rpt_print
-from f_dice.lib.types import S32_MIN, S32_MAX, U32
+from my_types import S32_MIN, S32_MAX, U32
 from numpy import int32
 
 from f_dice.lib.my_adc import ADConv

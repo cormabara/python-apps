@@ -6,13 +6,13 @@ import math
 
 from numpy import int32
 
-from f_dice.lib.report import rpt_print
-from f_dice.lib.tools import CheckSigned32
-from f_dice.lib.types import S32_MAX, S32_MIN
+from report import rpt_print
+from tools import CheckSigned32
+from my_types import S32_MAX, S32_MIN
 
 
 # supporto per componente integrale dei PID
-from f_dice.lib.range_limits import saturate_out_of_range, wrap_out_of_range
+from range_limits import saturate_out_of_range, wrap_out_of_range
 
 
 class XIntegral:

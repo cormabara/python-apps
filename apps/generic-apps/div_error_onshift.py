@@ -3,8 +3,8 @@
 
 import sys
 
-from f_dice.lib.tools import CheckUnsigned32, CheckUnsigned16, CheckSigned32
-from f_dice.lib.types import S32
+from tools import CheckUnsigned32, CheckUnsigned16, CheckSigned32
+from types import S32
 
 print(sys.argv[0])
 numerator1 = float(sys.argv[1])

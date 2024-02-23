@@ -5,13 +5,13 @@ import sys
 from random import randint
 from matplotlib import pyplot as plt
 
-from f_dice.lib.my_trigo import TRIGO_THETA_RANGE
+from mylibs.my_trigo import TRIGO_THETA_RANGE
 from collections import deque
 
-from f_dice.lib.range_limits import wrap_out_of_range
-from f_dice.lib.report import rpt_open, rpt_print
-from f_dice.lib.tools import MyPlot
-from f_dice.modules.phases_pll import PhasesPll
+from mylibs.range_limits import wrap_out_of_range
+from mylibs.report import rpt_open, rpt_print
+from mylibs.tools import MyPlot
+from modules.phases_pll import PhasesPll
 
 rpt_open("../../", "test_phases_pll.rpt")
 real_mode = False
@@ -29,7 +29,7 @@ def newStimulus(amplitude_=0, frequency_=0):
 
     print("frequency: " + str(frequency_))
     print("amplitude: " + str(amplitude_))
-    test_pll.stimulus(amplitude_, frequency_)
+    test_pll._createStimulus(amplitude_, frequency_)
 
 
 def pllRun():
@@ -103,7 +103,7 @@ def pllRun():
         test_pll.vector_index.append(index)
         sample_step_custom = TRIGO_THETA_RANGE * test_pll.frequency_in / SAMPLE_FREQUENCY_HZ
         theta_in_custom = (theta_in_custom + sample_step_custom) % TRIGO_THETA_RANGE
-        test_pll.Calculate(real_mode, theta_in_custom)
+        test_pll.Calculate(theta_in_custom)
 
         test_pll.theta_in_custom_v.append(test_pll.theta_in_custom)
         test_pll.omega_in_v.append(test_pll.omega_in_rad)
@@ -117,14 +117,14 @@ def pllRun():
         test_pll.effort_v.append(test_pll.effort)
 
         test_pll.theta_out_custom_v.append(test_pll.theta_out_custom)
-        test_pll.omega_out_v.append(test_pll.omega_out)
+        test_pll.omega_out_v.append(test_pll.omega_out_rad)
         test_pll.out_sinU_v.append(test_pll.out_sinU)
 
         test_pll.inputCosW_v.append(test_pll.cosU)
         test_pll.inputCosV_v.append(test_pll.cosV)
         test_pll.inputCosU_v.append(test_pll.cosW)
 
-        test_pll.theta_park_v.append(test_pll.prev_theta_out)
+        test_pll.theta_park_v.append(test_pll.theta_park)
 
         WrapVal = TRIGO_THETA_RANGE / 2
         error = test_pll.theta_out_custom - test_pll.theta_in_custom
@@ -172,12 +172,18 @@ def pllRun():
 
 def pllLoop():
     global test_pll
-    test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP)
-    test_pll.CalculateLoop(real_mode,400,50)
+    test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP,real_mode)
+    test_pll.CalculateLoop(400,50)
     pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v, test_pll.theta_park_v)
-    MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_out_v, test_pll.omega_in_v)
-    MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.out_sinU_v, test_pll.in_sinU_v)
+    MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_in_v, test_pll.omega_out_v)
+    MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.in_sinU_v, test_pll.out_sinU_v)
     pll_plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
+    pll_plt.show()
+
+
+    MyPlot(3, 1, 1, "theta_park_v", test_pll.input_sequence_v, test_pll.theta_park_v)
+    MyPlot(3, 1, 2, "Ed-Eq-Eg", test_pll.input_sequence_v, test_pll.Ed_v, test_pll.Eq_v, test_pll.Eg_v)
+    MyPlot(3, 1, 3, "kp-ki", test_pll.input_sequence_v, test_pll.pi_kp_v, test_pll.pi_ki_v)
     pll_plt.show()
 
 

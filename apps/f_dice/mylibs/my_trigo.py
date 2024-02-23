@@ -3,11 +3,11 @@ import math
 import sys
 import numpy
 import numpy as np
-from f_dice.lib.types import S32
+from my_types import S32
 from numpy import int32
 
-from f_dice.lib.range_limits import saturate_out_of_range
-from f_dice.lib.tools import div_sqr3, divshx
+from range_limits import saturate_out_of_range
+from tools import div_sqr3, divshx
 
 # shift for the look up table value. That means the available values are from 0 to 1023
 TRIGO_SHIFT = 14
@@ -412,6 +412,19 @@ def DirClarke(real_, u_, v_, w_, min_, max_):
         beta = out[1]
         return np.array([alpha, beta])
 
+
+def DirClarke_v(u_, v_, w_):
+    # Clarke diretta con vettori in ingresso
+    alpha = np.zeros(len(u_))
+    beta = np.zeros(len(u_))
+    for ind in range(0,len(u_)):
+        inm = np.array([u_[ind], v_[ind], w_[ind]])
+        dctm = np.array([[1, -1 / 2, -1 / 2], [0, math.sqrt(3) / 2, -math.sqrt(3) / 2], [1 / 2, 1 / 2, 1 / 2]])
+        out = (2 / 3) * numpy.matmul(dctm, inm)
+        alpha[ind] = out[0]
+        beta[ind] = out[1]
+
+    return np.array([alpha, beta])
 
 def DirPark(real_, alpha_, beta_, theta_, min_, max_):
     # La dirpark reale accetta un valore del theta che è in
