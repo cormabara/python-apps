@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import numpy as np
 from matplotlib import pyplot as plt
 
+from my_sigmadelta import SigmaDelta
 from report import MyReport
 from vmains import VMains
 from my_pid import MyPid

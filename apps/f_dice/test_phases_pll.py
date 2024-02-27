@@ -16,7 +16,7 @@ from modules.phases_pll import PhasesPll
 rpt_open("../../", "test_phases_pll.rpt")
 real_mode = False
 SAMPLE_FREQUENCY_HZ = 10000
-DEEP = 5 * TRIGO_THETA_RANGE
+DEEP = 50 * TRIGO_THETA_RANGE
 test_pll: PhasesPll = None
 
 
@@ -102,8 +102,8 @@ def pllRun():
     while not endOfLoop:
         test_pll.vector_index.append(index)
         sample_step_custom = TRIGO_THETA_RANGE * test_pll.frequency_in / SAMPLE_FREQUENCY_HZ
-        theta_in_custom = (theta_in_custom + sample_step_custom) % TRIGO_THETA_RANGE
-        test_pll.Calculate(theta_in_custom)
+        theta_in_custom = (theta_in_custom + sample_step_custom) # % TRIGO_THETA_RANGE
+        test_pll.calculate(theta_in_custom)
 
         test_pll.theta_in_custom_v.append(test_pll.theta_in_custom)
         test_pll.omega_in_v.append(test_pll.omega_in_rad)
@@ -112,8 +112,8 @@ def pllRun():
         test_pll.alpha_v.append(test_pll.Alpha)
         test_pll.beta_v.append(test_pll.Beta)
 
-        test_pll.Ed_v.append(test_pll.Ed)
-        test_pll.Eq_v.append(test_pll.Eq)
+        test_pll.ed_v.append(test_pll.Ed)
+        test_pll.eq_v.append(test_pll.Eq)
         test_pll.effort_v.append(test_pll.effort)
 
         test_pll.theta_out_custom_v.append(test_pll.theta_out_custom)
@@ -152,10 +152,10 @@ def pllRun():
             line_alpha.set_ydata(test_pll.alpha_v)
             line_beta.set_ydata(test_pll.beta_v)
 
-            ax_Ed.set_ylim([0, max(test_pll.Ed_v)*3/2])
-            ax_Eq.set_ylim([min(test_pll.Eq_v)*3/2, max(test_pll.Eq_v)*3/2])
-            line_Ed.set_ydata(test_pll.Ed_v)
-            line_Eq.set_ydata(test_pll.Eq_v)
+            ax_Ed.set_ylim([0, max(test_pll.ed_v) * 3 / 2])
+            ax_Eq.set_ylim([min(test_pll.eq_v) * 3 / 2, max(test_pll.eq_v) * 3 / 2])
+            line_Ed.set_ydata(test_pll.ed_v)
+            line_Eq.set_ydata(test_pll.eq_v)
 
             ax_Effort.set_ylim([-max(test_pll.effort_v) * 3 / 2, max(test_pll.effort_v) * 3 / 2])
             line_Effort.set_ydata(test_pll.effort_v)
@@ -173,8 +173,8 @@ def pllRun():
 def pllLoop():
     global test_pll
     test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP,real_mode)
-    test_pll.CalculateLoop(400,50)
-    pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v, test_pll.theta_park_v)
+    test_pll.calculate_loop(400, 50)
+    pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v)
     MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_in_v, test_pll.omega_out_v)
     MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.in_sinU_v, test_pll.out_sinU_v)
     pll_plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
@@ -182,7 +182,7 @@ def pllLoop():
 
 
     MyPlot(3, 1, 1, "theta_park_v", test_pll.input_sequence_v, test_pll.theta_park_v)
-    MyPlot(3, 1, 2, "Ed-Eq-Eg", test_pll.input_sequence_v, test_pll.Ed_v, test_pll.Eq_v, test_pll.Eg_v)
+    MyPlot(3, 1, 2, "Ed-Eq-Eg", test_pll.input_sequence_v, test_pll.ed_v, test_pll.eq_v, test_pll.eg_v)
     MyPlot(3, 1, 3, "kp-ki", test_pll.input_sequence_v, test_pll.pi_kp_v, test_pll.pi_ki_v)
     pll_plt.show()
 

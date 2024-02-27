@@ -41,7 +41,10 @@ class CnfAfe(metaclass=SingletonMeta):
     TRIGO_THETA_RANGE = 2 * math.pi
 
     AMPLITUDE = 500
+    IN_MAXAMPLITUDE = 500
+    SIGMADELTA_RESOLUTION = 12
 
+    RealMode = False
     def __init__(self):
         pass
 

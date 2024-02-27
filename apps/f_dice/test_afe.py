@@ -32,12 +32,22 @@ def run():
             break
 
     plot = MyPlot(4, 1, 1, "phases in", in_s, ph1, ph2, ph3)
-    MyPlot(4, 1, 2, "R / R-S / S-T", in_s, ph1, afe.vmains.in_RS_v, afe.vmains.in_ST_v)
-    MyPlot(4, 1, 3, "R / R-S / S-T", in_s, afe.vmains.in_RS_v, afe.vmains.linein.zc_RS_trig_v,
-           afe.vmains.linein.fail_phases_v)
-    MyPlot(4, 1, 4, "R / R-S / S-T", in_s, afe.vmains.in_ST_v, afe.vmains.linein.zc_ST_trig_v,
-           afe.vmains.linein.fail_phases_v)
+    MyPlot(4, 1, 2, "R / R-S / S-T", in_s, ph1, afe.vmains.in_ST_v, afe.vmains.in_RT_v)
+    MyPlot(4, 1, 3, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
+    #    MyPlot(4, 1, 3, "R / R-S / S-T", in_s, afe.vmains.in_RS_v, afe.vmains.linein.zc_RS_trig_v,
+    #           afe.vmains.linein.fail_phases_v)
+    #    MyPlot(4, 1, 4, "R / R-S / S-T", in_s, afe.vmains.in_ST_v, afe.vmains.linein.zc_ST_trig_v,
+    #           afe.vmains.linein.fail_phases_v)
+    plot.show()
 
+    plot = MyPlot(4, 1, 1, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
+    MyPlot(4, 1, 2, "PLL alpha/beta", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.alpha_v, afe.vmains.pll.beta_v)
+    MyPlot(4, 1, 3, "PLL ed /eq", in_s, afe.vmains.pll.ed_v, afe.vmains.pll.eq_v)
+    MyPlot(4, 1, 4, "PLL theta out", in_s, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_v)
+    plot.show()
+
+    plot = MyPlot(2, 1, 1, "PLL theta out", in_s, afe.vmains.pll.in_r_v,
+                  (np.array(afe.vmains.pll.theta_out_custom_v) + afe.vmains.get_theta_out_range() / 2) % afe.vmains.get_theta_out_range())
     plot.show()
 
     MyReport().rpt_print("End of script")
@@ -70,8 +80,8 @@ def loop():
 
     ax_sg = figure.add_subplot(312)
     ax_sg.title.set_text("Inputs R-S/S-T")
-    line_in_RS, = ax_sg.plot(vector_index, init_val, label="ph1")
-    line_in_ST, = ax_sg.plot(vector_index, init_val, label="ph2")
+    line_in_ST, = ax_sg.plot(vector_index, init_val, label="ph1")
+    line_in_RT, = ax_sg.plot(vector_index, init_val, label="ph2")
     ax_sg.set_ylim(-3 * CnfAfe().AMPLITUDE, 3 * CnfAfe().AMPLITUDE)
     plt.grid()
     plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
@@ -96,18 +106,18 @@ def loop():
         theta_in_custom1 = theta_in_custom + offset1
         theta_in_custom2 = theta_in_custom + offset2
         theta_in_custom3 = theta_in_custom + offset3
-        if not glbl_index % 673:
-            offset1 -= 100
-        if not glbl_index % 773:
-            offset1 += 100
+        # if not glbl_index % 673:
+        #    offset1 -= 100
+        # if not glbl_index % 773:
+        #    offset1 += 100
 
         # creo le tre forme di ingresso per il theta calcolato
         ph1 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom1)
         ph2 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom2 - ((2 * math.pi) / 3))
         ph3 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom3 - ((4 * math.pi) / 3))
 
-        afe.execute(ph1, ph2, ph3)      # esecuzione dell'afe sotto irq
-        afe.plot_sample()               # Aggironamento dei vettori per il plot
+        afe.execute(ph1, ph2, ph3)  # esecuzione dell'afe sotto irq
+        afe.plot_sample()  # Aggironamento dei vettori per il plot
 
         # Aggiungo i campioni delle tre forme di ingresso
         ph1_v.append(ph1)
@@ -119,8 +129,8 @@ def loop():
         line_in_ph2.set_ydata(ph2_v)
         line_in_ph3.set_ydata(ph3_v)
 
-        line_in_RS.set_ydata(afe.vmains.in_RS_v)
         line_in_ST.set_ydata(afe.vmains.in_ST_v)
+        line_in_RT.set_ydata(afe.vmains.in_RT_v)
 
         line_in_trig_zc_rs.set_ydata(afe.vmains.linein.zc_RS_trig_v)
         line_in_trig_zc_st.set_ydata(afe.vmains.linein.zc_ST_trig_v)

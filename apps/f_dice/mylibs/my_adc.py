@@ -1,7 +1,7 @@
 from enum import IntEnum
 
-from f_dice.lib.drv_err import drvErrSet
-from f_dice.lib.range_limits import check_out_range
+from drv_err import drvErrSet
+from range_limits import check_out_range
 
 ID_ADC = 1
 
