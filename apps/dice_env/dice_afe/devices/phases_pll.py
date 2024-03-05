@@ -11,7 +11,7 @@ from my_types import S32_MIN, S32_MAX, U32
 from numpy import int32
 
 from my_adc import ADConv
-from my_trigo import DirClarke, DirPark, TRIGO_THETA_RANGE, TRIGO_SHIFT
+from my_trigo import trigo_dir_clarke, trigo_dir_park, TRIGO_THETA_RANGE, TRIGO_SHIFT
 from my_pid import MyPid
 from tools import shift_dx, shift_sx, CheckUnsigned32, CnfAfe
 
@@ -161,7 +161,7 @@ class PhasesPll:
             self.theta_park = (self.prev_theta_out_custom * self.THETA_CUSTOM_TO_RAD) % (2 * math.pi)
             # self.theta_park = self.theta_in_rad
 
-        self.ed_eq = DirPark(self.real_mode, self.Alpha, self.Beta, self.theta_park, S32_MIN, S32_MAX)
+        self.ed_eq = trigo_dir_park(self.real_mode, self.Alpha, self.Beta, self.theta_park, S32_MIN, S32_MAX)
         self.Ed = self.ed_eq[0]
         self.Eq = self.ed_eq[1]
 
@@ -234,7 +234,7 @@ class PhasesPll:
         self.in_s = in_s_
         self.in_t = in_t_
 
-        self.alpha_beta = DirClarke(self.real_mode, self.in_r, self.in_s, self.in_t, S32_MIN, S32_MAX)
+        self.alpha_beta = trigo_dir_clarke(self.real_mode, self.in_r, self.in_s, self.in_t, S32_MIN, S32_MAX)
         self.Alpha = self.alpha_beta[0]
         self.Beta = self.alpha_beta[1]
 

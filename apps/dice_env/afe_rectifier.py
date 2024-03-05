@@ -1,23 +1,8 @@
 """
 In this module the definition of the DICE RECTIFIER application
 """
-import math
-from dataclasses import dataclass
 
-import numpy as np
-from matplotlib import pyplot as plt
-
-from my_sigmadelta import SigmaDelta
-from report import MyReport
-from vmains import VMains
-from my_pid import MyPid
-
-from tools import SinForm, MyPlot, CnfAfe
-
-
-class InputStage:
-    FREQUENCY_HZ = 50
-    SAMPLE_TIME_US = 100
+from modules.vmains import VMains
 
 
 class AfeRectifier:

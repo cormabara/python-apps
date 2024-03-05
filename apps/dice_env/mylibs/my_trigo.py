@@ -395,7 +395,7 @@ def _TrigoComb(A_, B_, teta_, min_, max_):
     return saturate_out_of_range(_TrigoCombLow(A_, B_, teta_), min_, max_);
 
 
-def DirClarke(real_, u_, v_, w_, min_, max_):
+def trigo_dir_clarke(real_, u_, v_, w_, min_, max_):
     # Clarke diretta
     if real_:
         u_ = S32(u_)
@@ -403,21 +403,37 @@ def DirClarke(real_, u_, v_, w_, min_, max_):
         alpha = S32(u_)
         beta = S32(div_sqr3(u_ + 2 * v_))
         beta = S32(saturate_out_of_range(beta, min_, max_))
-        return np.array([alpha, beta])
     else:
         inm = np.array([u_, v_, w_])
         dctm = np.array([[1, -1 / 2, -1 / 2], [0, math.sqrt(3) / 2, -math.sqrt(3) / 2], [1 / 2, 1 / 2, 1 / 2]])
         out = (2 / 3) * numpy.matmul(dctm, inm)
         alpha = out[0]
         beta = out[1]
-        return np.array([alpha, beta])
+
+    return np.array([alpha, beta])
+
+def trigo_rev_clarke(real_, alpha_, beta_):
+    """ Clarke reverse from alpha beta to v1,v2,v3 """
+    if real_:
+        v1 = 0
+        v2 = 0
+        v3 = 0
+        return np.array([v1, v2,v3])
+    else:
+        inm = np.array([alpha_, beta_, 0])
+        dctm = np.array([[1, 0, 1], [-(1/2), (math.sqrt(3) / 2), 1], [-(1 / 2), -(math.sqrt(3) / 2), 1]])
+        out = (2 / 3) * numpy.matmul(dctm, inm)
+        v1 = out[0]
+        v2 = out[1]
+        v3 = out[2]
+        return np.array([v1, v2, v3])
 
 
-def DirClarke_v(u_, v_, w_):
+def trigo_dir_clarke_v(u_, v_, w_):
     # Clarke diretta con vettori in ingresso
     alpha = np.zeros(len(u_))
     beta = np.zeros(len(u_))
-    for ind in range(0,len(u_)):
+    for ind in range(0, len(u_)):
         inm = np.array([u_[ind], v_[ind], w_[ind]])
         dctm = np.array([[1, -1 / 2, -1 / 2], [0, math.sqrt(3) / 2, -math.sqrt(3) / 2], [1 / 2, 1 / 2, 1 / 2]])
         out = (2 / 3) * numpy.matmul(dctm, inm)
@@ -426,7 +442,8 @@ def DirClarke_v(u_, v_, w_):
 
     return np.array([alpha, beta])
 
-def DirPark(real_, alpha_, beta_, theta_, min_, max_):
+
+def trigo_dir_park(real_, alpha_, beta_, theta_, min_, max_):
     # La dirpark reale accetta un valore del theta che è in
     # un range di 0-1024 mentre quella teorica in radianti
     if real_:
@@ -438,6 +455,18 @@ def DirPark(real_, alpha_, beta_, theta_, min_, max_):
         q = -alpha_ * math.sin(theta_) + beta_ * math.cos(theta_)
 
     return np.array([d, q])
+
+
+def trigo_rev_park(real_, vald_, valq_, theta_, min_, max_):
+    """ Reverse park from d,q to alpha, beta """
+    if real_:
+        valpha = _TrigoComb(-valq_, vald_, theta_, min_, max_)
+        vbeta = _TrigoComb(vald_, valq_, theta_, min_, max_)
+    else:
+        valpha = - valq_ * math.sin(theta_) + vald_ * math.cos(theta_)
+        vbeta = vald_ * math.sin(theta_) + valq_ * math.cos(theta_)
+
+    return np.array([valpha, vbeta])
 
 
 def sinAq(theta_):

@@ -11,7 +11,7 @@ from collections import deque
 from mylibs.range_limits import wrap_out_of_range
 from mylibs.report import rpt_open, rpt_print
 from mylibs.tools import MyPlot
-from modules.phases_pll import PhasesPll
+from devices.phases_pll import PhasesPll
 
 rpt_open("../../", "test_phases_pll.rpt")
 real_mode = False

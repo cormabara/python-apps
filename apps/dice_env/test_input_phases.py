@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-from my_trigo import DirClarke, DirClarke_v
+from my_trigo import trigo_dir_clarke, trigo_dir_clarke_v
 from my_types import S32_MAX, S32_MIN
 from report import MyReport
 from tools import MyPlot, rmsval, rmsvalfrompk

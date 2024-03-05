@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 
 from report import MyReport
 from my_types import S32_MIN, S32_MAX
-from my_trigo import TRIGO_SHIFT, TRIGO_THETA_RANGE, DirClarke, DirPark, sinAq, TabSin, TabCos, SIMTABDIM, \
+from my_trigo import TRIGO_SHIFT, TRIGO_THETA_RANGE, trigo_dir_clarke, trigo_dir_park, sinAq, TabSin, TabCos, SIMTABDIM, \
     cosAq
 from tools import shift_dx, MyPlot
 
@@ -42,19 +42,19 @@ def runTest():
     w = amplitude * numpy.cos(in_v - (4 * math.pi / 3))
 
     for sample in range(SAMPLES):
-        alpha_beta_t = DirClarke(False, u[sample], v[sample], w[sample], S32_MIN, S32_MAX)
+        alpha_beta_t = trigo_dir_clarke(False, u[sample], v[sample], w[sample], S32_MIN, S32_MAX)
         alpha_t[sample] = alpha_beta_t[0]
         beta_t[sample] = alpha_beta_t[1]
-        ed_eq = DirPark(False, alpha_t[sample], beta_t[sample], theta_t[sample], S32_MIN, S32_MAX)
+        ed_eq = trigo_dir_park(False, alpha_t[sample], beta_t[sample], theta_t[sample], S32_MIN, S32_MAX)
         ed_t[sample] = ed_eq[0]
         eq_t[sample] = ed_eq[1]
 
         sin_aq[sample] = sinAq(theta_r[sample])
 
-        alpha_beta = DirClarke(True, u[sample], v[sample], w[sample], S32_MIN, S32_MAX)
+        alpha_beta = trigo_dir_clarke(True, u[sample], v[sample], w[sample], S32_MIN, S32_MAX)
         alpha_r[sample] = alpha_beta[0]
         beta_r[sample] = alpha_beta[1]
-        ed_eq_r = DirPark(True, alpha_r[sample], beta_r[sample], theta_r[sample], S32_MIN, S32_MAX)
+        ed_eq_r = trigo_dir_park(True, alpha_r[sample], beta_r[sample], theta_r[sample], S32_MIN, S32_MAX)
         ed_r[sample] = shift_dx(int(ed_eq_r[0]), TRIGO_SHIFT)
         eq_r[sample] = shift_dx(int(ed_eq_r[1]), TRIGO_SHIFT)
     index = 0

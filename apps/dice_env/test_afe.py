@@ -31,13 +31,11 @@ def run():
             MyReport().rpt_print("KILLING APPLICATION")
             break
 
-    plot = MyPlot(4, 1, 1, "phases in", in_s, ph1, ph2, ph3)
-    MyPlot(4, 1, 2, "R / R-S / S-T", in_s, ph1, afe.vmains.in_ST_v, afe.vmains.in_RT_v)
-    MyPlot(4, 1, 3, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
-    #    MyPlot(4, 1, 3, "R / R-S / S-T", in_s, afe.vmains.in_RS_v, afe.vmains.linein.zc_RS_trig_v,
-    #           afe.vmains.linein.fail_phases_v)
-    #    MyPlot(4, 1, 4, "R / R-S / S-T", in_s, afe.vmains.in_ST_v, afe.vmains.linein.zc_ST_trig_v,
-    #           afe.vmains.linein.fail_phases_v)
+    plot = MyPlot(5, 1, 1, "phases in", in_s, ph1, ph2, ph3)
+    MyPlot(5, 1, 2, "R / R-S / S-T", in_s, ph1, afe.vmains.in_RS_v, afe.vmains.in_TS_v)
+    MyPlot(5, 1, 3, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
+    MyPlot(5, 1, 5, "RS / RS-trig", in_s, afe.vmains.in_RS_v, afe.vmains.linein.zc_RS_trig_v)
+    MyPlot(5, 1, 4, "TS / TS-trig", in_s, afe.vmains.in_TS_v, afe.vmains.linein.zc_TS_trig_v)
     plot.show()
 
     plot = MyPlot(4, 1, 1, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
@@ -47,7 +45,8 @@ def run():
     plot.show()
 
     plot = MyPlot(2, 1, 1, "PLL theta out", in_s, afe.vmains.pll.in_r_v,
-                  (np.array(afe.vmains.pll.theta_out_custom_v) + afe.vmains.get_theta_out_range() / 2) % afe.vmains.get_theta_out_range())
+                  (np.array(
+                      afe.vmains.pll.theta_out_custom_v) + afe.vmains.get_theta_out_range() / 2) % afe.vmains.get_theta_out_range())
     plot.show()
 
     MyReport().rpt_print("End of script")
@@ -129,11 +128,11 @@ def loop():
         line_in_ph2.set_ydata(ph2_v)
         line_in_ph3.set_ydata(ph3_v)
 
-        line_in_ST.set_ydata(afe.vmains.in_ST_v)
-        line_in_RT.set_ydata(afe.vmains.in_RT_v)
+        line_in_ST.set_ydata(afe.vmains.in_RS_v)
+        line_in_RT.set_ydata(afe.vmains.in_TS_v)
 
         line_in_trig_zc_rs.set_ydata(afe.vmains.linein.zc_RS_trig_v)
-        line_in_trig_zc_st.set_ydata(afe.vmains.linein.zc_ST_trig_v)
+        line_in_trig_zc_st.set_ydata(afe.vmains.linein.zc_TS_trig_v)
 
         # drawing updated values
         if not glbl_index % 10:

@@ -1,5 +1,5 @@
 """
-This is the main file for f_dice device simulator
+This is the main file for dice_env device simulator
 """
 from enum import Enum,IntEnum
 
