@@ -11,7 +11,7 @@ class SysTimer:
 
         self.start(timeout_ms_)
 
-    def Check(self):
+    def expired(self):
         return True if time.monotonic_ns() >= self.end_ns else False
 
     def time(self):
@@ -26,7 +26,7 @@ class SysTimer:
         return tt
 
     def CheckLoop(self):
-        retval = self.Check()
+        retval = self.expired()
         if retval is True:
             self.start()
         return retval

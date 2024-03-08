@@ -2,6 +2,8 @@
 Library file with all defines and macro about data types
 """
 
+drverr_dt = int
+
 U32_MAX = (2 ** 32) - 1  # Max for unsigned 32 integer
 S32_MAX = (2 ** 31) - 1  # Max for signed 32 integer
 S32_MIN = -((2 ** 31) - 1)  # Max for signed 32 integer

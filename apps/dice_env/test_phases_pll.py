@@ -1,10 +1,12 @@
 """
 This module is the implementation for the PLL on input phases
 """
+import math
 import sys
 from random import randint
 from matplotlib import pyplot as plt
 
+from afe_config import CnfAfe
 from mylibs.my_trigo import TRIGO_THETA_RANGE
 from collections import deque
 
@@ -107,7 +109,6 @@ def pllRun():
 
         test_pll.theta_in_custom_v.append(test_pll.theta_in_custom)
         test_pll.omega_in_v.append(test_pll.omega_in_rad)
-        test_pll.in_sinU_v.append(test_pll.in_sinU)
 
         test_pll.alpha_v.append(test_pll.Alpha)
         test_pll.beta_v.append(test_pll.Beta)
@@ -120,9 +121,9 @@ def pllRun():
         test_pll.omega_out_v.append(test_pll.omega_out_rad)
         test_pll.out_sinU_v.append(test_pll.out_sinU)
 
-        test_pll.inputCosW_v.append(test_pll.cosU)
-        test_pll.inputCosV_v.append(test_pll.cosV)
-        test_pll.inputCosU_v.append(test_pll.cosW)
+        test_pll.input_T_v.append(test_pll.in_R)
+        test_pll.input_S_v.append(test_pll.in_S)
+        test_pll.input_R_v.append(test_pll.in_T)
 
         test_pll.theta_park_v.append(test_pll.theta_park)
 
@@ -142,12 +143,11 @@ def pllRun():
             line_omega_out.set_ydata(test_pll.omega_out_v)
             line_omega_in.set_ydata(test_pll.omega_in_v)
 
-            line_sin_in.set_ydata(test_pll.in_sinU_v)
             line_sin_out.set_ydata(test_pll.out_sinU_v)
 
-            line_cos_U.set_ydata(test_pll.inputCosU_v)
-            line_cos_V.set_ydata(test_pll.inputCosV_v)
-            line_cos_W.set_ydata(test_pll.inputCosW_v)
+            line_cos_U.set_ydata(test_pll.input_R_v)
+            line_cos_V.set_ydata(test_pll.input_S_v)
+            line_cos_W.set_ydata(test_pll.input_T_v)
 
             line_alpha.set_ydata(test_pll.alpha_v)
             line_beta.set_ydata(test_pll.beta_v)
@@ -172,11 +172,28 @@ def pllRun():
 
 def pllLoop():
     global test_pll
+    def _createStimulus(amplitude_, frequency_):
+        amplitude_in = amplitude_
+        frequency_in = frequency_
+        omega_in_rad = (frequency_in * 2 * math.pi)
+        print(str(frequency_in))
+        print(str(omega_in_rad))
+
     test_pll = PhasesPll(SAMPLE_FREQUENCY_HZ, DEEP,real_mode)
-    test_pll.calculate_loop(400, 50)
+
+    _createStimulus(400, 50)
+    test_pll.prev_theta_out_custom = 0
+    test_pll.theta_in = 0
+    theta_in_custom = 0
+    for sample in CnfAfe().display_range():
+        sample_step_custom = TRIGO_THETA_RANGE * test_pll.frequency_in / SAMPLE_FREQUENCY_HZ
+        theta_in_custom = (theta_in_custom + sample_step_custom) # % TRIGO_THETA_RANGE
+        test_pll.calculate(theta_in_custom)
+        sample += 1
+
     pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v)
     MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_in_v, test_pll.omega_out_v)
-    MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.in_sinU_v, test_pll.out_sinU_v)
+    MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.input_R_v, test_pll.out_sinU_v)
     pll_plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
     pll_plt.show()
 

@@ -8,4 +8,4 @@ class SigmaDelta:
         self.resolution = resolution_
 
     def calculate(self,in1_,in2_):
-        return (in1_ * (2**self.resolution)/self.max_amplitude) - (in2_ * (2**self.resolution)/self.max_amplitude)
+        return (in1_ - in2_) * (2**self.resolution)/self.max_amplitude

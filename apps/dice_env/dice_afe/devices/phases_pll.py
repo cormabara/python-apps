@@ -1,11 +1,11 @@
 
-
-
 import math
 from collections import deque
+from typing import Any
 
 import numpy as np
 
+from afe_config import CnfAfe
 from report import rpt_print
 from my_types import S32_MIN, S32_MAX, U32
 from numpy import int32
@@ -13,10 +13,11 @@ from numpy import int32
 from my_adc import ADConv
 from my_trigo import trigo_dir_clarke, trigo_dir_park, TRIGO_THETA_RANGE, TRIGO_SHIFT
 from my_pid import MyPid
-from tools import shift_dx, shift_sx, CheckUnsigned32, CnfAfe
+from tools import shift_dx, shift_sx, CheckUnsigned32
 
 
 class PhasesPll:
+    theta_out_rad_new: float | Any
     AMPLITUDE_MAX = 500
     ADC_NUMBITS = 12
     FREQUENCY_REF_HZ = 50
@@ -37,6 +38,8 @@ class PhasesPll:
     I_KI_SHIFT = 16
     NEW_SHIFT = 0
 
+    REF_OMEGA_SHIFTED = OMEGA_REF_RAD * (2 ** NEW_SHIFT)
+
     def __init__(self, rm_, sample_frequency_hz_, deep_):
 
         self.in_t = None
@@ -50,14 +53,11 @@ class PhasesPll:
         self.theta_in_rad = 0
         self.omega_in_rad = 0
         self.in_sinU = 0
-        self.cosW = None
-        self.cosV = None
-        self.cosU = None
         self.theta_park = 0
 
         # Variabili di output
         self.theta_out_custom = None
-        self.theta_out_rad = None
+        self.theta_out_rad_old = None
         self.omega_out_rad = 0
         self.out_sinU = 0
 
@@ -98,16 +98,10 @@ class PhasesPll:
         self.theta_in_custom_v = deque(iniVal, maxlen=wr)
         self.theta_in_rad_v = deque(iniVal, maxlen=wr)
         self.omega_in_v = deque(iniVal, maxlen=wr)
-        self.in_sinU_v = deque(iniVal, maxlen=wr)
 
         self.in_r_v = deque(iniVal, maxlen=wr)
         self.in_s_v = deque(iniVal, maxlen=wr)
         self.in_t_v = deque(iniVal, maxlen=wr)
-
-
-        self.inputCosW_v = deque(iniVal, maxlen=wr)
-        self.inputCosV_v = deque(iniVal, maxlen=wr)
-        self.inputCosU_v = deque(iniVal, maxlen=wr)
 
         self.alpha_v = deque(iniVal, maxlen=wr)
         self.beta_v = deque(iniVal, maxlen=wr)
@@ -125,31 +119,6 @@ class PhasesPll:
         self.theta_out_rad_v = deque(iniVal, maxlen=wr)
         self.theta_out_custom_v = deque(iniVal, maxlen=wr)
         self.out_sinU_v = deque(iniVal, maxlen=wr)
-
-    def _createStimulus(self, amplitude_, frequency_):
-        self.amplitude_in = amplitude_
-        self.frequency_in = frequency_
-        self.omega_in_rad = (self.frequency_in * 2 * math.pi)
-        print(str(self.frequency_in))
-        print(str(self.omega_in_rad))
-
-    def _create_inputs(self, theta_custom_):
-        """This function prepare all inputs for the PLL calculation"""
-        self.theta_in_custom = theta_custom_ % self.THETA_CUSTOM_RANGE
-        self.theta_in_rad = (self.theta_in_custom * self.THETA_CUSTOM_TO_RAD) % self.THETA_RAD_RANGE
-        self.omega_in_rad = (self.frequency_in * 2 * math.pi)
-        self.in_sinU = self.amplitude_in * math.sin(self.theta_in_rad)
-        cosU = self.amplitude_in * math.cos(self.theta_in_rad)
-        cosV = self.amplitude_in * math.cos(self.theta_in_rad - ((2 * math.pi) / 3))
-        cosW = self.amplitude_in * math.cos(self.theta_in_rad - ((4 * math.pi) / 3))
-
-        self.in_sinU = self.adc.convert(self.in_sinU)
-        # self.cosU = self.adc.convert(cosU)
-        # self.cosV = self.adc.convert(cosV)
-        # self.cosW = self.adc.convert(cosW)
-        self.cosU = cosU
-        self.cosV = cosV
-        self.cosW = cosW
 
     def _apply_park(self):
         """ Routine di applicazione della park. IN real mode l'angolo è in unità custom, in theo mode
@@ -208,24 +177,23 @@ class PhasesPll:
 
     def _calculate_outputs(self):
 
-        ref_omega = self.OMEGA_REF_RAD * (2 ** self.NEW_SHIFT)
-        tmp_omega_rad_shifted = self.effort  + ref_omega
-        tmp_theta_rad_shifted = self.my_integrator.output(tmp_omega_rad_shifted)
-        self.omega_out_rad = tmp_omega_rad_shifted / (2 ** self.NEW_SHIFT)
+        self.omega_rad_shifted = self.effort + self.REF_OMEGA_SHIFTED
+        self.theta_rad_shifted = self.my_integrator.output(self.omega_rad_shifted)
 
-        self.theta_out_custom = (tmp_theta_rad_shifted * self.THETA_RAD_TO_CUSTOM) / (2 ** self.NEW_SHIFT)
+        # Questo è il vero valore interessante che torna in igresso alla park
+        self.theta_out_custom = (self.theta_rad_shifted * self.THETA_RAD_TO_CUSTOM)/ (2**self.NEW_SHIFT)
+
+        self.theta_out_rad_new = self.theta_rad_shifted / (2 ** self.NEW_SHIFT)
+        self.omega_out_rad = self.omega_rad_shifted / (2 ** self.NEW_SHIFT)
+
+        # Calcolo il theta out in unit' custom
+        self.theta_out_custom = (self.theta_out_rad_new * self.THETA_RAD_TO_CUSTOM)
         self.theta_out_custom %= self.THETA_CUSTOM_RANGE
         self.prev_theta_out_custom = self.theta_out_custom
 
-
-        self.theta_out_rad = (self.theta_out_custom * self.THETA_CUSTOM_TO_RAD) % (2 * math.pi)
-        self.out_sinU = (self.Ed / (2 ** self.NEW_SHIFT)) * math.sin(self.theta_out_rad)
-
-    def get_theta_custom(self):
-        return self.theta_out_custom
-
-    def get_omega(self):
-        return self.omega_out_rad
+        # Qui ricostruisco la sinusoide di ingresso
+        self.theta_out_rad_old = (self.theta_out_custom * self.THETA_CUSTOM_TO_RAD) % (2 * math.pi)
+        self.out_sinU = (self.Ed / (2 ** self.NEW_SHIFT)) * math.sin(self.theta_out_rad_old)
 
     def calculate(self, in_r_, in_s_, in_t_):
         """This function execute a single iteration on the PLL using the previous value of the output
@@ -247,26 +215,7 @@ class PhasesPll:
         self._calculate_outputs()
         self.plot_sample()
 
-    def calculate_loop(self, amplitude_, frequency_):
-        self._createStimulus(amplitude_, frequency_)
-
-        self.prev_theta_out_custom = 0
-        theta_in = 0
-        # Il for viene definito sul numero di campioni calcolati per il
-        # teta di ingresso
-        for sample in self.display_range:
-            self.calculate(theta_in)
-            self.plot_sample(sample)
-            theta_in += self.BASE_STEP_CUSTOM
-            self.input_sequence_v.append(theta_in)
-        # Torno nel calcolo teorico per salvare vars per il confronto con il caso teorico
-        self.out_amplitude = float(np.mean(self.ed_v) / 2 ** self.NEW_SHIFT)
-
     def plot_sample(self):
-        self.in_sinU_v.append(self.in_sinU)
-        self.inputCosU_v.append(self.cosU)
-        self.inputCosV_v.append(self.cosV)
-        self.inputCosW_v.append(self.cosW)
         self.theta_in_custom_v.append(self.theta_in_custom)
         self.theta_in_rad_v.append(self.theta_in_rad)
         self.omega_in_v.append(self.omega_in_rad)
@@ -286,6 +235,19 @@ class PhasesPll:
         self.effort_v.append(self.effort)
         self.prev_theta_out_v.append(self.prev_theta_out_custom)
         self.theta_out_custom_v.append(self.theta_out_custom)
-        self.theta_out_rad_v.append(self.theta_out_rad)
+        self.theta_out_rad_v.append(self.theta_out_rad_old)
         self.omega_out_v.append(self.omega_out_rad)
         self.out_sinU_v.append(self.out_sinU)
+
+    def get_theta_custom(self):
+        return self.theta_out_custom
+
+    def get_omega(self):
+        return self.omega_out_rad
+
+    def get_vac(self):
+        return math.sqrt((self.Ed**2) + (self.Eq**2))
+
+    def is_locked(self):
+        return True
+        pass

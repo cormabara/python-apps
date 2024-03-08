@@ -27,29 +27,6 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 
-class CnfAfe(metaclass=SingletonMeta):
-    WIN_DEEP = 1000  # Deep of the display window
-    INPUT_FREQ_HZ = 50
-    INPUT_OMEGA_RAD = 2 * math.pi * INPUT_FREQ_HZ
-    INPUT_PERIOD_S = 1/50         # Periodo del segnale di ingresso (50Hz)
-    INPUT_PERIOD_mS = INPUT_PERIOD_S * 1000         # Periodo del segnale di ingresso (50Hz)
-    INPUT_PERIOD_uS = INPUT_PERIOD_mS * 1000         # Periodo del segnale di ingresso (50Hz)
-
-    SAMPLE_FREQUENCY_HZ = 10000
-    SAMPLE_TIME_uS = 100            # Freuenza di campionamento sotto irq
-    PERIOD_IN_SAMPLES = INPUT_PERIOD_uS/SAMPLE_TIME_uS      # Sinusoide completa in sample
-    TRIGO_THETA_RANGE = 2 * math.pi
-
-    AMPLITUDE = 500
-    IN_MAXAMPLITUDE = 500
-    SIGMADELTA_RESOLUTION = 12
-
-    RealMode = False
-    def __init__(self):
-        pass
-
-    def display_range(self):
-        return range(0, self.WIN_DEEP)
 
 
 def SinForm(phase_, range_):
@@ -89,6 +66,11 @@ def shift_sx(val_: int, sh_: int):
 
 def divshx(val_, shift_):
     return (int(val_) + (1 << (shift_ - 1))) >> shift_
+
+def divshxu(val_, shift_):
+    """ divisione unsigned per potenze di 2 con approssimazione +/- 0.5 (6[cycles]) (DIVision by right-SHift 
+        with approXimation, dividendo Unsigned) """
+    return (val_ + (1 << (shift_ - 1))) >> shift_
 
 
 def _CheckBitOverflow(d_, numbits_, signed_):

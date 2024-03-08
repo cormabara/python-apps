@@ -16,7 +16,7 @@ class SysErr(metaclass=SingletonMeta):
     def set_alarm(self, num_, str_):
         err = num_
         MyReport().rpt_print("ALARM: " + str(num_) + " - " + str_)
-        self.glbl_error = err
+        # self.glbl_error = err
         return err
 
     def check_alarm(self):

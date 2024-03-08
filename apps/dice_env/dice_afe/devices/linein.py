@@ -3,7 +3,7 @@ from enum import Enum
 
 from my_errors import SysErr
 from report import MyReport
-from tools import CnfAfe
+from afe_config import CnfAfe
 
 
 class LineIn:
@@ -50,7 +50,7 @@ class LineIn:
             """ Check the change of sign for input signal """
             return in1_ * in2_ < 0
 
-        def sample_zc(self, in_):
+        def sample(self, in_):
             """ sample the input and check the zerocross
                 - tick value updated
                 - trigger flag rised """
@@ -68,7 +68,7 @@ class LineIn:
 
         def check_zc(self):
             """ Questa funzione verifica la correttezza dello zero cross """
-            if self.zc_val < LineIn.MIN_ZC:
+            if self.zc_trig > 0 and self.zc_val < LineIn.MIN_ZC:
                 return SysErr().set_alarm(-1, "zerocross under minimum:" + str(self.zc_val))
             # Controllo se zerocross rs oltre il massimo
             elif self.zc_val > LineIn.MAX_ZC:
@@ -109,7 +109,7 @@ class LineIn:
             # SysErr().set_alarm(-1,"Error in phases")
             MyReport().rpt_print("Error in phases")
 
-    def sample_and_check(self, in_rs_, in_ts_):
+    def sample_and_check(self, in_rs_lsb_, in_ts_lsb_):
         """ This is the function to sample and check the zerocross of the two singla input
             and verify the cross signals distance """
         self.zerocross_rs.zc_cnt += 1
@@ -117,23 +117,21 @@ class LineIn:
         self.zc_RS_TS_cnt += 1
         self.zc_TS_RS_cnt += 1
 
-        if self.zerocross_rs.sample_zc(in_rs_):
+        if self.zerocross_rs.sample(in_rs_lsb_):
             self.zc_TS_RS_val = self.zc_TS_RS_cnt
             self.zc_RS_TS_cnt = 0
 
-        if self.zerocross_ts.sample_zc(in_ts_):
+        if self.zerocross_ts.sample(in_ts_lsb_):
             self.zc_RS_TS_val = self.zc_RS_TS_cnt
             self.zc_TS_RS_cnt = 0
 
-        if (self.zerocross_rs.zc_trig >= 0) and (self.zerocross_ts.zc_trig >= 0):
-            if (self.zerocross_rs.zc_trig > 0) or (self.zerocross_ts.zc_trig > 0):
+        # Sullo zerocross di rs controllo lo zerocross e il delta fasi
+        self.zerocross_rs.check_zc()
+        self.zerocross_ts.check_zc()
 
-                if self.zerocross_rs.zc_trig > 0:
-                    self.zerocross_rs.check_zc()
-                    self._check_sequence()
+        if (self.zerocross_rs.zc_trig > 0) and (self.zerocross_ts.zc_trig >= 0):
+            self._check_sequence()
 
-                if self.zerocross_ts.zc_trig > 0:
-                    self.zerocross_ts.check_zc()
 
         self.plot_sample()
 

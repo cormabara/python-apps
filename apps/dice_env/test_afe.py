@@ -4,38 +4,98 @@
 import math
 import sys
 from collections import deque
-
 import numpy as np
 from matplotlib import pyplot as plt
 
-from apps.f_dice.afe_rectifier import AfeRectifier
+from afe_rectifier import AfeRect, AfeRectSt
+from afe_config import CnfAfe, AfeSignals
 from my_errors import SysErr
 from report import MyReport
-from tools import MyPlot, CnfAfe
+from tools import MyPlot
 
+
+class LoopPlotterFigure:
+
+    class LoopPlotterSubplot:
+
+        def __init__(self,pos_,subplot_,title_, label1_,label2_=None,label3_=None,label4_=None):
+            self.subplot = subplot_
+            self.subplot.title.set_text(title_)
+            self.init_val = [0 for i in CnfAfe().display_range()]
+            self.vector_index = deque([i for i in CnfAfe().display_range()], maxlen=CnfAfe().WIN_DEEP)
+
+            self.line_1 = None
+            self.line_2 = None
+            self.line_3 = None
+            self.line_4 = None
+            self.pos = pos_
+
+            if label1_:
+                self.line_1, = self.subplot.plot(self.vector_index, self.init_val, label=label1_)
+            if label2_:
+                self.line_2, = self.subplot.plot(self.vector_index, self.init_val, label=label2_)
+            if label3_:
+                self.line_3, = self.subplot.plot(self.vector_index, self.init_val, label=label3_)
+            if label4_:
+                self.line_4, = self.subplot.plot(self.vector_index, self.init_val, label=label4_)
+
+        def set_y_range(self,min_,max_):
+            self.subplot.set_ylim(min_, max_)
+
+        def add_samples(self, queue1_, queue2_, queue3_, queue4_):
+            if self.line_1:
+                self.line_1.set_ydata(queue1_)
+            if self.line_2:
+                self.line_2.set_ydata(queue2_)
+            if self.line_3:
+                self.line_3.set_ydata(queue3_)
+            if self.line_4:
+                self.line_4.set_ydata(queue4_)
+
+    def __init__(self,plt_):
+        self.plt = plt_
+        self.subplots = list()
+        self.figure = self.plt.figure()
+
+    def add_subplot(self,pos_,title_, label1_,label2_=None,label3_=None,label4_=None):
+        subplot = self.figure.add_subplot(pos_)
+        lsp = self.LoopPlotterSubplot(pos_,subplot,title_, label1_,label2_,label3_,label4_)
+
+        self.subplots.append(lsp)
+        self.plt.grid()
+        self.plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
+
+    def add_samples(self, pos_, queue1_, queue2_=None, queue3_=None, queue4_=None):
+        res = list(filter(lambda x: x.pos == pos_, self.subplots))
+        if len(res) == 1:
+            res[0].add_samples(queue1_, queue2_, queue3_, queue4_)
+
+    def refresh(self):
+        self.figure.canvas.draw()
+        self.figure.canvas.flush_events()
+
+    def set_subplot_range(self, pos_,  min_, max_):
+        res = list(filter(lambda x: x.pos == pos_, self.subplots))
+        if len(res) == 1:
+            res[0].set_y_range(min_,max_)
 
 def run():
-    NUM_WAVES = CnfAfe().WIN_DEEP / CnfAfe().PERIOD_IN_SAMPLES
-    in_s = np.arange(0, (NUM_WAVES * 2 * math.pi), (NUM_WAVES * 2 * math.pi) / CnfAfe().WIN_DEEP)
-    ph1 = CnfAfe().AMPLITUDE * np.sin(in_s)
-    ph2 = CnfAfe().AMPLITUDE * np.sin(in_s - ((2 * math.pi) / 3))
-    ph3 = CnfAfe().AMPLITUDE * np.sin(in_s - ((4 * math.pi) / 3))
-
-    afe = AfeRectifier()
-    afe.start()
-
-    for smpl in range(0, len(in_s)):
-        afe.execute(ph1[smpl], ph2[smpl], ph3[smpl])
+    afe = AfeRect()
+    afe.status = AfeRectSt.aferest_st_start
+    for smpl in range(0, len(AfeSignals().ph1_v)):
+        AfeSignals().generate_phases_in()
+        afe.handle(AfeSignals().in_rs_lsb, AfeSignals().in_ts_lsb)  # esecuzione dell'afe sotto irq
         afe.plot_sample()
-        if SysErr().check_alarm():
-            MyReport().rpt_print("KILLING APPLICATION")
-            break
+        #if SysErr().check_alarm():
+        #    MyReport().rpt_print("KILLING APPLICATION")
+        #    break
 
-    plot = MyPlot(5, 1, 1, "phases in", in_s, ph1, ph2, ph3)
-    MyPlot(5, 1, 2, "R / R-S / S-T", in_s, ph1, afe.vmains.in_RS_v, afe.vmains.in_TS_v)
+    in_s = np.array([ii for ii in CnfAfe().display_range()])
+    plot = MyPlot(5, 1, 1, "phases in", in_s, AfeSignals().ph1_v, AfeSignals().ph2_v, AfeSignals().ph3_v)
+    MyPlot(5, 1, 2, "R / R-S / S-T", in_s, AfeSignals().ph1_v, AfeSignals().plot_in_rs, AfeSignals().plot_in_ts)
     MyPlot(5, 1, 3, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
-    MyPlot(5, 1, 5, "RS / RS-trig", in_s, afe.vmains.in_RS_v, afe.vmains.linein.zc_RS_trig_v)
-    MyPlot(5, 1, 4, "TS / TS-trig", in_s, afe.vmains.in_TS_v, afe.vmains.linein.zc_TS_trig_v)
+    MyPlot(5, 1, 5, "RS / RS-trig", in_s, AfeSignals().plot_in_rs, afe.vmains.linein.zc_RS_trig_v)
+    MyPlot(5, 1, 4, "TS / TS-trig", in_s, AfeSignals().plot_in_ts, afe.vmains.linein.zc_TS_trig_v)
     plot.show()
 
     plot = MyPlot(4, 1, 1, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
@@ -44,113 +104,96 @@ def run():
     MyPlot(4, 1, 4, "PLL theta out", in_s, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_v)
     plot.show()
 
-    plot = MyPlot(2, 1, 1, "PLL theta out", in_s, afe.vmains.pll.in_r_v,
-                  (np.array(
-                      afe.vmains.pll.theta_out_custom_v) + afe.vmains.get_theta_out_range() / 2) % afe.vmains.get_theta_out_range())
+    plot = MyPlot(2, 1, 1, "PLL theta out", in_s, afe.vmains.pll.in_r_v,afe.vmains.pll.theta_out_custom_v)
     plot.show()
 
     MyReport().rpt_print("End of script")
 
 
+main_timer = 0
+
+
 def loop():
-    ph1_v = deque([i for i in CnfAfe().display_range()], maxlen=CnfAfe().WIN_DEEP)
-    ph2_v = deque([i for i in CnfAfe().display_range()], maxlen=CnfAfe().WIN_DEEP)
-    ph3_v = deque([i for i in CnfAfe().display_range()], maxlen=CnfAfe().WIN_DEEP)
+    global main_timer
 
     """ This is the continuous run for the PLL, the DEEP is the deep
         of the scrolling window"""
-    afe = AfeRectifier()
-    afe.start()
+    afe = AfeRect()
 
     # here we are creating sub plots
     plt.ion()
-    figure = plt.figure()
-    init_val = [0 for i in CnfAfe().display_range()]
-    vector_index = deque([i for i in CnfAfe().display_range()], maxlen=CnfAfe().WIN_DEEP)
 
-    ax_input = figure.add_subplot(311)
-    ax_input.title.set_text("Inputs R/S/T")
-    line_in_ph1, = ax_input.plot(vector_index, init_val, label="ph1")
-    line_in_ph2, = ax_input.plot(vector_index, init_val, label="ph2")
-    line_in_ph3, = ax_input.plot(vector_index, init_val, label="ph3")
-    ax_input.set_ylim(-3 / 2 * CnfAfe().AMPLITUDE, 3 / 2 * CnfAfe().AMPLITUDE)
-    plt.grid()
-    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
+    input_fig = LoopPlotterFigure(plt)
+    input_fig.add_subplot(211, "Inputs R/S/T", "ph1", "ph2","ph3")
+    input_fig.set_subplot_range(211, -CnfAfe().IN_MAXAMPLITUDE*11/10, CnfAfe().IN_MAXAMPLITUDE*11/10)
+    input_fig.add_subplot(212, "Inputs R-S/T-S", "rs", "ts")
+    input_fig.set_subplot_range(212, -CnfAfe().MAX_SIGMADELTA_VAL*20/10, CnfAfe().MAX_SIGMADELTA_VAL*20/10)
 
-    ax_sg = figure.add_subplot(312)
-    ax_sg.title.set_text("Inputs R-S/S-T")
-    line_in_ST, = ax_sg.plot(vector_index, init_val, label="ph1")
-    line_in_RT, = ax_sg.plot(vector_index, init_val, label="ph2")
-    ax_sg.set_ylim(-3 * CnfAfe().AMPLITUDE, 3 * CnfAfe().AMPLITUDE)
-    plt.grid()
-    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
+    linein_fig = LoopPlotterFigure(plt)
+    linein_fig.add_subplot(211, "Zerocross", "trig zc RS", "target_ref")
+    linein_fig.set_subplot_range(211, -5, 500)
 
-    ax_vmains_zc = figure.add_subplot(313)
-    ax_vmains_zc.title.set_text("ZEROCROSS")
-    line_in_trig_zc_rs, = ax_vmains_zc.plot(vector_index, init_val, label="trig zc RS")
-    line_in_trig_zc_st, = ax_vmains_zc.plot(vector_index, init_val, label="trig zc RS")
-    ax_vmains_zc.set_ylim(-3 / 2 * CnfAfe().AMPLITUDE, 3 / 2 * CnfAfe().AMPLITUDE)
-    plt.grid()
-    plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
+
+    pll_fig = LoopPlotterFigure(plt)
+    pll_fig.add_subplot(311, "alpha/beta", "alpha", "beta", "theta")
+    pll_fig.set_subplot_range(311, -2000,2000)
+    pll_fig.add_subplot(312, "ed / eq", "ed", "eq", "theta")
+    pll_fig.set_subplot_range(312, -2000,2000)
+    pll_fig.add_subplot(313, "pll output", "input" "custom_theta", "theta")
+    pll_fig.set_subplot_range(313, -2000,2000)
+
+    vbus_fig = LoopPlotterFigure(plt)
+    vbus_fig.add_subplot(111, "vbus_pid", "target_volt", "trig zc ST")
+    vbus_fig.set_subplot_range(111, -10,600)
 
     glbl_index = 0
     theta_in_custom = 0
     endOfLoop = False
     offset1 = offset2 = offset3 = 0
+
+    # Questo loop fa una passata ogni 100uS
     while not endOfLoop:
-        # calcolo lo step sul theta partendo dalla frequenza base e dalla frequenza di campionamento
-        theta_step_custom = CnfAfe().TRIGO_THETA_RANGE * (CnfAfe().INPUT_FREQ_HZ / CnfAfe().SAMPLE_FREQUENCY_HZ)
-        theta_in_custom = (theta_in_custom + theta_step_custom) % CnfAfe().TRIGO_THETA_RANGE
-        # costruisco i tre angoli che mi servono per lo sfasamento di test
-        theta_in_custom1 = theta_in_custom + offset1
-        theta_in_custom2 = theta_in_custom + offset2
-        theta_in_custom3 = theta_in_custom + offset3
-        # if not glbl_index % 673:
-        #    offset1 -= 100
-        # if not glbl_index % 773:
-        #    offset1 += 100
 
-        # creo le tre forme di ingresso per il theta calcolato
-        ph1 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom1)
-        ph2 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom2 - ((2 * math.pi) / 3))
-        ph3 = CnfAfe().AMPLITUDE * math.sin(theta_in_custom3 - ((4 * math.pi) / 3))
+        AfeSignals().generate_phases_in()
 
-        afe.execute(ph1, ph2, ph3)  # esecuzione dell'afe sotto irq
-        afe.plot_sample()  # Aggironamento dei vettori per il plot
+        # Gestione sotto irq, l'ingresso del rettificatore sono i due segnali differenziali
+        # R-T e S-T
+        afe.handle(AfeSignals().in_rs_lsb, AfeSignals().in_ts_lsb)  # esecuzione dell'afe sotto irq
 
-        # Aggiungo i campioni delle tre forme di ingresso
-        ph1_v.append(ph1)
-        ph2_v.append(ph2)
-        ph3_v.append(ph3)
+        # Gestione sotto main (gestione lenta in background)
+        if not main_timer:
+            afe.background()
+            main_timer = CnfAfe().MAIN_TIME_100uS
+        else:
+            main_timer -= 1
 
-        # Aggiorno i subplot
-        line_in_ph1.set_ydata(ph1_v)
-        line_in_ph2.set_ydata(ph2_v)
-        line_in_ph3.set_ydata(ph3_v)
+        input_fig.add_samples(211,AfeSignals().ph1_v,AfeSignals().ph2_v,AfeSignals().ph3_v)
+        input_fig.add_samples(212, AfeSignals().plot_in_rs, AfeSignals().plot_in_ts)
 
-        line_in_ST.set_ydata(afe.vmains.in_RS_v)
-        line_in_RT.set_ydata(afe.vmains.in_TS_v)
+        linein_fig.add_samples(211,afe.vmains.linein.zc_RS_trig_v,afe.vmains.linein.zc_TS_trig_v)
 
-        line_in_trig_zc_rs.set_ydata(afe.vmains.linein.zc_RS_trig_v)
-        line_in_trig_zc_st.set_ydata(afe.vmains.linein.zc_TS_trig_v)
+        pll_fig.add_samples(311, afe.vmains.pll.in_r_v, afe.vmains.pll.alpha_v, afe.vmains.pll.beta_v)
+        pll_fig.add_samples(312, afe.vmains.pll.ed_v, afe.vmains.pll.eq_v, afe.vmains.pll.theta_out_custom_v)
+        pll_fig.add_samples(313,np.array(AfeSignals().ph1_v)*10, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_v)
+
+        vbus_fig.add_samples(111,afe.vbus.plt_target_volt,afe.vbus.plt_reference_volt)
 
         # drawing updated values
         if not glbl_index % 10:
-            figure.canvas.draw()
-            figure.canvas.flush_events()
+            input_fig.refresh()
+            linein_fig.refresh()
+            vbus_fig.refresh()
 
-            if not glbl_index % 100:
-                afe.vmains.linein.report_debug()
-
-        glbl_index = glbl_index + 1
 
         # Se ci sono allarmi nel sistema allora fermo tutto
         if SysErr().check_alarm():
             MyReport().rpt_print("KILLING APPLICATION")
             break
 
+        glbl_index += 1
 
-MyReport("../../../data", "afe_report.txt")
+
+MyReport("../../data", "afe_report.txt")
 if len(sys.argv) >= 2:
     if sys.argv[1] == "loop":
         loop()
