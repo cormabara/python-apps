@@ -33,7 +33,7 @@ class PllEncoder:
         # Quindi scelgo di avere un fattore shift dx di 16
 
         num = self.enc_res << 16
-        if CheckSigned32(num):
+        if not CheckSigned32(num):
             rpt_print("Error overflow on numerator")
 
         den = self.sample_freq_hz * 256

@@ -118,12 +118,12 @@ def pllRun():
         test_pll.effort_v.append(test_pll.effort)
 
         test_pll.theta_out_custom_v.append(test_pll.theta_out_custom)
-        test_pll.omega_out_v.append(test_pll.omega_out_rad)
+        test_pll.omega_out_rad_v.append(test_pll.omega_out_rad)
         test_pll.out_sinU_v.append(test_pll.out_sinU)
 
-        test_pll.input_T_v.append(test_pll.in_R)
-        test_pll.input_S_v.append(test_pll.in_S)
-        test_pll.input_R_v.append(test_pll.in_T)
+        test_pll.in_r_v.append(test_pll.in_r)
+        test_pll.in_s_v.append(test_pll.in_s)
+        test_pll.in_t_v.append(test_pll.in_t)
 
         test_pll.theta_park_v.append(test_pll.theta_park)
 
@@ -140,7 +140,7 @@ def pllRun():
             line_in_theta.set_ydata(test_pll.theta_in_custom_v)
             line_out_theta.set_ydata(test_pll.theta_out_custom_v)
 
-            line_omega_out.set_ydata(test_pll.omega_out_v)
+            line_omega_out.set_ydata(test_pll.omega_out_rad_v)
             line_omega_in.set_ydata(test_pll.omega_in_v)
 
             line_sin_out.set_ydata(test_pll.out_sinU_v)
@@ -192,7 +192,7 @@ def pllLoop():
         sample += 1
 
     pll_plt = MyPlot(3, 1, 1, "Theta", test_pll.input_sequence_v, test_pll.theta_in_custom_v, test_pll.theta_out_custom_v)
-    MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_in_v, test_pll.omega_out_v)
+    MyPlot(3, 1, 2, "Omega", test_pll.input_sequence_v, test_pll.omega_in_v, test_pll.omega_out_rad_v)
     MyPlot(3, 1, 3, "Sin", test_pll.input_sequence_v, test_pll.input_R_v, test_pll.out_sinU_v)
     pll_plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=0.1)
     pll_plt.show()

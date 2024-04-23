@@ -7,6 +7,9 @@
  *
  *  \details More details
  """
+from my_types import S32_MAX, S32_MIN
+
+
 def check_out_range(value_, min_, max_):
 	return (value_ < min_) or (value_ > max_)
 
@@ -43,3 +46,7 @@ def wrap_out_of_range(value_, min_, max_, delta_):
 	elif value_ > max_:
 		value_ -= delta_
 	return value_
+
+
+def check_s32(v_):
+	return check_out_range(v_, S32_MIN, S32_MAX)

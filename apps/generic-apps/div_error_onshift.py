@@ -4,7 +4,7 @@
 import sys
 
 from tools import CheckUnsigned32, CheckUnsigned16, CheckSigned32
-from types import S32
+from my_types import S32
 
 print(sys.argv[0])
 numerator1 = float(sys.argv[1])
@@ -15,7 +15,7 @@ divider2 = float(sys.argv[4])
 for temp_iter in range(0, 31):
     factor = 1 << temp_iter
     division = ((numerator1 * numerator2) * factor) / (divider1 * divider2)
-    if CheckSigned32(numerator1 * numerator2 * factor):
+    if not CheckSigned32(numerator1 * numerator2 * factor):
         print("overflow 32 bits on numerator: " + str(numerator1 * numerator2 * factor))
         break
 
@@ -30,7 +30,7 @@ for temp_iter in range(0, 31):
 
 for temp_speed in range(1, 2000000):
     result = float(division_int) * temp_speed
-    if CheckSigned32(result):
+    if not CheckSigned32(result):
         print("error overflow for speed: " + str(temp_speed))
         break
 

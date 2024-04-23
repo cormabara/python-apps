@@ -104,24 +104,24 @@ class MyPid:
         out = 0
         if self.kp:
             out = (error_ * self.kp) / 2 ** self.shift_kp
-            if CheckSigned32(out):
+            if not CheckSigned32(out):
                 rpt_print("Overflow on mypid proportional")
 
         # componente derivativa
         if self.kd:
             out += ((error_ - self.prevError) * self.kd) / 2 ** self.shift_kd
-            if CheckSigned32(out):
+            if not CheckSigned32(out):
                 rpt_print("Overflow on mypid derivative")
 
         # componente integrale del campionamento precedente
         if self.ki:
             out += self.integral.getVal()
-            if CheckSigned32(out):
+            if not CheckSigned32(out):
                 rpt_print("Overflow on mypid integral")
 
         self.prev_error = error_
 
-        if CheckSigned32(out):
+        if not CheckSigned32(out):
             rpt_print("Overflow on mypid output")
 
         # limitazione anti - windup con aggiornamento dell'errore integrale

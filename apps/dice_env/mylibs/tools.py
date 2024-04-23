@@ -88,19 +88,19 @@ def _CheckBitOverflow(d_, numbits_, signed_):
 
 
 def CheckUnsigned32(d_):
-    return _CheckBitOverflow(d_, 32, False)
+    return not _CheckBitOverflow(d_, 32, False)
 
 
 def CheckSigned32(d_):
-    return _CheckBitOverflow(d_, 32, True)
+    return not _CheckBitOverflow(d_, 32, True)
 
 
 def CheckUnsigned16(d_):
-    return _CheckBitOverflow(d_, 16, False)
+    return not _CheckBitOverflow(d_, 16, False)
 
 
 def CheckSigned16(d_):
-    return _CheckBitOverflow(d_, 16, True)
+    return not _CheckBitOverflow(d_, 16, True)
 
 
 def CheckIntOverflow(d_, numbits_):

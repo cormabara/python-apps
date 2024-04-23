@@ -31,13 +31,15 @@ class LoopPlotterFigure:
             self.pos = pos_
 
             if label1_:
-                self.line_1, = self.subplot.plot(self.vector_index, self.init_val, label=label1_)
+                self.line_1, = self.subplot.plot(self.vector_index, self.init_val, label=label1_, color="red")
             if label2_:
-                self.line_2, = self.subplot.plot(self.vector_index, self.init_val, label=label2_)
+                self.line_2, = self.subplot.plot(self.vector_index, self.init_val, label=label2_, color="blue")
             if label3_:
-                self.line_3, = self.subplot.plot(self.vector_index, self.init_val, label=label3_)
+                self.line_3, = self.subplot.plot(self.vector_index, self.init_val, label=label3_, color="green")
             if label4_:
-                self.line_4, = self.subplot.plot(self.vector_index, self.init_val, label=label4_)
+                self.line_4, = self.subplot.plot(self.vector_index, self.init_val, label=label4_, color="yellow")
+
+            self.subplot.legend()
 
         def set_y_range(self,min_,max_):
             self.subplot.set_ylim(min_, max_)
@@ -92,19 +94,39 @@ def run():
 
     in_s = np.array([ii for ii in CnfAfe().display_range()])
     plot = MyPlot(5, 1, 1, "phases in", in_s, AfeSignals().ph1_v, AfeSignals().ph2_v, AfeSignals().ph3_v)
+    plot.legend()
     MyPlot(5, 1, 2, "R / R-S / S-T", in_s, AfeSignals().ph1_v, AfeSignals().plot_in_rs, AfeSignals().plot_in_ts)
+    plot.legend()
     MyPlot(5, 1, 3, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
+    plot.legend()
     MyPlot(5, 1, 5, "RS / RS-trig", in_s, AfeSignals().plot_in_rs, afe.vmains.linein.zc_RS_trig_v)
+    plot.legend()
     MyPlot(5, 1, 4, "TS / TS-trig", in_s, AfeSignals().plot_in_ts, afe.vmains.linein.zc_TS_trig_v)
+    plot.legend()
     plot.show()
 
     plot = MyPlot(4, 1, 1, "PLL R/S/T", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.in_s_v, afe.vmains.pll.in_t_v)
     MyPlot(4, 1, 2, "PLL alpha/beta", in_s, afe.vmains.pll.in_r_v, afe.vmains.pll.alpha_v, afe.vmains.pll.beta_v)
     MyPlot(4, 1, 3, "PLL ed /eq", in_s, afe.vmains.pll.ed_v, afe.vmains.pll.eq_v)
-    MyPlot(4, 1, 4, "PLL theta out", in_s, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_v)
+    MyPlot(4, 1, 4, "PLL theta out", in_s, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_rad_v)
     plot.show()
 
     plot = MyPlot(2, 1, 1, "PLL theta out", in_s, afe.vmains.pll.in_r_v,afe.vmains.pll.theta_out_custom_v)
+    plot.show()
+
+    input_fig = LoopPlotterFigure(plt)
+    input_fig.add_subplot(311, "Inputs 1/2/3", "ph1", "ph2","ph3")
+    input_fig.set_subplot_range(311, -CnfAfe().IN_MAXAMPLITUDE*11/10, CnfAfe().IN_MAXAMPLITUDE*11/10)
+    input_fig.add_samples(311, AfeSignals().ph1_v, AfeSignals().ph2_v, AfeSignals().ph3_v)
+
+    input_fig.add_subplot(312, "Inputs R-S/T-S", "rs", "ts")
+    input_fig.set_subplot_range(312, -CnfAfe().MAX_SIGMADELTA_VAL*11/10, CnfAfe().MAX_SIGMADELTA_VAL*11/10)
+    input_fig.add_samples(312, AfeSignals().plot_in_rs, AfeSignals().plot_in_ts)
+
+    input_fig.add_subplot(313, "Inputs R/S/T", "R", "S","T")
+    input_fig.set_subplot_range(313, -CnfAfe().MAX_SIGMADELTA_VAL*11/10, CnfAfe().MAX_SIGMADELTA_VAL*11/10)
+    input_fig.add_samples(313, afe.vmains.linein.in_R_v, afe.vmains.linein.in_S_v, afe.vmains.linein.in_T_v)
+    input_fig.refresh()
     plot.show()
 
     MyReport().rpt_print("End of script")
@@ -132,14 +154,16 @@ def loop():
     linein_fig = LoopPlotterFigure(plt)
     linein_fig.add_subplot(211, "Zerocross", "trig zc RS", "target_ref")
     linein_fig.set_subplot_range(211, -5, 500)
+    linein_fig.add_subplot(212, "R / S / T", "R", "S", "T")
+    linein_fig.set_subplot_range(212, -2000, 2000)
 
 
     pll_fig = LoopPlotterFigure(plt)
-    pll_fig.add_subplot(311, "alpha/beta", "alpha", "beta", "theta")
+    pll_fig.add_subplot(311, "alpha/beta","phase_r", "alpha", "beta")
     pll_fig.set_subplot_range(311, -2000,2000)
-    pll_fig.add_subplot(312, "ed / eq", "ed", "eq", "theta")
+    pll_fig.add_subplot(312, "ed / eq", "phase_r", "ed", "eq")
     pll_fig.set_subplot_range(312, -2000,2000)
-    pll_fig.add_subplot(313, "pll output", "input" "custom_theta", "theta")
+    pll_fig.add_subplot(313, "pll output", "phase_r","theta[cust]","omega[rad]")
     pll_fig.set_subplot_range(313, -2000,2000)
 
     vbus_fig = LoopPlotterFigure(plt)
@@ -171,15 +195,16 @@ def loop():
         input_fig.add_samples(212, AfeSignals().plot_in_rs, AfeSignals().plot_in_ts)
 
         linein_fig.add_samples(211,afe.vmains.linein.zc_RS_trig_v,afe.vmains.linein.zc_TS_trig_v)
+        linein_fig.add_samples(212,afe.vmains.pll.in_r_v,afe.vmains.pll.in_s_v,afe.vmains.pll.in_t_v)
 
         pll_fig.add_samples(311, afe.vmains.pll.in_r_v, afe.vmains.pll.alpha_v, afe.vmains.pll.beta_v)
-        pll_fig.add_samples(312, afe.vmains.pll.ed_v, afe.vmains.pll.eq_v, afe.vmains.pll.theta_out_custom_v)
-        pll_fig.add_samples(313,np.array(AfeSignals().ph1_v)*10, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_v)
+        pll_fig.add_samples(312, afe.vmains.pll.in_r_v, afe.vmains.pll.ed_v, afe.vmains.pll.eq_v)
+        pll_fig.add_samples(313, afe.vmains.pll.in_r_v, afe.vmains.pll.theta_out_custom_v, afe.vmains.pll.omega_out_rad_v)
 
         vbus_fig.add_samples(111,afe.vbus.plt_target_volt,afe.vbus.plt_reference_volt)
 
         # drawing updated values
-        if not glbl_index % 10:
+        if not glbl_index % 100:
             input_fig.refresh()
             linein_fig.refresh()
             vbus_fig.refresh()
@@ -193,7 +218,7 @@ def loop():
         glbl_index += 1
 
 
-MyReport("../../data", "afe_report.txt")
+MyReport("./", "afe_report.log")
 if len(sys.argv) >= 2:
     if sys.argv[1] == "loop":
         loop()

@@ -308,7 +308,7 @@ TabCos = _getCosTable(SIMTABDIM)
 # 180° - 270° terzo settore
 # 270° - 359° quarto settore
 # ricordando che l'angolo è espresso in un range di TRIGO_THETA_RANGE
-def _tabSector(index_: int):
+def _tabSector(index_):
     if not (index_ & SIMTABDIM_HIHI):
         if not (index_ & SIMTABDIM_HI):
             return 1
@@ -360,7 +360,7 @@ def _cos4q(theta_):        return _sin_q(theta_)
 def _sinAq(theta_: int):
     # "teta_" puo' avere un valore qualsiasi, positivo o negativo;
     # ricordando la proporzione (0°..360° ==> 0..1024) e le proprieta' dei numeri binari...
-    theta_ = round(theta_)
+    theta_ = np.round(theta_)
     sector = _tabSector(theta_)
     if sector == 1:
         return _sin1q(theta_)  # (0° <= teta < 90°)
@@ -392,7 +392,7 @@ def _TrigoCombLow(A_, B_, teta_):
 
 
 def _TrigoComb(A_, B_, teta_, min_, max_):
-    return saturate_out_of_range(_TrigoCombLow(A_, B_, teta_), min_, max_);
+    return saturate_out_of_range(_TrigoCombLow(A_, B_, teta_), min_, max_)
 
 
 def trigo_dir_clarke(real_, u_, v_, w_, min_, max_):
