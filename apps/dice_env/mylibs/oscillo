@@ -1,8 +1,0 @@
-# This file contains the code to handle the CSV files produced by DSUTE oscilloscope
-
-
-def oscilloGetFromCsv(filename_):
-    rpt_print("\nGet values from CSV oscilloscope: " + filename_)
-    current = pandas.read_csv(filename_, usecols=[0], header=12).to_numpy()
-    compare = pandas.read_csv(filename_, usecols=[1], header=12).to_numpy()
-    calculate_from_arrays(current, compare)

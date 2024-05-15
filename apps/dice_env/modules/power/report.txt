@@ -1,9 +1,0 @@
-
-SIMULATE FROM FILE: /home/deimo/host_lavori/dice/oscillo/power_1.osc.csv
-end loop
-Iu rms [lsb] mean value: Input(37.243262163108156)
-Half Ton[10nS] mean value: Real(2083.544477223861)
-Vphph rms [V] mean value: Real(121.04505225261263) Theo(121.53422626354522)
-PowerS [V*lsb] mean value: Real(7830.331366568328)
-PowerS [VA] mean value: Real(11.250262513125657) Theo(11.790347118886466)
-PowerP [W] mean value: Real(9.815440772038603) Theo(10.284549229550406)
