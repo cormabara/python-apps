@@ -1,2 +1,0 @@
-This is the report file: 
-CALCULATE FROM FILE: /home/deimo/lavori/python/python-apps/inputs/sin-cos-new-carate.osc.csv

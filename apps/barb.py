@@ -33,19 +33,24 @@ class TexHeader(tk.Frame):
         self.hdr2.pack(side="top")
         self.hdr2a = tk.Label(self.hdr2, height=1,  text="DENSITY ")
         self.hdr2a.pack(side="left")
-        self.hdr2b = tk.Text(self.hdr2, height=1, width=10)
+        self.hdr2b = tk.Entry(self.hdr2, width=6)
         self.hdr2b.insert(INSERT, "10.0")
         self.hdr2b.pack(side="left")
         self.hdr2c = tk.Label(self.hdr2, height=1, text=" PICKS_INCH")
         self.hdr2c.pack(side="left")
 
-        self.hdr3 = tk.Label(self, height=1, text="NUMBER_OF_EXECUTIONS 0")
+        self.hdr3 = Frame(self)
         self.hdr3.pack(side="top")
+        self.hdr3a = tk.Label(self.hdr3, height=1, text="NUMBER_OF_EXECUTIONS ")
+        self.hdr3a.pack(side="left")
+        self.hdr3b = tk.Entry(self.hdr3, width=6)
+        self.hdr3b.insert(INSERT, "1")
+        self.hdr3b.pack(side="left")
 
     def generate(self,ff_):
         ff_.write(self.hdr1.cget("text") + "\n")
-        ff_.write(self.hdr2a.cget("text") + self.hdr2b.get(1.0, "end-1c" ) + self.hdr2c.cget("text") + "\n")
-        ff_.write(self.hdr3.cget("text") + "\n")
+        ff_.write(self.hdr2a.cget("text") + self.hdr2b.get() + self.hdr2c.cget("text") + "\n")
+        ff_.write(self.hdr3a.cget("text") + self.hdr3b.get() + "\n\n")
 
 
 class TexTable(tk.Frame):
@@ -98,11 +103,11 @@ class TexTable(tk.Frame):
             pass
 
         def generate(self, file_):
-            file_.write("\tBEGIN\n")
+            file_.write("\tBEGIN_ITEM\n")
             file_.write('\t\tDESIGN \"' + self.design + "\"\n")
-            file_.write('\t\tNUMBER_OF_METERS \"' + str(self.meters) + "\"\n")
-            file_.write('\t\tFIRST_PICK \"' + str(self.first_pick) + "\"\n")
-            file_.write("\tEND\n")
+            file_.write('\t\tNUMBER_OF_METERS ' + str(self.meters) + "\n")
+            file_.write('\t\tFIRST_PICK ' + str(self.first_pick) + "\n")
+            file_.write("\tEND_ITEM\n")
 
     def __init__(self, parent, rowsnum_):
         # use black background so it "peeks through" to
@@ -134,10 +139,10 @@ class TexTable(tk.Frame):
                 self.rows[ii].pack()
 
     def generate(self, ff_, numtex_):
-        ff_.write("BEGIN\n")
+        ff_.write("BEGIN_PROGRAM\n")
         for ind in range(numtex_):
             self.rows[ind].generate(ff_)
-        ff_.write("END\n")
+        ff_.write("END_PROGRAM\n")
 
 
 def change_num_tex():

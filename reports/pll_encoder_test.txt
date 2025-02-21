@@ -1,4 +1,0 @@
-This is the report file: Error overflow on numerator
-max error pos: 28.95854810476152
-max error neg: -28.45039450088734
-mean error: -7.261434744694037e-15
