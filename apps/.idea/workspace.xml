@@ -5,85 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc84a540-3e3b-424a-935c-0f76694b0671" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/barb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/IIR_Filter_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/cooling_hysteresis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/dice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/dice_servo/report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/dice_servo/smart_iqff.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/hysteresis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/foster/common.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/foster/constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/foster/docs/ISD_foster_model.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/foster/docs/ISD_foster_model.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/foster/foster.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/pll_encoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/power/dice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/power/power.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/power/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/power/report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/power/utilities.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/modules/scr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/DmDictionary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/drv_err.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/iir_filter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_adc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_csv.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_errors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_pid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_plotter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_sigmadelta.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_timers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_trigo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/my_types.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/oscillo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/range_limits.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/report.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/mylibs/tools.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/pid_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/pos_loop.conversions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_afe.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_foster.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_input_phases.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_phases_pll.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_pll_encoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_scr.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/test_trigo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dice_env/tetael_calculation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic-apps/div_2_mulshift.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic-apps/div_error_onshift.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic-apps/socket-connection.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic-apps/speed_calc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic-apps/test_plot.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iqff_report.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/personal/moto_parabolico.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/pwd_store.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/android.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/buildozer.spec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/datafile.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/ctrl_elements.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/ctrl_toolbar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/datafile.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/dialog_edit_item.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/dialog_password.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/my_crypt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/my_layout.kv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/pwd_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/win_debug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pwd_store/source/win_main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,13 +31,15 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Python.barb.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fourier.executor&quot;: &quot;Run&quot;,
     &quot;Python.socket-connection.executor&quot;: &quot;Run&quot;,
     &quot;Python.test_phases_pll.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Rebasing master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/marco/lavori/sharc/sharc_python&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/marco/lavori/python/python-apps/apps&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -130,7 +54,7 @@
       <recent name="$PROJECT_DIR$/f_dice/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.barb">
+  <component name="RunManager" selected="Python.fourier">
     <configuration name="IIR_Filter_test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="apps" />
       <option name="ENV_FILES" value="" />
@@ -175,7 +99,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="div_error_onshift" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="fourier" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="apps" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -188,8 +112,8 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_tools/div_error_onshift.py" />
-      <option name="PARAMETERS" value="1024 1 256 5000" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fourier.py" />
+      <option name="PARAMETERS" value="$PROJECT_DIR$/../../../dice/tools/dsuite-dice_afe-exe/user_data/temp/osc_acquisition_RS_TS.osc.csv 2 1" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -501,7 +425,11 @@
     </configuration>
     <list>
       <item itemvalue="Python.IIR_Filter_test" />
+      <item itemvalue="Python.barb" />
+      <item itemvalue="Python.fourier" />
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.pos_loop.conversions" />
+      <item itemvalue="Python.socket-connection" />
       <item itemvalue="Python.test plot" />
       <item itemvalue="Python.test_foster" />
       <item itemvalue="Python.test_phases_pll" />
@@ -512,26 +440,22 @@
       <item itemvalue="Python.test_trigo file_new" />
       <item itemvalue="Python.test_trigo run" />
       <item itemvalue="Python.test_trigo simple" />
-      <item itemvalue="Python.barb" />
-      <item itemvalue="Python.div_error_onshift" />
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.socket-connection" />
       <item itemvalue="Python tests.test_pll_encoder" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.fourier" />
         <item itemvalue="Python.barb" />
         <item itemvalue="Python.socket-connection" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python tests.test_pll_encoder" />
-        <item itemvalue="Python.div_error_onshift" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
+        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
       </set>
     </attachedChunks>
   </component>
@@ -569,6 +493,11 @@
           <url>file://$PROJECT_DIR$/barb.py</url>
           <line>142</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mb_libs/mb_csv.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

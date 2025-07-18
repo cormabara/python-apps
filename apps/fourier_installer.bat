@@ -1,0 +1,1 @@
+pyinstaller fourier.spec --clean

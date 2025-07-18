@@ -4,7 +4,7 @@
 import sys
 
 from tools import CheckUnsigned32, CheckUnsigned16, CheckSigned32
-from my_types import S32
+from mb_types import S32
 
 print(sys.argv[0])
 numerator1 = float(sys.argv[1])

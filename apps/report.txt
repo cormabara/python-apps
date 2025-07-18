@@ -1,0 +1,3 @@
+This is the report file:
+[2025-03-31 11:20:32.394470]	
+Load values from CSV oscilloscope: /home/marco/lavori/dice/tools/dsuite-dice_afe-exe/user_data/temp/osc_acquisition_RS_TS.osc.csv
